@@ -1,10 +1,12 @@
+// Creates the module and sets up page routing and HTML5 mode
 var MyApp;
 (function (MyApp) {
-    angular.module("MyApp", ["ngRoute"]).config(function ($routeProvider, $locationProvider) {
+    angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap"]).config(function (filepickerProvider, $routeProvider, $locationProvider) {
+        filepickerProvider.setKey("AupjI1ulQZebn5FDtAfgkz");
         $routeProvider
             .when("/", {
             templateUrl: "/ngApp/Views/home.html",
-            controller: MyApp.Controllers.HomeController,
+            controller: MyApp.Controllers.SignUpController,
             controllerAs: "vm"
         })
             .when("/profile", {

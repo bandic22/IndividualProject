@@ -1,9 +1,11 @@
-﻿namespace MyApp {
-    angular.module("MyApp", ["ngRoute"]).config(($routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
+﻿// Creates the module and sets up page routing and HTML5 mode
+namespace MyApp {
+    angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap"]).config((filepickerProvider, $routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
+        filepickerProvider.setKey("AupjI1ulQZebn5FDtAfgkz");
         $routeProvider
             .when("/", {
                 templateUrl: "/ngApp/Views/home.html",
-                controller: MyApp.Controllers.HomeController,
+                controller: MyApp.Controllers.SignUpController,
                 controllerAs: "vm"
             })
             .when("/profile", {

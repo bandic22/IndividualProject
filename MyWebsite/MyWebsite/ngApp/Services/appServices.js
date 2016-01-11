@@ -2,25 +2,23 @@ var MyApp;
 (function (MyApp) {
     var Services;
     (function (Services) {
-        var SignUpService = (function () {
-            function SignUpService($location) {
-                this.$location = $location;
+        var UserService = (function () {
+            function UserService() {
             }
-            SignUpService.prototype.createUser = function ($location) {
+            UserService.prototype.getUser = function () {
+                this.newUser = {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    dateOfBirth: this.dateOfBirth,
+                    userName: this.userName,
+                    emailAddress: this.emailAddress,
+                    password: this.password
+                };
             };
-            return SignUpService;
+            return UserService;
         })();
-        Services.SignUpService = SignUpService;
-        var HomeService = (function () {
-            function HomeService() {
-            }
-            HomeService.prototype.getUserLogin = function () {
-            };
-            return HomeService;
-        })();
-        Services.HomeService = HomeService;
-        angular.module("MyApp").service("Services", SignUpService);
-        angular.module("MyApp").service("Services", HomeService);
+        Services.UserService = UserService;
+        angular.module("MyApp").service('userService', UserService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
 //# sourceMappingURL=appServices.js.map

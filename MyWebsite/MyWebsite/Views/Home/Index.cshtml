@@ -5,38 +5,59 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
-    <div class="container allBodies">
+    <!--Header image-->
+    <div class="container" id="mainBody">
         <div class="row" id="pageHeader">
             <div class="col-md-12 ">
                 <img id="mainLogoImg" src="http://i.imgur.com/ibOyOnT.png" />
             </div>
         </div>
+
+        <!--Top nav tabs-->
         <div class="row">
             <div class="col-md-12">
-                <ul class="nav nav-tabs mainNav">
+                <ul class="nav nav-tabs" id="mainNav">
                     <li role="presentation"><a href="/home">Home</a></li>
                     <li role="presentation"><a href="/profile">Profile</a></li>
                     <li role="presentation"><a href="/explore">Explore</a></li>
                 </ul>
             </div>
         </div>
+
         <div ng-view>
 
 
         </div>
+
+        <!--Page footer-->
+        <div class="row">
+            <div class="col-md-12">
+                <div id="pageFooter">
+                    Copyright&#169; 2016 Duran Gradwell
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
 
-   
+    
+
+
+
 
     <!--Bootstrap stuff-->
     <script src="~/Scripts/jquery-2.1.4.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <!--Angular stuff-->
     <script src="~/Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="//api.filepicker.io/v2/filepicker.js"></script>
+    <script src="/Scripts/angular_filepicker.min.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/angular-resource.min.js"></script>
