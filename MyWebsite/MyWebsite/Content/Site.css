@@ -4,7 +4,9 @@
 }
 
 #pageHeader {
-    background: -webkit-linear-gradient(top, rgb(92,92,92) 0%,rgb(129,129,129) 49%,rgb(129,129,129) 49%,rgb(117,117,117) 90%,rgb(114,114,114) 99%,rgb(117,117,117) 100%);
+    background: -webkit-linear-gradient(top, rgb(108,108,108) 6%,rgb(165,165,165) 46%,rgb(85,85,85) 100%);
+    border: 3px double black;
+    border-bottom: none;
 }
 
 #mainBody {

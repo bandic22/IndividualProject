@@ -257,6 +257,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="ngApp\Details\profileDetails.html" />
     <Content Include="ngApp\Dialogs\newReqDialog.html" />
     <Content Include="ngApp\Views\explore.html" />
     <Content Include="ngApp\Views\home.html" />

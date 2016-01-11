@@ -19,8 +19,12 @@ var MyApp;
             controller: MyApp.Controllers.ExploreController,
             controllerAs: 'vm'
         })
+            .when('/profileDetails/:id', {
+            templateUrl: '/ngApp/profileDetails.html',
+            controller: MyApp.Controllers.ProfileDetailsController,
+            controllerAs: 'vm'
+        })
             .otherwise("/");
         $locationProvider.html5Mode(true);
     });
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=ngApp.js.map

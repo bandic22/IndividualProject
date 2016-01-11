@@ -33,42 +33,52 @@
 
     export class ProfileController {
 
+        constructor(private $uibModal: angular.ui.bootstrap.IModalService) {
+
+
+        }
+
+         // open new modal upon clicking add new request button
+        public addNewRequest() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
+                controller: "dialogController",
+                controllerAs: "modal",
+                size: "sm"
+            })
+
+        }
+    }
+
+    export class ProfileDetailsController {
+
+        constructor() {
+
+        }
+
+
+    }
+
+    export class DialogController {
+        
         public file;
 
-        constructor(private $uibModal: angular.ui.bootstrap.IModalService, private filepickerService, private $scope: ng.IScope) {
-
+        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private filepickerService, private $scope: ng.IScope) {
 
         }
 
         public pickFile() {
             this.filepickerService.pick(
                 { mimetype: 'image/*' },
-                this.fileUploaded.bind(this)
-            );
+                this.fileUploaded.bind(this),
+                this.$uibModalInstance.close())          
         }
 
         public fileUploaded(file) {
             // save file url to database
             this.file = file;
             this.$scope.$apply(); // force page to update
-        }
-
-        public addNewRequest() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
-                controller: "DialogController",
-                controllerAs: "modal",
-                size: "sm"
-            });
-
-        }
-    }
-
-    export class DialogController {
-        
-        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance) {
-
         }
 
         public ok() {

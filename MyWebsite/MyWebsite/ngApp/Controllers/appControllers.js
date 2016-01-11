@@ -23,23 +23,14 @@ var MyApp;
         })();
         Controllers.SignUpController = SignUpController;
         var ProfileController = (function () {
-            function ProfileController($uibModal, filepickerService, $scope) {
+            function ProfileController($uibModal) {
                 this.$uibModal = $uibModal;
-                this.filepickerService = filepickerService;
-                this.$scope = $scope;
             }
-            ProfileController.prototype.pickFile = function () {
-                this.filepickerService.pick({ mimetype: 'image/*' }, this.fileUploaded.bind(this));
-            };
-            ProfileController.prototype.fileUploaded = function (file) {
-                // save file url to database
-                this.file = file;
-                this.$scope.$apply(); // force page to update
-            };
+            // open new modal upon clicking add new request button
             ProfileController.prototype.addNewRequest = function () {
                 this.$uibModal.open({
                     templateUrl: "/ngApp/Dialogs/newReqDialog.html",
-                    controller: "DialogController",
+                    controller: "dialogController",
                     controllerAs: "modal",
                     size: "sm"
                 });
@@ -47,10 +38,26 @@ var MyApp;
             return ProfileController;
         })();
         Controllers.ProfileController = ProfileController;
-        var DialogController = (function () {
-            function DialogController($uibModalInstance) {
-                this.$uibModalInstance = $uibModalInstance;
+        var ProfileDetailsController = (function () {
+            function ProfileDetailsController() {
             }
+            return ProfileDetailsController;
+        })();
+        Controllers.ProfileDetailsController = ProfileDetailsController;
+        var DialogController = (function () {
+            function DialogController($uibModalInstance, filepickerService, $scope) {
+                this.$uibModalInstance = $uibModalInstance;
+                this.filepickerService = filepickerService;
+                this.$scope = $scope;
+            }
+            DialogController.prototype.pickFile = function () {
+                this.filepickerService.pick({ mimetype: 'image/*' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
+            };
+            DialogController.prototype.fileUploaded = function (file) {
+                // save file url to database
+                this.file = file;
+                this.$scope.$apply(); // force page to update
+            };
             DialogController.prototype.ok = function () {
                 this.$uibModalInstance.close();
             };
@@ -70,4 +77,3 @@ var MyApp;
         angular.module("MyApp").controller("dialogController", DialogController);
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=appControllers.js.map

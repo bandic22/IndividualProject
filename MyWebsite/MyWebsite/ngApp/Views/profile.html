@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td>User Name</td>
-                <td id="profileUserDetail">{{vm.userName}}</td>
+                <td id="profileUserDetail">{{vm.userName}}</td> <!--Create a details page for editing user info in the profile -->
                 <td><a href="/profileModal">Edit</a></td>
             </tr>
             <tr>
@@ -52,7 +52,7 @@
 
             </tbody>
         </table>
-        <button class="btn btn-primary" id="profileReqBtn" ng-click="modal.addNewRequest()">Add new request</button> <!--can I refer to 2 controllers in the same html file?-->
+        <button class="btn btn-primary" id="profileReqBtn" ng-click="vm.addNewRequest()">Add new request</button> <!--can I refer to 2 controllers in the same html file?-->
     </div>
 </div>
 
