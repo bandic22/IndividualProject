@@ -258,7 +258,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ngApp\Details\profileDetails.html" />
+    <Content Include="ngApp\Dialogs\loginDialog.html" />
+    <Content Include="ngApp\Dialogs\newGearDialog.html" />
     <Content Include="ngApp\Dialogs\newReqDialog.html" />
+    <Content Include="ngApp\Dialogs\newSpaceDialog.html" />
+    <Content Include="ngApp\Views\about.html" />
     <Content Include="ngApp\Views\explore.html" />
     <Content Include="ngApp\Views\home.html" />
     <Content Include="ngApp\Views\profile.html" />
@@ -1115,6 +1119,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ngApp\Controllers\appControllers.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\loginController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\signUpController.ts" />
     <TypeScriptCompile Include="ngApp\ngApp.ts" />
     <TypeScriptCompile Include="ngApp\Services\appServices.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />

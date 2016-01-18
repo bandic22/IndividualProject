@@ -2,11 +2,12 @@ var MyApp;
 (function (MyApp) {
     var Controllers;
     (function (Controllers) {
-        var SignUpController = (function () {
-            function SignUpController($location) {
+        var HomeController = (function () {
+            function HomeController($location, $uibModal) {
                 this.$location = $location;
+                this.$uibModal = $uibModal;
             }
-            SignUpController.prototype.getNewUser = function () {
+            HomeController.prototype.getNewUser = function () {
                 this.newUser = {
                     firstName: this.firstName,
                     lastName: this.lastName,
@@ -19,9 +20,17 @@ var MyApp;
                 this.$location.path("/profile");
                 console.log(this.newUser);
             };
-            return SignUpController;
+            HomeController.prototype.login = function () {
+                this.$uibModal.open({
+                    templateUrl: "/ngApp/Dialogs/loginDialog.html",
+                    controller: "dialogController",
+                    controllerAs: "modal",
+                    size: "sm"
+                });
+            };
+            return HomeController;
         })();
-        Controllers.SignUpController = SignUpController;
+        Controllers.HomeController = HomeController;
         var ProfileController = (function () {
             function ProfileController($uibModal) {
                 this.$uibModal = $uibModal;
@@ -32,7 +41,23 @@ var MyApp;
                     templateUrl: "/ngApp/Dialogs/newReqDialog.html",
                     controller: "dialogController",
                     controllerAs: "modal",
-                    size: "sm"
+                    size: "lg"
+                });
+            };
+            ProfileController.prototype.addNewGear = function () {
+                this.$uibModal.open({
+                    templateUrl: "/ngApp/Dialogs/newGearDialog.html",
+                    controller: "dialogController",
+                    controllerAs: "modal",
+                    size: "lg"
+                });
+            };
+            ProfileController.prototype.addUserSpace = function () {
+                this.$uibModal.open({
+                    templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
+                    controller: "dialogController",
+                    controllerAs: "modal",
+                    size: "lg"
                 });
             };
             return ProfileController;
@@ -51,14 +76,18 @@ var MyApp;
                 this.$scope = $scope;
             }
             DialogController.prototype.pickFile = function () {
-                this.filepickerService.pick({ mimetype: 'image/*' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
+                this.filepickerService.pick({ mimetype: '/image' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
             };
             DialogController.prototype.fileUploaded = function (file) {
                 // save file url to database
                 this.file = file;
                 this.$scope.$apply(); // force page to update
             };
-            DialogController.prototype.ok = function () {
+            DialogController.prototype.submit = function () {
+                this.$uibModalInstance.close();
+                //something to submit info
+            };
+            DialogController.prototype.close = function () {
                 this.$uibModalInstance.close();
             };
             return DialogController;
@@ -70,10 +99,17 @@ var MyApp;
             return ExploreController;
         })();
         Controllers.ExploreController = ExploreController;
+        var AboutController = (function () {
+            function AboutController() {
+            }
+            return AboutController;
+        })();
+        Controllers.AboutController = AboutController;
         // Registering the controllers with the main module.
-        angular.module("MyApp").controller("signUpController", SignUpController);
+        angular.module("MyApp").controller("homeController", HomeController);
         angular.module("MyApp").controller("profileController", ProfileController);
         angular.module("MyApp").controller("exploreController", ExploreController);
         angular.module("MyApp").controller("dialogController", DialogController);
+        angular.module("MyApp").controller("aboutController", AboutController);
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));

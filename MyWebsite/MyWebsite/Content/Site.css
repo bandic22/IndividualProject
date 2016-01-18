@@ -1,6 +1,9 @@
 ﻿#mainLogoImg {
-    position: relative;
-    left: 215px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto !important;
 }
 
 #pageHeader {
@@ -58,7 +61,7 @@
 }
 
 #profileTable {
-    margin-top: 6px;
+    margin-top: 10px;
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
     border: 1px solid black;
     border-radius: 5px;
@@ -75,6 +78,7 @@
 }
 
 #profilePostList {
+    margin-top: 25px;
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
     border: 1px solid black;
     border-radius: 5px;
@@ -82,4 +86,22 @@
 
 #profileReqBtn {
     margin-bottom: 15px;
+}
+
+#profileUploadBtn {
+    margin-top: 20px;
+} 
+
+#gearTable{
+    margin-top: 10px;
+    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#spaceTable{
+    margin-top: 10px;
+    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    border: 1px solid black;
+    border-radius: 5px;
 }

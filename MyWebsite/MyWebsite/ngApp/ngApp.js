@@ -6,7 +6,7 @@ var MyApp;
         $routeProvider
             .when("/", {
             templateUrl: "/ngApp/Views/home.html",
-            controller: MyApp.Controllers.SignUpController,
+            controller: MyApp.Controllers.HomeController,
             controllerAs: "vm"
         })
             .when("/profile", {
@@ -19,10 +19,15 @@ var MyApp;
             controller: MyApp.Controllers.ExploreController,
             controllerAs: 'vm'
         })
-            .when('/profileDetails/:id', {
-            templateUrl: '/ngApp/profileDetails.html',
+            .when("/profileDetails/:id", {
+            templateUrl: "/ngApp/Details/profileDetails.html",
             controller: MyApp.Controllers.ProfileDetailsController,
             controllerAs: 'vm'
+        })
+            .when("/about", {
+            templateUrl: "/ngApp/Views/about.html",
+            controller: MyApp.Controllers.AboutController,
+            controllerAs: "vm"
         })
             .otherwise("/");
         $locationProvider.html5Mode(true);

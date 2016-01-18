@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <h1 class="text-center">My Profile</h1>
+        <h1 class="text-center">My Profile Info</h1>
     </div>
 </div>
 
@@ -33,6 +33,40 @@
                 <td><a href="/profileModal">Edit</a></td>
             </tr>
         </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center">My Setup</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2 class="text-center">My Gear</h2>
+        <table class="table table-condensed table-responsive" id="gearTable">
+            <tr ng-repeat="gear in vm.userGear">
+                <td></td>
+                <td id="gearDetail"></td>
+                <td><a href="/newGearModal"></a></td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" id="profileReqBtn" ng-click="vm.addNewGear()">Add gear</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2 class="text-center">My Space</h2>
+        <table class="table table-condensed table-responsive" id="spaceTable">
+            <tr ng-repeat="space in vm.userSpace">
+                <td></td>
+                <td id="spaceTable"></td>
+                <td><a href="/newSpaceModal"></a></td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" id="profileReqBtn" ng-click="vm.addUserSpace()">Add space info</button>
     </div>
 </div>
 

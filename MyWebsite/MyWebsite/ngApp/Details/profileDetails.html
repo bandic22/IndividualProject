@@ -1,1 +1,12 @@
-﻿
+﻿<div class="modal-header">
+    <h3 class="modal-title">Editing</h3>
+</div>
+<div class="modal-body">
+    <label>Title<input type="text" id="reqTitleText" placeholder="Enter a title" /></label>
+    <label>Description<input type="text" id="reqDescText" placeholder="Enter a description" /></label>
+    <button class="btn btn-primary form" id="profileUploadBtn" ng-click="modal.pickFile()">Upload</button>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="modal.Submit()">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
+</div>

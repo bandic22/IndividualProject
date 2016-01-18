@@ -1,6 +1,6 @@
 ﻿namespace MyApp.Controllers {
 
-    export class SignUpController {
+    export class HomeController {
 
         public newUser: {};
 
@@ -11,7 +11,7 @@
         private emailAddress: string;
         private password: string;
 
-        constructor(private $location: ng.ILocationService) {
+        constructor(private $location: ng.ILocationService, private $uibModal: angular.ui.bootstrap.IModalService) {
 
         }
 
@@ -29,20 +29,11 @@
             this.$location.path("/profile");
             console.log(this.newUser);
         }
-    }
 
-    export class ProfileController {
-
-        constructor(private $uibModal: angular.ui.bootstrap.IModalService) {
-
-
-        }
-
-         // open new modal upon clicking add new request button
-        public addNewRequest() {
+        public login() {
 
             this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
+                templateUrl: "/ngApp/Dialogs/loginDialog.html",
                 controller: "dialogController",
                 controllerAs: "modal",
                 size: "sm"
@@ -51,17 +42,63 @@
         }
     }
 
-    export class ProfileDetailsController {
+    export class ProfileController {
 
-        constructor() {
+        constructor(private $uibModal: angular.ui.bootstrap.IModalService) {
 
         }
+        // open new modal upon clicking add new request button
+        public addNewRequest() {
 
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
+                controller: "dialogController",
+                controllerAs: "modal",
+                size: "lg"
+            })
+        }
 
+        public addNewGear() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newGearDialog.html",
+                controller: "dialogController",
+                controllerAs: "modal",
+                size: "lg"
+            })
+        }
+
+        public addUserSpace() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
+                controller: "dialogController",
+                controllerAs: "modal",
+                size: "lg"
+            })
+        }
+    }
+
+    export class ProfileDetailsController {
+
+        //public profileDetail;
+
+        //constructor(private $uibModal: angular.ui.bootstrap.IModalService, private $routeParams: ng.route.IRouteParamsService) {
+        //    this.profileDetail = profileDetails.filter((p) => p.id == $routeParams['id'])[0];
+        //}
+
+        //public editProfile() {
+        //    this.$uibModal.open({
+        //        templateUrl: "/ngApp/Dialogs/profileDetails.html",
+        //        controller: "profileDetailsController",
+        //        controllerAs: "modal",
+        //        size: "sm"
+        //    })
+        //}
     }
 
     export class DialogController {
-        
+
         public file;
 
         constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private filepickerService, private $scope: ng.IScope) {
@@ -70,9 +107,9 @@
 
         public pickFile() {
             this.filepickerService.pick(
-                { mimetype: 'image/*' },
+                { mimetype: '/image' },
                 this.fileUploaded.bind(this),
-                this.$uibModalInstance.close())          
+                this.$uibModalInstance.close())
         }
 
         public fileUploaded(file) {
@@ -81,7 +118,12 @@
             this.$scope.$apply(); // force page to update
         }
 
-        public ok() {
+        public submit() {
+            this.$uibModalInstance.close();
+            //something to submit info
+        }
+
+        public close() {
             this.$uibModalInstance.close();
         }
 
@@ -95,10 +137,16 @@
 
     }
 
+    export class AboutController {
+
+
+    }
+
     // Registering the controllers with the main module.
-    angular.module("MyApp").controller("signUpController", SignUpController);
+    angular.module("MyApp").controller("homeController", HomeController);
     angular.module("MyApp").controller("profileController", ProfileController);
     angular.module("MyApp").controller("exploreController", ExploreController);
     angular.module("MyApp").controller("dialogController", DialogController);
+    angular.module("MyApp").controller("aboutController", AboutController);
 }
 

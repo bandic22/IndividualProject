@@ -13,17 +13,18 @@
     <div class="container" id="mainBody">
         <div class="row" id="pageHeader">
             <div class="col-md-12 ">
-                <img id="mainLogoImg" src="http://i.imgur.com/ibOyOnT.png" />
+                <img id="mainLogoImg" src="http://i.imgur.com/PJzqsk0.png"/> <!--Voice graphic by <a href="http://www.freepik.com/">Freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>-->
             </div>
         </div>
 
         <!--Top nav tabs-->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 img-responsive">
                 <ul class="nav nav-tabs" id="mainNav">
                     <li role="presentation"><a href="/home">Home</a></li>
                     <li role="presentation"><a href="/profile">Profile</a></li>
                     <li role="presentation"><a href="/explore">Explore</a></li>
+                    <li role="presentation"><a href="/about">About</a></li>
                 </ul>
             </div>
         </div>
@@ -35,21 +36,22 @@
 
         <!--Page footer-->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 img-responsive">
                 <div id="pageFooter">
                     Copyright&#169; 2016 Duran Gradwell
                 </div>
             </div>
         </div>
-
     </div>
 
-
-
-    
-
-
-
+    <!--Soundcloud API-->
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+    <script>
+  SC.initialize({
+      client_id: 'a1dd81241e6b3f7fa9bcc06893ffd926',
+    //redirect_uri: 'http://example.com/callback'
+  });
+    </script>
 
     <!--Bootstrap stuff-->
     <script src="~/Scripts/jquery-2.1.4.js"></script>
