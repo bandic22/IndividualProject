@@ -10,29 +10,25 @@
             <tr>
                 <td>First Name</td>
                 <td id="profileUserDetail">{{vm.firstName}}</td>
-                <td><a href="/profileModal">Edit</a></td>
             </tr>
             <tr>
                 <td>Last Name</td>
                 <td id="profileUserDetail">{{vm.lastName}}</td>
-                <td><a href="/profileModal">Edit</a></td>
             </tr>
             <tr>
                 <td>User Name</td>
                 <td id="profileUserDetail">{{vm.userName}}</td> <!--Create a details page for editing user info in the profile -->
-                <td><a href="/profileModal">Edit</a></td>
             </tr>
             <tr>
                 <td>Email Address</td>
                 <td id="profileUserDetail">{{vm.emailAddress}}</td>
-                <td><a href="/profileModal">Edit</a></td>
             </tr>
             <tr>
                 <td>Password</td>
                 <td id="profileUserDetail">{{vm.password}}</td>
-                <td><a href="/profileModal">Edit</a></td>
             </tr>
         </table>
+        <button class="btn btn-primary" ng-click="vm.editProfile()">Edit Details</button>
     </div>
 </div>
 

@@ -19,11 +19,6 @@ var MyApp;
             controller: MyApp.Controllers.ExploreController,
             controllerAs: 'vm'
         })
-            .when("/profileDetails/:id", {
-            templateUrl: "/ngApp/Details/profileDetails.html",
-            controller: MyApp.Controllers.ProfileDetailsController,
-            controllerAs: 'vm'
-        })
             .when("/about", {
             templateUrl: "/ngApp/Views/about.html",
             controller: MyApp.Controllers.AboutController,

@@ -2,16 +2,16 @@ var MyApp;
 (function (MyApp) {
     var Controllers;
     (function (Controllers) {
-        var SignUpController = (function () {
-            function SignUpController($uibModal, $uibModalInstance) {
+        var EditProfileController = (function () {
+            function EditProfileController($uibModal, $uibModalInstance) {
                 this.$uibModal = $uibModal;
                 this.$uibModalInstance = $uibModalInstance;
             }
-            SignUpController.prototype.cancel = function () {
+            EditProfileController.prototype.cancel = function () {
                 this.$uibModalInstance.close();
             };
-            return SignUpController;
+            return EditProfileController;
         })();
-        Controllers.SignUpController = SignUpController;
+        Controllers.EditProfileController = EditProfileController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));

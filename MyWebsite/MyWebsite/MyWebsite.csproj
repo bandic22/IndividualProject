@@ -257,11 +257,12 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="ngApp\Details\profileDetails.html" />
+    <Content Include="ngApp\Dialogs\editProfileDialog.html" />
     <Content Include="ngApp\Dialogs\loginDialog.html" />
     <Content Include="ngApp\Dialogs\newGearDialog.html" />
     <Content Include="ngApp\Dialogs\newReqDialog.html" />
     <Content Include="ngApp\Dialogs\newSpaceDialog.html" />
+    <Content Include="ngApp\Dialogs\signUpDialog.html" />
     <Content Include="ngApp\Views\about.html" />
     <Content Include="ngApp\Views\explore.html" />
     <Content Include="ngApp\Views\home.html" />
@@ -1109,6 +1110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ngApp\Details\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1118,11 +1120,21 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ngApp\Controllers\aboutController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\appControllers.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\loginController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\editProfileController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\exploreController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\gearDialogController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\homeController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\indexController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\loginDialogController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\profileController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\reqDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\signUpController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\spaceDialogController.ts" />
     <TypeScriptCompile Include="ngApp\ngApp.ts" />
     <TypeScriptCompile Include="ngApp\Services\appServices.ts" />
+    <TypeScriptCompile Include="ngApp\Services\soundServices.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

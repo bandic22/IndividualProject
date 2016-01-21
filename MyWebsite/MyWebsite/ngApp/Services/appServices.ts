@@ -15,7 +15,7 @@
 
         }
 
-        private getUser() {
+        public getUser() {
             this.newUser = {
                 firstName: this.firstName,
                 lastName: this.lastName,
@@ -24,8 +24,11 @@
                 emailAddress: this.emailAddress,
                 password: this.password
             }
-        }
+        }       
     }
+
+
     angular.module("MyApp").service('userService', UserService);
+   
 }
 

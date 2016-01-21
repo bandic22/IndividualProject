@@ -56,10 +56,6 @@
     padding-left: 10px;
 }
 
-#signUpSubmitButton {
-    margin-top: 15px;
-}
-
 #profileTable {
     margin-top: 10px;
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);

@@ -2,16 +2,17 @@ var MyApp;
 (function (MyApp) {
     var Controllers;
     (function (Controllers) {
-        var SignUpController = (function () {
-            function SignUpController($uibModal, $uibModalInstance) {
+        var LoginDialogController = (function () {
+            function LoginDialogController($location, $uibModal, $uibModalInstance) {
+                this.$location = $location;
                 this.$uibModal = $uibModal;
                 this.$uibModalInstance = $uibModalInstance;
             }
-            SignUpController.prototype.cancel = function () {
+            LoginDialogController.prototype.cancel = function () {
                 this.$uibModalInstance.close();
             };
-            return SignUpController;
+            return LoginDialogController;
         })();
-        Controllers.SignUpController = SignUpController;
+        Controllers.LoginDialogController = LoginDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
