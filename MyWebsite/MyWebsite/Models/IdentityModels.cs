@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
 
 namespace MyWebsite.Models
 {
@@ -20,6 +21,12 @@ namespace MyWebsite.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public IDbSet<Request> Requests { get; set; }
+        public IDbSet<RequestCategory> RequestCategories { get; set; }
+        public IDbSet<GearItem> GearItems { get; set; }
+        public IDbSet<GearCategory> GearCategories { get; set; }
+        public IDbSet<UserSpace> UserSpaces { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

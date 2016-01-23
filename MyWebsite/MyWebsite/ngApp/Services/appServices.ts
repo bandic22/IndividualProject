@@ -1,34 +1,36 @@
 ﻿namespace MyApp.Services {
 
-    export class UserService {
+    export class MainService {
 
-        private newUser;
-        private firstName: string;
-        private lastName: string;
-        private dateOfBirth;
-        private userName: string;
-        private emailAddress: string;
-        private password: string;
+        private requestResource;
 
-        constructor() {
-            
+        constructor($resource: angular.resource.IResourceService) {
+
+            this.requestResource = $resource('/api/requests/:id');
 
         }
 
-        public getUser() {
-            this.newUser = {
-                firstName: this.firstName,
-                lastName: this.lastName,
-                dateOfBirth: this.dateOfBirth,
-                userName: this.userName,
-                emailAddress: this.emailAddress,
-                password: this.password
-            }
-        }       
+        public getRequests() {
+
+            return this.requestResource.query();
+        }
+
+        public getRequest(id: number) {
+
+            return this.requestResource.get({ id: id });
+        }
+
+        public addRequest(request) {
+
+            return this.requestResource.save(request).$promise;
+
+        }
+
+        public deleteRequest(id: number) {
+
+            return this.requestResource.delete({ id: id }).$promise;
+        }
     }
-
-
-    angular.module("MyApp").service('userService', UserService);
-   
+    angular.module("MyApp").service('mainService', MainService);
 }
 

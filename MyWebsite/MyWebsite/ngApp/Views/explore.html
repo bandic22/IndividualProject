@@ -5,14 +5,21 @@
             <thead id="exploreHeader">
                 <tr>
                     <th>Title</th>
+                    <th>Author</th>
                     <th>Category</th>
-                    <th>Date Created</th>
-                    <th>Replies</th>                  
+                    <th>Description</th>
+                    <th>Replies</th> 
+                    <th>Date Created</th>                 
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
+                <tr ng-repeat="request in vm.requests">
+                    <td>{{request.title}}</td>
+                    <td>{{request.author}}</td>
+                    <td>{{request.category}}</td>
+                    <td>{{request.description}}</td>
+                    <td>{{request.replies}}</td>
+                    <td>{{request.dateCreated}}</td>
                 </tr>
             </tbody>
         </table>

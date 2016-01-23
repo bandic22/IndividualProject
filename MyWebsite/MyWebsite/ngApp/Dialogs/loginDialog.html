@@ -1,19 +1,22 @@
-﻿<div class="modal-header">
-    <h3 class="modal-title">Login</h3>
-</div>
-<div class="modal-body">
-    <div class="row form-group">
-        <div class="col-md-6">
-            <label>Email</label><input class="form-control" type="text" placeholder="Email" />
+﻿<form ng-submit="modal.login()">
+    <div class="modal-header">
+        <h3 class="modal-title">Login</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label>Email</label><input class="form-control" type="text" placeholder="Email" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Password</label><input class="form-control" type="password" placeholder="Password" />Don't have an account yet? <a ng-click="modal.signUp()">Sign Up</a>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label>Password</label><input class="form-control" type="password" placeholder="Password" />Don't have an account yet? <a ng-click="vm.signUp()">Sign Up</a>
-        </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Login</button>
     </div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-    <button class="btn btn-primary" ng-click="modal.submit()">Login</button>
-</div>
+</form>
+

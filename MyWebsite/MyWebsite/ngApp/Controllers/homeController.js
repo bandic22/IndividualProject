@@ -9,7 +9,7 @@ var MyApp;
             HomeController.prototype.signUp = function () {
                 this.$uibModal.open({
                     templateUrl: "/ngApp/Dialogs/signUpDialog.html",
-                    controller: MyApp.Controllers.SignUpController,
+                    controller: MyApp.Controllers.SignUpModalController,
                     controllerAs: "modal",
                     size: "sm"
                 });
@@ -28,3 +28,4 @@ var MyApp;
         angular.module("MyApp").controller("homeController", HomeController);
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=homeController.js.map

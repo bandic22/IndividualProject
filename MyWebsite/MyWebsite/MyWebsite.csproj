@@ -79,6 +79,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi.WebHost, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.WebHost.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,6 +156,10 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -204,6 +224,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -237,15 +258,28 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="API\RequestsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601230747143_initial.cs" />
+    <Compile Include="Migrations\201601230747143_initial.Designer.cs">
+      <DependentUpon>201601230747143_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GearCategory.cs" />
+    <Compile Include="Models\GearItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\RequestCategory.cs" />
+    <Compile Include="Models\UserSpace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\RequestRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1121,19 +1155,18 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ngApp\Controllers\aboutController.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\appControllers.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\editProfileController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editProfileModalController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\exploreController.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\gearDialogController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\gearDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\homeController.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\indexController.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\loginDialogController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\loginDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\profileController.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\reqDialogController.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\signUpController.ts" />
-    <TypeScriptCompile Include="ngApp\Controllers\spaceDialogController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\reqDialogController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\signUpModalController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\spaceDialogController.ts" />
     <TypeScriptCompile Include="ngApp\ngApp.ts" />
     <TypeScriptCompile Include="ngApp\Services\appServices.ts" />
+    <TypeScriptCompile Include="ngApp\Services\exploreServices.ts" />
     <TypeScriptCompile Include="ngApp\Services\soundServices.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
@@ -1147,6 +1180,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601230747143_initial.resx">
+      <DependentUpon>201601230747143_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

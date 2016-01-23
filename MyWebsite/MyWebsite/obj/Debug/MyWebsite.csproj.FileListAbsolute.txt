@@ -178,3 +178,14 @@ C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsi
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.csprojResolveAssemblyReference.cache
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.dll
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.pdb
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.dll
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.Web.Common.dll
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.Web.WebApi.dll
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.Web.WebApi.WebHost.dll
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\WebActivatorEx.dll
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.xml
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.Web.Common.xml
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.Web.WebApi.xml
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\Ninject.Web.WebApi.WebHost.xml
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.Migrations.initial.resources
+C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.csproj.GenerateResource.Cache

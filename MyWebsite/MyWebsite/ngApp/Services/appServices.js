@@ -2,22 +2,26 @@ var MyApp;
 (function (MyApp) {
     var Services;
     (function (Services) {
-        var UserService = (function () {
-            function UserService() {
+        var MainService = (function () {
+            function MainService($resource) {
+                this.requestResource = $resource('/api/requests/:id');
             }
-            UserService.prototype.getUser = function () {
-                this.newUser = {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    dateOfBirth: this.dateOfBirth,
-                    userName: this.userName,
-                    emailAddress: this.emailAddress,
-                    password: this.password
-                };
+            MainService.prototype.getRequests = function () {
+                return this.requestResource.query();
             };
-            return UserService;
+            MainService.prototype.getRequest = function (id) {
+                return this.requestResource.get({ id: id });
+            };
+            MainService.prototype.addRequest = function (request) {
+                return this.requestResource.save(request).$promise;
+            };
+            MainService.prototype.deleteRequest = function (id) {
+                return this.requestResource.delete({ id: id }).$promise;
+            };
+            return MainService;
         })();
-        Services.UserService = UserService;
-        angular.module("MyApp").service('userService', UserService);
+        Services.MainService = MainService;
+        angular.module("MyApp").service('mainService', MainService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=appServices.js.map

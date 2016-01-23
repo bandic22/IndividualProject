@@ -3,11 +3,16 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ReqDialogController = (function () {
-            function ReqDialogController($uibModalInstance, filepickerService, $scope) {
+            function ReqDialogController(requestService, $uibModalInstance, filepickerService, $scope) {
+                this.requestService = requestService;
                 this.$uibModalInstance = $uibModalInstance;
                 this.filepickerService = filepickerService;
                 this.$scope = $scope;
             }
+            ReqDialogController.prototype.addRequest = function () {
+                this.$uibModalInstance.close();
+                return this.requestService.addRequest(this.request);
+            };
             ReqDialogController.prototype.pickFile = function () {
                 this.filepickerService.pick({ mimetype: '/image' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
             };
@@ -22,5 +27,6 @@ var MyApp;
             return ReqDialogController;
         })();
         Controllers.ReqDialogController = ReqDialogController;
+        angular.module("MyApp").controller("reqDialogController", ReqDialogController);
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));

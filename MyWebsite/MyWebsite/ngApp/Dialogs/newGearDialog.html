@@ -1,19 +1,35 @@
-﻿<div class="modal-header">
-    <h3 class="modal-title">Submit a new piece of gear!</h3>
-</div>
-<div class="modal-body">
-    <div class="row form-group">
-        <div class="col-md-6" id="reqModalInputs">
-            <label>Title</label><input class="form-control" type="text" placeholder="Enter a title" />
+﻿<form ng-submit="modal.addNewGear()">
+    <div class="modal-header">
+        <h3 class="modal-title">Submit a new piece of gear!</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row form-group">
+            <div class="col-md-6" id="reqModalInputs">
+                <label>Title</label><input class="form-control" type="text" placeholder="Enter a title" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" id="modalDropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Category
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" ng-repeat="category in vm.categories">
+                        <li><a href="#">{{category.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Description</label><textarea class="form-control" rows="8" cols="50" placeholder="Enter a description" />
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label>Description</label><textarea class="form-control" rows="8" cols="50" placeholder="Enter a description" />
-        </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
     </div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-    <button class="btn btn-primary" ng-click="modal.submit()">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
-</div>
+</form>
+

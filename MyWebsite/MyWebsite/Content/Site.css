@@ -35,6 +35,16 @@
     color: black;
 }
 
+#homeCarousel {
+    max-width: 100%;
+    height: auto !important;
+    margin-left: -14px;
+}
+
+#homeCarousel span {
+    cursor: pointer; 
+}
+
 .error {
     color: rgba(191, 51, 13, 0.80);
 }
@@ -54,6 +64,10 @@
     margin-top: 20px;
     padding-top: 9px;
     padding-left: 10px;
+}
+
+.btnHome {
+    margin-top: 10px;
 }
 
 #profileTable {
@@ -80,8 +94,25 @@
     border-radius: 5px;
 }
 
+#homePanel {
+    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#homeHeading {
+    margin-top: 25px;
+    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
 #profileReqBtn {
     margin-bottom: 15px;
+}
+
+#modalDropdown {
+    margin-bottom: 10px;
 }
 
 #profileUploadBtn {

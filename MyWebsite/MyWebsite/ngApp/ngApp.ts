@@ -1,6 +1,6 @@
 ﻿// Creates the module and sets up page routing and HTML5 mode
 namespace MyApp {
-    angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap"]).config((filepickerProvider, $routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
+    angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap", "ngResource"]).config((filepickerProvider, $routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
         filepickerProvider.setKey("AupjI1ulQZebn5FDtAfgkz");
         $routeProvider
             .when("/", {
@@ -25,5 +25,33 @@ namespace MyApp {
             })
             .otherwise("/");
         $locationProvider.html5Mode(true);
+    });
+
+    angular.module('MyApp').factory('authInterceptor', (
+        $q: ng.IQService,
+        $window: ng.IWindowService,
+        $location: ng.ILocationService
+    ) =>
+        ({
+            request: function (config) {
+                config.headers = config.headers || {};
+                let token = $window.sessionStorage.getItem('token');
+                if (token) {
+                    config.headers.Authorization = 'Bearer ' + token;
+                }
+                return config;
+            },
+            response: function (response) {
+                if (response.status === 401) {
+                    $location.path('/login');
+                }
+                return response || $q.when(response);
+            }
+        })
+    );
+
+
+    angular.module('MyApp').config(function ($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptor');
     });
 }

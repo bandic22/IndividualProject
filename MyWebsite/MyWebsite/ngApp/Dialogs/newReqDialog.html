@@ -1,24 +1,41 @@
-﻿<div class="modal-header">
-    <h3 class="modal-title">Make a new request!</h3>
-</div>
-<div class="modal-body">
-    <div class="row form-group">
-        <div class="col-md-6" id="reqModalInputs">
-            <label>Title</label><input class="form-control" type="text" placeholder="Enter a title" />          
-        </div>           
+﻿<form ng-submit="modal.addRequest()">
+    <div class="modal-header">
+        <h3 class="modal-title">Make a new request!</h3>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label>Description</label><textarea class="form-control" rows="8" cols="50" placeholder="Enter a description" />  
+    <div class="modal-body">
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label>Title</label><input ng-model="modal.request.title" class="form-control" type="text" placeholder="Enter a title" />
+            </div>
         </div>
-    </div>     
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn btn-primary form" id="profileUploadBtn" ng-click="modal.pickFile()">Choose sound</button>
+        <div class="row">
+            <div class="col-md-6" id="modalDropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Category
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">HTML</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>  
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-    <button class="btn btn-primary" ng-click="modal.submit()">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
-</div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Description</label><textarea ng-model="modal.request.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary form" id="profileUploadBtn" ng-click="modal.pickFile()">Choose sound</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
+    </div>
+</form>
