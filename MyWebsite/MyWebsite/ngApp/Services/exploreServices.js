@@ -5,7 +5,7 @@ var MyApp;
         var ExploreService = (function () {
             function ExploreService($resource) {
                 this.requestResource = $resource('/api/requests/:id');
-                this.replyResource = $resource('/api/replies/:id');
+                this.replyResource = $resource('/api/requestExplore/:id');
             }
             ExploreService.prototype.getRequests = function () {
                 return this.requestResource.query();
@@ -14,7 +14,7 @@ var MyApp;
                 return this.requestResource.get({ id: id });
             };
             ExploreService.prototype.getReplies = function (id) {
-                return this.replyResource.query({ id: id });
+                return this.replyResource.get({ id: id });
             };
             ExploreService.prototype.addReply = function (reply) {
                 return this.replyResource.save(reply);
@@ -25,3 +25,4 @@ var MyApp;
         angular.module("MyApp").service('exploreService', ExploreService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=exploreServices.js.map

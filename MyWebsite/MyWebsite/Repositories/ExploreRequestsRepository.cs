@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 
 namespace MyWebsite.Repositories
 {
@@ -19,7 +20,7 @@ namespace MyWebsite.Repositories
         public RequestViewModel GetRequestInfo(int requestId)
         {
             var request = _repo.Query<Request>().Where(r => r.Id == requestId).FirstOrDefault();
-            var replies = _repo.Query<Reply>().Where(re => re.Id == requestId).Include(u => u.User.UserName).ToList();
+            var replies = _repo.Query<Reply>().Where(re => re.RequestId == requestId).Include(u => u.User).ToList();
 
             var requestViewModel = new RequestViewModel
             {
@@ -29,5 +30,14 @@ namespace MyWebsite.Repositories
 
             return requestViewModel;
         }
+
+        public void addReply(Reply reply)
+        {
+            _repo.Add<Reply>(reply);
+            _repo.SaveChanges();
+        }
+
+
+        
     }
 }

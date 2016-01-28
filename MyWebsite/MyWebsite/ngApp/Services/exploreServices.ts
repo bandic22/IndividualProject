@@ -7,7 +7,7 @@
 
         constructor($resource: angular.resource.IResourceService) {
             this.requestResource = $resource('/api/requests/:id');
-            this.replyResource = $resource('/api/replies/:id');
+            this.replyResource = $resource('/api/requestExplore/:id');
         }
 
         public getRequests() {
@@ -19,7 +19,7 @@
         }
 
         public getReplies(id: number) {
-            return this.replyResource.query({ id: id });
+            return this.replyResource.get({ id: id });
 
         }
 

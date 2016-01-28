@@ -34,3 +34,4 @@ var MyApp;
         angular.module("MyApp").controller("reqDialogController", ReqDialogController);
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=reqDialogController.js.map

@@ -16,3 +16,4 @@ var MyApp;
         Controllers.EditProfileModalController = EditProfileModalController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=editProfileModalController.js.map

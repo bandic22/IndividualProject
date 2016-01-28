@@ -78,3 +78,4 @@ var MyApp;
         Controllers.ProfileController = ProfileController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=profileController.js.map

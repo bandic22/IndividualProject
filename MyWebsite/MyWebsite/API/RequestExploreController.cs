@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using MyWebsite.Models;
 using MyWebsite.Models.ViewModels;
 using MyWebsite.Repositories;
 using System;
@@ -22,6 +23,21 @@ namespace MyWebsite.API
         public RequestViewModel Get(int id)
         {
             return _repo.GetRequestInfo(id);
+        }
+
+        public IHttpActionResult Post(Reply reply)
+        {
+            if (ModelState.IsValid)
+            {
+                if (reply.Id == 0)
+                {
+                    var userId = this.User.Identity.GetUserId();
+                    reply.UserId = userId;
+                    _repo.addReply(reply);
+                    
+                }
+            }
+            return BadRequest();
         }
     }
 }
