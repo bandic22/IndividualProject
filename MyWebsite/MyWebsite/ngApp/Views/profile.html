@@ -63,6 +63,8 @@
                 <td>{{vm.userProfileInfo.userSpace.title}}</td>
             </tr>
         </table>
+        <h2>{{vm.file.filename}}</h2>
+        <img ng-src="{{vm.file.url}}" alt="{{vm.file.filename}}" />
         <button class="btn btn-primary" id="profileReqBtn" ng-click="vm.addUserSpace()">Add space info</button>
     </div>
 </div>
@@ -83,11 +85,11 @@
                     <td><a href="/details/{{request.id}}">{{request.title}}</a></td>
                     <td>{{request.dateCreated}}</td>
                     <td>{{request.noOfReplies}}</td>
-                    <td><button class="btn btn-primary" ng-click="vm.editRequest(request.id)">Edit</button><button class="btn btn-primary" ng-click="vm.deleteRequest(request.id)">Delete</button></td>
+                    <td><button class="btn btn-primary" ng-click="vm.editRequest(request.id)">Edit</button><button class="btn btn-primary" ng-click="vm.deleteRequest(request.id)">Delete</button><button id="profileUploadBtn" class="btn btn-primary" ng-show="textSubmitted" ng-click="modal.pickFile()"></button></td>
                 </tr>
             </tbody>
         </table>
-        <button class="btn btn-primary" id="profileReqBtn" ng-click="vm.addNewRequest()">Add new request</button> <!--can I refer to 2 controllers in the same html file?-->
+        <button class="btn btn-primary" id="profileReqBtn" ng-click="vm.addNewRequest()">Add new request</button>        
     </div>
 </div>
 

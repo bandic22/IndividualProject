@@ -22,7 +22,7 @@ var MyApp;
                     templateUrl: "/ngApp/Dialogs/newReqDialog.html",
                     controller: MyApp.Controllers.ReqDialogController,
                     controllerAs: "modal",
-                    size: "sm"
+                    size: "sm",
                 });
             };
             ProfileController.prototype.addNewGear = function () {
@@ -54,7 +54,7 @@ var MyApp;
                     templateUrl: "/ngApp/Dialogs/newGearDialog.html",
                     controller: MyApp.Controllers.GearDialogController,
                     controllerAs: "modal",
-                    size: "sm"
+                    size: "sm",
                 });
             };
             ProfileController.prototype.editSpace = function () {
@@ -78,4 +78,3 @@ var MyApp;
         Controllers.ProfileController = ProfileController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=profileController.js.map

@@ -132,3 +132,7 @@
     border: 1px solid black;
     border-radius: 5px;
 }
+
+#audioPlayer{
+    margin-top: 20px;
+}

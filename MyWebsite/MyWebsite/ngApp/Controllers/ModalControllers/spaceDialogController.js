@@ -9,6 +9,7 @@ var MyApp;
                 this.filepickerService = filepickerService;
                 this.$scope = $scope;
                 this.userService = userService;
+                this.userSpace = {};
             }
             SpaceDialogController.prototype.addNewSpace = function () {
                 var _this = this;
@@ -19,11 +20,11 @@ var MyApp;
             SpaceDialogController.prototype.editSpace = function () {
             };
             SpaceDialogController.prototype.pickFile = function () {
-                this.filepickerService.pick({ mimetype: '/image' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
+                this.filepickerService.pick({ mimetype: 'image/*' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
             };
             SpaceDialogController.prototype.fileUploaded = function (file) {
                 // save file url to database
-                this.file = file;
+                this.userSpace.fileUrl = this.file.url; // or this.file.url
                 this.$scope.$apply(); // force page to update
             };
             SpaceDialogController.prototype.cancel = function () {
@@ -34,4 +35,3 @@ var MyApp;
         Controllers.SpaceDialogController = SpaceDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=spaceDialogController.js.map

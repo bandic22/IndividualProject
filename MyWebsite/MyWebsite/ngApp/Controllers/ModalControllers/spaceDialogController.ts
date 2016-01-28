@@ -6,6 +6,7 @@
         public file;
 
         constructor(private $uibModal: angular.ui.bootstrap.IModalService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private filepickerService, private $scope: ng.IScope, private userService: MyApp.Services.UserService) {
+            this.userSpace = {};
 
         }
 
@@ -23,14 +24,14 @@
 
         public pickFile() {
             this.filepickerService.pick(
-                { mimetype: '/image' },
+                { mimetype: 'image/*' },
                 this.fileUploaded.bind(this),
                 this.$uibModalInstance.close())
         }
 
         public fileUploaded(file) {
             // save file url to database
-            this.file = file;
+            this.userSpace.fileUrl = this.file.url; // or this.file.url
             this.$scope.$apply(); // force page to update
         }
 

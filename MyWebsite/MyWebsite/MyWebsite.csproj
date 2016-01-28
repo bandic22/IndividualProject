@@ -268,9 +268,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601280224440_initial.cs" />
-    <Compile Include="Migrations\201601280224440_initial.Designer.cs">
-      <DependentUpon>201601280224440_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201601281847581_initial.cs" />
+    <Compile Include="Migrations\201601281847581_initial.Designer.cs">
+      <DependentUpon>201601281847581_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -346,6 +346,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular_filepicker.min.js" />
+    <Content Include="Scripts\bootstrap-modalmanager.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -1200,8 +1201,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601280224440_initial.resx">
-      <DependentUpon>201601280224440_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601281847581_initial.resx">
+      <DependentUpon>201601281847581_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

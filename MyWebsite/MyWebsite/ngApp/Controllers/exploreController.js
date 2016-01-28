@@ -14,4 +14,3 @@ var MyApp;
         Controllers.ExploreController = ExploreController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=exploreController.js.map

@@ -1,4 +1,4 @@
-﻿<form ng-submit="modal.addRequest()">
+﻿<section id="reqModal">
     <div class="modal-header">
         <h3 class="modal-title">Make a new request!</h3>
     </div>
@@ -34,6 +34,6 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" ng-click="modal.addRequest()">Submit</button>
     </div>
-</form>
+</section>

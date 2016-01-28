@@ -16,6 +16,7 @@ var MyApp;
                 return this.requestResource.get({ id: id });
             };
             UserService.prototype.addUserRequest = function (request) {
+                console.log(request);
                 return this.requestResource.save(request).$promise;
             };
             UserService.prototype.deleteRequest = function (id) {
@@ -47,4 +48,3 @@ var MyApp;
         angular.module("MyApp").service("userService", UserService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=userServices.js.map

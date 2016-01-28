@@ -23,6 +23,7 @@
         }
 
         public addUserRequest(request) {
+            console.log(request);
             return this.requestResource.save(request).$promise;
         }
 

@@ -19,4 +19,3 @@ var MyApp;
         Controllers.RequestDetailsController = RequestDetailsController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=requestDetailsController.js.map

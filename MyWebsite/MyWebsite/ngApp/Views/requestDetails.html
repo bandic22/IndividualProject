@@ -8,6 +8,16 @@
                 <button ng-hide="!account.isLoggedIn()" type="submit">Reply to this request</button>
                 <h3 ng-show="!account.isLoggedIn()">Please login to leave a comment</h3>
             </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-1" id="audioPlayer">
+                    <script>
+            audiojs.events.ready(function () {
+                var as = audiojs.createAll();
+            });
+                    </script>
+                    <audio src="https://www.filestackapi.com/api/file/btmPjq9Tsismhr4yssbq" preload="none" />
+                </div>
+            </div>          
         </div>
     </div>
 </form>

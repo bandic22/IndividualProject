@@ -23,7 +23,7 @@
                 templateUrl: "/ngApp/Dialogs/newReqDialog.html",
                 controller: MyApp.Controllers.ReqDialogController,
                 controllerAs: "modal",
-                size: "sm"
+                size: "sm",              
             });
         }
 
@@ -63,7 +63,7 @@
                 templateUrl: "/ngApp/Dialogs/newGearDialog.html",
                 controller: MyApp.Controllers.GearDialogController,
                 controllerAs: "modal",
-                size: "sm"
+                size: "sm",
             });
         }
 
