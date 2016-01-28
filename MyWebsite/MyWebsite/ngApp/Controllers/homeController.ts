@@ -11,8 +11,8 @@
 
             this.$uibModal.open({
                 templateUrl: "/ngApp/Dialogs/signUpDialog.html",
-                controller: MyApp.Controllers.SignUpModalController,
-                controllerAs: "modal",
+                controller: MyApp.Controllers.RegisterController,
+                controllerAs: "register",
                 size: "sm"
             })
         }
@@ -21,8 +21,8 @@
 
             this.$uibModal.open({
                 templateUrl: "/ngApp/Dialogs/loginDialog.html",
-                controller: MyApp.Controllers.LoginDialogController,
-                controllerAs: "modal",
+                controller: MyApp.Controllers.LoginController,
+                controllerAs: "login",
                 size: "sm"
             })
         }       

@@ -2,30 +2,37 @@
 
     export class ReqDialogController {
 
-        public file;
         public request;
 
-        constructor(private mainService: MyApp.Services.MainService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private filepickerService, private $scope: ng.IScope) {
+        constructor(private userService: MyApp.Services.UserService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private filepickerService, private $scope: ng.IScope) {
 
         }
 
         public addRequest() {
+            this.userService.addUserRequest(this.request).then(() => {            
+                this.$uibModalInstance.close();
+                  
+            });                 
+        }
 
-            this.$uibModalInstance.close();
-            return this.mainService.addRequest(this.request);           
+        public editRequest() {
+
+
+
         }
 
         public pickFile() {
             this.filepickerService.pick(
-                { mimetype: '/image' },
+                { mimetype: 'audio/*' },
                 this.fileUploaded.bind(this),
-                this.$uibModalInstance.close())
+                this.$uibModalInstance.close()
+            )                
         }
 
         public fileUploaded(file) {
             // save file url to database
-            this.file = file;
-            this.$scope.$apply(); // force page to update
+            this.request.fileUrl = file; 
+            this.$scope.$apply(); // force page to update            
         }
 
         public cancel() {

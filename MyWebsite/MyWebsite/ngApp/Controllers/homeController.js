@@ -9,16 +9,16 @@ var MyApp;
             HomeController.prototype.signUp = function () {
                 this.$uibModal.open({
                     templateUrl: "/ngApp/Dialogs/signUpDialog.html",
-                    controller: MyApp.Controllers.SignUpModalController,
-                    controllerAs: "modal",
+                    controller: MyApp.Controllers.RegisterController,
+                    controllerAs: "register",
                     size: "sm"
                 });
             };
             HomeController.prototype.login = function () {
                 this.$uibModal.open({
                     templateUrl: "/ngApp/Dialogs/loginDialog.html",
-                    controller: MyApp.Controllers.LoginDialogController,
-                    controllerAs: "modal",
+                    controller: MyApp.Controllers.LoginController,
+                    controllerAs: "login",
                     size: "sm"
                 });
             };
@@ -28,4 +28,3 @@ var MyApp;
         angular.module("MyApp").controller("homeController", HomeController);
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=homeController.js.map

@@ -3,9 +3,10 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var SignUpModalController = (function () {
-            function SignUpModalController($uibModal, $uibModalInstance) {
+            function SignUpModalController($uibModal, $uibModalInstance, accountService) {
                 this.$uibModal = $uibModal;
                 this.$uibModalInstance = $uibModalInstance;
+                this.accountService = accountService;
             }
             SignUpModalController.prototype.cancel = function () {
                 this.$uibModalInstance.close();
@@ -15,4 +16,3 @@ var MyApp;
         Controllers.SignUpModalController = SignUpModalController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=signUpModalController.js.map

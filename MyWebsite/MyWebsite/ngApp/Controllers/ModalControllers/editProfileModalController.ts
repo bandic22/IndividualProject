@@ -2,7 +2,9 @@
 
     export class EditProfileModalController {
 
-        constructor(private $uibModal: angular.ui.bootstrap.IModalService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance) {
+        public user;
+
+        constructor(private userService: MyApp.Services.UserService, private $uibModal: angular.ui.bootstrap.IModalService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance) {
 
         }
 

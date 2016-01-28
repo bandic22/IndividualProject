@@ -16,4 +16,3 @@ var MyApp;
         Controllers.LoginDialogController = LoginDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=loginDialogController.js.map

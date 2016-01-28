@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace MyWebsite.Models
 {
@@ -34,6 +35,11 @@ namespace MyWebsite.Models
 
     public class RegisterBindingModel
     {
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -80,5 +86,11 @@ namespace MyWebsite.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class ConfirmEmailBindingModel
+    {
+        public string UserId { get; set; }
+        public string Code { get; set; }
     }
 }

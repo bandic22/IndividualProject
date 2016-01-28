@@ -1,0 +1,23 @@
+﻿<form ng-submit="vm.userReply()">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>{{vm.request.title}}</h3>
+            <p>{{vm.request.description}}</p>
+            <div ng-controller="AccountController as account">
+                <textarea ng-hide="!account.isLoggedIn()" ng-model="vm.reply.message" cols="50" rows="10"></textarea>
+                <button ng-hide="!account.isLoggedIn()" type="submit">Reply to this request</button>
+                <h3 ng-show="!account.isLoggedIn()">Please login to leave a comment</h3>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div ng-repeat="reply in vm.replyView">
+            <h3>{{reply.user.userName}}</h3>
+            <p>{{reply.message}}</p>
+        </div>     
+    </div>
+</div>
+

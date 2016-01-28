@@ -1,44 +1,53 @@
-﻿<form ng-submit="modal.createUser()">
-    <div class="modal-header">
-        <h3 class="modal-title">Sign Up</h3>
-    </div>
-    <div class="modal-body">
-        <div class="row form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <label>First Name</label><input type="text" ng-model="vm.firstName" class="form-control" placeholder="First Name" name="firstName" required /><span ng-show="newUserForm.firstName.$touched && newUserForm.firstName.$error.required" class="error">Please enter your first name</span> <!--Must refer to the name of the form, not the vm.firstName-->
+﻿    <form name="newUserForm" id="signUpModal" ng-submit="register.register()">
+        <ul>
+            <li ng-repeat="message in register.validationMessages">
+                {{message}}
+            </li>
+        </ul>
+        <div class="modal-header">
+            <h3 class="modal-title">Sign Up</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>First Name</label><input type="text" ng-model="register.registerUser.firstName" class="form-control" placeholder="First Name" name="firstName" required /><span ng-show="newUserForm.firstName.$touched && newUserForm.firstName.$error.required" class="error">Please enter your first name</span> <!--Must refer to the name of the form, not the vm.firstName-->
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>Last Name</label><input type="text" ng-model="register.registerUser.lastName" class="form-control" placeholder="Last Name" name="lastName" required /><span ng-show="newUserForm.lastName.$touched && newUserForm.lastName.$error.required" class="error">Please enter your last name</span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>Date of Birth</label><input type="date" ng-model="register.dateOfBirth" class="form-control" placeholder="Date of Birth" name="dateOfBirth" required /><span ng-show="newUserForm.dateOfBirth.$touched && newUserForm.dateOfBirth.$error.required" class="error">Please choose your date of birth</span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>User Name</label><input type="text" ng-model="register.userName" class="form-control" placeholder="User Name" name="userName" required /><span ng-show="newUserForm.userName.$touched && newUserForm.userName.$error.required" class="error">Please enter a user name</span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>Email Address</label><input type="text" ng-model="register.registerUser.email" class="form-control" placeholder="Email Address" name="email" required /><span ng-show="newUserForm.email.$touched && newUserForm.email.$error.required" class="error">Please enter an email address</span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>Password</label><input type="password" ng-model="register.registerUser.password" class="form-control" placeholder="Password" name="password" required /><span ng-show="newUserForm.password.$touched && newUserForm.password.$error.required" class="error">Please enter a password</span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>Confirm Password</label><input type="password" ng-model="register.registerUser.confirmPassword" class="form-control" placeholder="Confirm Password" name="confirmPassword" required /><span ng-show="newUserForm.confirmPassword.$touched && newUserForm.confirmPassword.$error.required" class="error">Please confirm your password</span>
+                </div>
             </div>
         </div>
-        <div class="row form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <label>Last Name</label><input type="text" ng-model="vm.lastName" class="form-control" placeholder="Last Name" name="lastName" required /><span ng-show="newUserForm.lastName.$touched && newUserForm.lastName.$error.required" class="error">Please enter your last name</span>
-            </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="register.cancel()">Cancel</button>
+            <button class="btn btn-primary" type="submit">Confirm</button>
         </div>
-        <div class="row form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <label>Date of Birth</label><input type="date" ng-model="vm.dateOfBirth" class="form-control" placeholder="Date of Birth" name="dateOfBirth" required /><span ng-show="newUserForm.dateOfBirth.$touched && newUserForm.dateOfBirth.$error.required" class="error">Please choose your date of birth</span>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <label>User Name</label><input type="text" ng-model="vm.userName" class="form-control" placeholder="User Name" name="userName" required /><span ng-show="newUserForm.userName.$touched && newUserForm.userName.$error.required" class="error">Please enter a user name</span>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <label>Email Address</label><input type="text" ng-model="vm.emailAddress" class="form-control" placeholder="Email Address" name="emailAddress" required /><span ng-show="newUserForm.emailAddress.$touched && newUserForm.emailAddress.$error.required" class="error">Please enter an email address</span>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <label>Password</label><input type="password" ng-model="vm.password" class="form-control" placeholder="Password" name="password" required /><span ng-show="newUserForm.password.$touched && newUserForm.password.$error.required" class="error">Please enter a password</span>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-        <button class="btn btn-primary" type="submit">Confirm</button>
-    </div>
-</form>
-
+    </form>
 
 

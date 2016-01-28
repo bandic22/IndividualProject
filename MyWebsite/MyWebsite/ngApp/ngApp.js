@@ -24,6 +24,11 @@ var MyApp;
             controller: MyApp.Controllers.AboutController,
             controllerAs: "vm"
         })
+            .when("/details/:id", {
+            templateUrl: "/ngApp/Views/requestDetails.html",
+            controller: MyApp.Controllers.RequestDetailsController,
+            controllerAs: "vm"
+        })
             .otherwise("/");
         $locationProvider.html5Mode(true);
     });
@@ -49,4 +54,3 @@ var MyApp;
         $httpProvider.interceptors.push('authInterceptor');
     });
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=ngApp.js.map

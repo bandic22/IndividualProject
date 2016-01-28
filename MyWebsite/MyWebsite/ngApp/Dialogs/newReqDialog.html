@@ -8,21 +8,19 @@
                 <label>Title</label><input ng-model="modal.request.title" class="form-control" type="text" placeholder="Enter a title" />
             </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-6" id="modalDropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                         Category
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">HTML</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">JavaScript</a></li>
+                    <ul class="dropdown-menu" ng-repeat="category in modal.categories">
+                        <li><a href="#" ng-model="modal.request.category">{{category.name}}</a></li>
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="row">
             <div class="col-md-12">
                 <label>Description</label><textarea ng-model="modal.request.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
@@ -36,6 +34,6 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-        <button class="btn btn-primary" type="submit">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
+        <button class="btn btn-primary" type="submit">Submit</button>
     </div>
 </form>

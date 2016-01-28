@@ -3,7 +3,8 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var EditProfileModalController = (function () {
-            function EditProfileModalController($uibModal, $uibModalInstance) {
+            function EditProfileModalController(userService, $uibModal, $uibModalInstance) {
+                this.userService = userService;
                 this.$uibModal = $uibModal;
                 this.$uibModalInstance = $uibModalInstance;
             }
@@ -15,4 +16,3 @@ var MyApp;
         Controllers.EditProfileModalController = EditProfileModalController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=editProfileModalController.js.map

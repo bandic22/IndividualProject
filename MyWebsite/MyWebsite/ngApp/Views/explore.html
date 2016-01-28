@@ -6,20 +6,16 @@
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Replies</th> 
-                    <th>Date Created</th>                 
+                    <th>Date Created</th> 
+                    <th>Replies</th>                                
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="request in vm.requests">
-                    <td>{{request.title}}</td>
-                    <td>{{request.author}}</td>
-                    <td>{{request.category}}</td>
-                    <td>{{request.description}}</td>
-                    <td>{{request.replies}}</td>
+                    <td><a href="/details/{{request.id}}">{{request.title}}</a></td>
+                    <td>{{request.userId}}</td>
                     <td>{{request.dateCreated}}</td>
+                    <td>{{request.noOfReplies}}</td>
                 </tr>
             </tbody>
         </table>

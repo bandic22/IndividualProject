@@ -2,56 +2,19 @@
 
     export class ProfileController {
 
-        public request; 
-        public requests;
+        public userProfileInfo;
 
-        constructor(private $uibModal: ng.ui.bootstrap.IModalService, private mainService: MyApp.Services.MainService, private $resource: ng.resource.IResourceService, private $location: ng.ILocationService) {
+        constructor(private $uibModal: ng.ui.bootstrap.IModalService, private $resource: ng.resource.IResourceService, private $location: ng.ILocationService, private profileService: MyApp.Services.ProfileService, private userService: MyApp.Services.UserService) {
 
+            this.userProfileInfo = profileService.getUserInfo();
         }
 
-        public editProfile() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/editProfileDialog.html",
-                controller: MyApp.Controllers.EditProfileModalController,
-                controllerAs: "modal",
-                size: "sm"
-            })
+        public deleteGear(id: number) {
+            return this.userService.deleteUserGear(id);
         }
-
-        public getRequest(id: number) {
-            this.request = this.mainService.getRequest(id);
-
-        }
-
-        //public addRequest() {
-
-        //    return this.mainService.addRequest(this.request);
-        //}
 
         public deleteRequest(id: number) {
-
-            return this.mainService.deleteRequest(id); // add .then, change path
-        }
-
-        public addNewGear() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newGearDialog.html",
-                controller: MyApp.Controllers.GearDialogController,
-                controllerAs: "modal",
-                size: "sm"
-            })
-        }
-
-        public addUserSpace() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
-                controller: MyApp.Controllers.SpaceDialogController,
-                controllerAs: "modal",
-                size: "sm"
-            })
+            return this.userService.deleteRequest(id);
         }
 
         public addNewRequest() {
@@ -61,8 +24,67 @@
                 controller: MyApp.Controllers.ReqDialogController,
                 controllerAs: "modal",
                 size: "sm"
-            })
+            });
         }
 
+        public addNewGear() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newGearDialog.html",
+                controller: MyApp.Controllers.GearDialogController,
+                controllerAs: "modal",
+                size: "sm"
+            });
+        }
+
+        public addUserSpace() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
+                controller: MyApp.Controllers.SpaceDialogController,
+                controllerAs: "modal",
+                size: "sm"
+            });
+        }
+
+        public editRequest() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
+                controller: MyApp.Controllers.ReqDialogController,
+                controllerAs: "modal",
+                size: "sm"
+            });
+        }
+
+        public editGear() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newGearDialog.html",
+                controller: MyApp.Controllers.GearDialogController,
+                controllerAs: "modal",
+                size: "sm"
+            });
+        }
+
+        public editSpace() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
+                controller: MyApp.Controllers.SpaceDialogController,
+                controllerAs: "modal",
+                size: "sm"
+            });
+        }
+
+        public editProfile() {
+
+            this.$uibModal.open({
+                templateUrl: "/ngApp/Dialogs/editProfileDialog.html",
+                controller: MyApp.Controllers.EditProfileModalController,
+                controllerAs: "modal",
+                size: "sm"
+            });
+        }
     }
 }

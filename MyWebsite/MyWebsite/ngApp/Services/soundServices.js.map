@@ -1,1 +1,1 @@
-{"version":3,"file":"soundServices.js","sourceRoot":"","sources":["soundServices.ts"],"names":[],"mappings":"AAKC"}
+{"version":3,"file":"soundServices.js","sourceRoot":"","sources":["soundServices.ts"],"names":["MyApp","MyApp.SoundService","MyApp.SoundService.constructor"],"mappings":"AAAA,IAAU,KAAK,CAUd;AAVD,WAAU,KAAK,EAAC,CAAC;IAEbA;QAEIC,sBAAYA,SAAuCA;QAInDC,CAACA;QACLD,mBAACA;IAADA,CAACA,AAPDD,IAOCA;IAPYA,kBAAYA,eAOxBA,CAAAA;AACLA,CAACA,EAVS,KAAK,KAAL,KAAK,QAUd"}

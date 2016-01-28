@@ -1,4 +1,6 @@
-﻿using MyWebsite.Models;
+﻿using Microsoft.AspNet.Identity;
+using MyWebsite.Models;
+using MyWebsite.Models.ViewModels;
 using MyWebsite.Repositories;
 using System;
 using System.Collections.Generic;
@@ -33,11 +35,20 @@ namespace MyWebsite.Controllers
         // checks the model state, if valid and if request id == 0, it's new, so create new DB entry and return it
         public IHttpActionResult Post(Request request)
         {
-            _repo.Add<Request>(request);
-            _repo.SaveChanges();
-            return Ok();
+            if(ModelState.IsValid)
+            {
+                if(request.Id == 0)
+                {
+                    var userId = this.User.Identity.GetUserId();
+                    request.UserId = userId;
+                    _repo.Add<Request>(request);
+                    _repo.SaveChanges();
+                    return Ok();
+                }
+            }
+            return BadRequest();           
         }
-
+     
         public IHttpActionResult Delete(int id)
         {
             _repo.Delete<Request>(id);

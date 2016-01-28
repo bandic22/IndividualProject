@@ -6,7 +6,6 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
-
 </head>
 <body>
     <!--Header image-->
@@ -18,16 +17,18 @@
         </div>
 
         <!--Top nav tabs-->
-        <div class="row">
-            <div class="col-md-12 img-responsive">
-                <ul class="nav nav-tabs" id="mainNav">
-                    <li role="presentation"><a href="/home">Home</a></li>
-                    <li role="presentation"><a href="/profile">Profile</a></li>
-                    <li role="presentation"><a href="/explore">Explore</a></li>
-                    <li role="presentation"><a href="/about">About</a></li>                                       
-                </ul>
+        <div ng-controller="AccountController as account">
+            <div class="row">
+                <div class="col-md-12 img-responsive">
+                    <ul class="nav nav-tabs" id="mainNav">
+                        <li role="presentation"><a href="/home">Home</a></li>
+                        <li role="presentation"><a ng-show="account.isLoggedIn()" href="/profile">Profile</a></li>
+                        <li role="presentation"><a href="/explore">Explore</a></li>
+                        <li role="presentation"><a href="/about">About</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </div>        
 
         <div ng-view>
             
@@ -44,34 +45,46 @@
         </div>
     </div>
 
+   
+
     <!--Soundcloud API-->
-    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+    @*<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
     <script>
   SC.initialize({
       client_id: 'a1dd81241e6b3f7fa9bcc06893ffd926',
-    //redirect_uri: 'http://example.com/callback'
+    redirect_uri: 'http://example.com/callback'
   });
-    </script>
+    </script>*@
 
     <!--Bootstrap stuff-->
     <script src="~/Scripts/jquery-2.1.4.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <!--Angular stuff-->
     <script src="~/Scripts/angular.min.js"></script>
-    <script type="text/javascript" src="//api.filepicker.io/v2/filepicker.js"></script>
+    <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
     <script src="/Scripts/angular_filepicker.min.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/angular-resource.min.js"></script>
     <!--Files created by me-->
     <script src="~/ngApp/ngApp.js"></script>
-    <script src="~/ngApp/Services/appServices.js"></script>
+    <script src="~/audiojs/audio.min.js"></script>
+    <script>
+  audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+  });
+    </script>
     <script src="~/ngApp/Services/exploreServices.js"></script>
     <script src="~/ngApp/Services/soundServices.js"></script>
+    <script src="~/ngApp/Services/userServices.js"></script>
+    <script src="~/ngApp/Services/accountService.js"></script>
+    <script src="~/ngApp/Services/profileService.js"></script>
     <script src="~/ngApp/Controllers/aboutController.js"></script>
     <script src="~/ngApp/Controllers/exploreController.js"></script>
     <script src="~/ngApp/Controllers/homeController.js"></script>
     <script src="~/ngApp/Controllers/profileController.js"></script>
+    <script src="~/ngApp/Controllers/accountController.js"></script>
+    <script src="~/ngApp/Controllers/requestDetailsController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/editProfileModalController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/gearDialogController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/loginDialogController.js"></script>
