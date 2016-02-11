@@ -3,10 +3,21 @@
     export class ExploreController {
         
         public requests;
+        public replies;
+        public sortType = 'title';
+        public sortReverse = false;
 
-        constructor(private exploreService: MyApp.Services.ExploreService, private $resource: ng.resource.IResourceService, private $location: ng.ILocationService) {
+        public totalItems;
+        public currentPage = 1;
+        public maxSize = 5;
+
+        public bigTotalItems = 200;
+        public bigCurrentPage = 1;
+
+        constructor(private exploreService: MyApp.Services.ExploreService) {
             
             this.requests = exploreService.getRequests();
-        }
+
+        }     
     }
 }

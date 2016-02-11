@@ -1,24 +1,30 @@
 ﻿<div class="row">
-    <div class="col-md-10 col-md-offset-1" id="profilePostList">
+    <div class="col-md-10 col-md-offset-1 myTable" id="exploreTable">
         <h2 class="text-center">Requests</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Search</label><input type="text" class="form-control" ng-model="searchText" ng-model-options="{debounce:1000}" />
+            </div> 
+        </div>                     
         <table class="table table-responsive table-hover">
             <thead id="exploreHeader">
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>Date Created</th> 
-                    <th>Replies</th>                                
+                    <th><a style="cursor: pointer" ng-click="sortType = 'dateCreated'; sortReverse = !sortReverse">Date Created<span class="glyphicon glyphicon-arrow-down"></span></a></th>
+                    <th><a style="cursor: pointer" ng-click="sortType = 'noOfReplies'; sortReverse = !sortReverse">Replies<span class="glyphicon glyphicon-arrow-down"></span></a></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="request in vm.requests">
+                <tr id="exploreList" ng-repeat="request in vm.requests | filter:{title: searchText} | orderBy:sortType:sortReverse">
                     <td><a href="/details/{{request.id}}">{{request.title}}</a></td>
-                    <td>{{request.userId}}</td>
-                    <td>{{request.dateCreated}}</td>
+                    <td><a href="/profile/{{request.user.displayName}}">{{request.user.displayName}}</a></td><!--if you pass in a displayName into here, it'll redirect to the profile page, passing in the displayName to the routeparams of the new controller-->
+                    <td>{{request.dateCreated | date: 'short'}}</td>
                     <td>{{request.noOfReplies}}</td>
                 </tr>
             </tbody>
         </table>
+        <uib-pagination ng-model="vm.bigCurrentPage" max-size="vm.maxSize" class="pagination-sm" boundary-link-numbers="true" items-per-page="10" total-items="vm.bigTotalItems"></uib-pagination>
     </div>
 </div>
 

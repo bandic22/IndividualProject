@@ -1,14 +1,15 @@
 ﻿// Creates the module and sets up page routing and HTML5 mode
 namespace MyApp {
-    angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap", "ngResource"]).config((filepickerProvider, $routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
+    angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap", "ngResource", "ngSanitize"]).config((filepickerProvider, $routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider, $sceProvider) => {
         filepickerProvider.setKey("AupjI1ulQZebn5FDtAfgkz");
+        //$sceProvider.enabled(false);
         $routeProvider
             .when("/", {
                 templateUrl: "/ngApp/Views/home.html",
                 controller: MyApp.Controllers.HomeController,
                 controllerAs: "vm"
             })
-            .when("/profile", {
+            .when("/profile/:displayName?", {
                 templateUrl: "/ngApp/Views/profile.html",
                 controller: MyApp.Controllers.ProfileController,
                 controllerAs: "vm"
@@ -23,11 +24,56 @@ namespace MyApp {
                 controller: MyApp.Controllers.AboutController,
                 controllerAs: "vm"
             })
+            .when("/spaceDetails/:id", {
+                templateUrl: "/ngApp/Views/spaceDetails.html",
+                controller: MyApp.Controllers.SpaceDetailsController,
+                controllerAs: "vm"
+            }) 
+            .when("/gearDetails/:id", {
+                templateUrl: "/ngApp/Views/gearDetails.html",
+                controller: MyApp.Controllers.GearDetailsController,
+                controllerAs: "vm"
+            }) 
             .when("/details/:id", {
                 templateUrl: "/ngApp/Views/requestDetails.html",
                 controller: MyApp.Controllers.RequestDetailsController,
                 controllerAs: "vm"
             }) 
+            .when("/addRequest", {
+                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
+                controller: MyApp.Controllers.ReqDialogController,
+                controllerAs: "vm",
+            })
+            .when("/addGear", {
+                templateUrl: "/ngApp/Dialogs/newGearDialog.html",
+                controller: MyApp.Controllers.GearDialogController,
+                controllerAs: "vm",
+            })
+            .when("/addSpace", {
+                templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
+                controller: MyApp.Controllers.SpaceDialogController,
+                controllerAs: "vm"
+            })
+            .when("/editRequest/:id", {
+                templateUrl: "/ngApp/Dialogs/editReqDialog.html",
+                controller: MyApp.Controllers.EditRequestController,
+                controllerAs: "vm",
+            })
+            .when("/editSpace/:id", {
+                templateUrl: "/ngApp/Dialogs/editSpaceDialog.html",
+                controller: MyApp.Controllers.EditSpaceController,
+                controllerAs: "vm",
+            })
+            .when("/editGear/:id", {
+                templateUrl: "/ngApp/Dialogs/editGearDialog.html",
+                controller: MyApp.Controllers.EditGearController,
+                controllerAs: "vm",
+            })
+            .when("/adminPage", {
+                templateUrl: "/ngApp/Views/adminPage.html",
+                controller: MyApp.Controllers.AdminController,
+                controllerAs: "admin",
+            })
             .otherwise("/");
         $locationProvider.html5Mode(true);
     });

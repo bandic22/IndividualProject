@@ -264,7 +264,7 @@ namespace MyWebsite.Controllers
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
@@ -328,7 +328,7 @@ namespace MyWebsite.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, DisplayName = model.DisplayName, Status = "In good standing", MemberSince = DateTime.Now, IsActive = true };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -337,6 +337,26 @@ namespace MyWebsite.Controllers
                 return GetErrorResult(result);
             }
 
+            //Uncomment to send an email confirmation
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            code = System.Web.HttpUtility.UrlEncode(code);
+
+            var callbackUrl = String.Format("/confirmEmail?userId={0}&code={1}", user.Id, code);
+            var absoluteCallbackUrl = Request.GetUrlHelper().Content(callbackUrl);
+            await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Welcome to Mixed Up!\n\nPlease confirm your account by clicking <a href=\"" + absoluteCallbackUrl + "\">here</a>");
+
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [Route("ConfirmEmail")]
+        public async Task<IHttpActionResult> ConfirmEmail(ConfirmEmailBindingModel model)
+        {
+            var result = await UserManager.ConfirmEmailAsync(model.UserId, model.Code);
+            if (!result.Succeeded)
+            {
+                return BadRequest("Invalid confirmation code!");
+            }
             return Ok();
         }
 

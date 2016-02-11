@@ -1,9 +1,4 @@
 ﻿    <form name="newUserForm" id="signUpModal" ng-submit="register.register()">
-        <ul>
-            <li ng-repeat="message in register.validationMessages">
-                {{message}}
-            </li>
-        </ul>
         <div class="modal-header">
             <h3 class="modal-title">Sign Up</h3>
         </div>
@@ -25,7 +20,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-md-6 col-md-offset-3">
-                    <label>User Name</label><input type="text" ng-model="register.registerUser.userName" class="form-control" placeholder="User Name" name="userName" required /><span ng-show="newUserForm.userName.$touched && newUserForm.userName.$error.required" class="error">Please enter a user name</span>
+                    <label>User Name</label><input type="text" ng-model="register.registerUser.displayName" class="form-control" placeholder="User Name" name="displayName" required /><span ng-show="newUserForm.displayName.$touched && newUserForm.displayName.$error.required" class="error">Please enter a user name</span>
                 </div>
             </div>
             <div class="row form-group">
@@ -43,6 +38,11 @@
                     <label>Confirm Password</label><input type="password" ng-model="register.registerUser.confirmPassword" class="form-control" placeholder="Confirm Password" name="confirmPassword" required /><span ng-show="newUserForm.confirmPassword.$touched && newUserForm.confirmPassword.$error.required" class="error">Please confirm your password</span>
                 </div>
             </div>
+            <ul>
+                <li ng-repeat="message in register.validationMessages">
+                    {{message}}
+                </li>
+            </ul>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="register.cancel()">Cancel</button>

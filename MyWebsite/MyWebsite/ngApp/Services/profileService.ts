@@ -1,17 +1,23 @@
 ﻿namespace MyApp.Services {
 
+// gets the user profile view model info
     export class ProfileService {
 
         public userInfoResource;
+        public visitUserResource;
 
         constructor($resource: ng.resource.IResourceService) {
 
-            this.userInfoResource = $resource("/api/profile/:id");
+            this.userInfoResource = $resource("/api/profileView/:id");
+            this.visitUserResource = $resource("/api/visitUser");
 
         }
 
-        public getUserInfo() {
+        public getUserInfoProfile(displayName: string) {
+            return this.visitUserResource.get({ displayName: displayName });
+        }
 
+        public getUserInfo() {
             return this.userInfoResource.get();
         }
     }

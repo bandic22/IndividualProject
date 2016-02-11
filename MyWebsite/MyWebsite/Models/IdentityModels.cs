@@ -5,6 +5,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace MyWebsite.Models
 {
@@ -13,6 +17,10 @@ namespace MyWebsite.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string DisplayName { get; set; }
+        public DateTime MemberSince { get; set; }
+        public string Status { get; set; }
+        public bool IsActive { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
@@ -22,6 +30,12 @@ namespace MyWebsite.Models
             return userIdentity;
         }
     }
+
+    public class ApplicationUserDto
+    {
+        public string DisplayName { get; set; }
+        public string Id { get; set; }
+    } 
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

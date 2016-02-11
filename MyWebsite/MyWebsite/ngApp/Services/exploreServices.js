@@ -2,22 +2,29 @@ var MyApp;
 (function (MyApp) {
     var Services;
     (function (Services) {
+        // Handles 
         var ExploreService = (function () {
             function ExploreService($resource) {
                 this.requestResource = $resource('/api/requests/:id');
-                this.replyResource = $resource('/api/requestExplore/:id');
+                this.detailsRequestResource = $resource('/api/requestView/:id');
             }
             ExploreService.prototype.getRequests = function () {
                 return this.requestResource.query();
             };
             ExploreService.prototype.getRequest = function (id) {
-                return this.requestResource.get({ id: id });
+                return this.requestResource.get({ id: id }).$promise;
             };
             ExploreService.prototype.getReplies = function (id) {
-                return this.replyResource.get({ id: id });
+                return this.detailsRequestResource.get({ id: id });
+            };
+            ExploreService.prototype.deleteReply = function (id) {
+                return this.detailsRequestResource.remove({ id: id });
             };
             ExploreService.prototype.addReply = function (reply) {
-                return this.replyResource.save(reply);
+                return this.detailsRequestResource.save(reply);
+            };
+            ExploreService.prototype.hideReply = function (reply) {
+                return this.detailsRequestResource.save(reply);
             };
             return ExploreService;
         })();

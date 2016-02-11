@@ -46,6 +46,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -79,6 +83,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -93,6 +101,18 @@
     </Reference>
     <Reference Include="Ninject.Web.WebApi.WebHost, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.WebApi.WebHost.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -113,9 +133,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -221,12 +238,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\ProfileController.cs" />
-    <Compile Include="API\RepliesController.cs" />
-    <Compile Include="API\RequestsController.cs" />
-    <Compile Include="API\RequestExploreController.cs" />
+    <Compile Include="API\AdminViewController.cs" />
+    <Compile Include="API\ProfileViewController.cs" />
+    <Compile Include="API\UserRequestsController.cs" />
+    <Compile Include="API\RequestViewController.cs" />
     <Compile Include="API\UserGearController.cs" />
     <Compile Include="API\UserSpaceController.cs" />
+    <Compile Include="API\VisitUserController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -268,9 +286,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601281847581_initial.cs" />
-    <Compile Include="Migrations\201601281847581_initial.Designer.cs">
-      <DependentUpon>201601281847581_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201601310312298_initial.cs" />
+    <Compile Include="Migrations\201601310312298_initial.Designer.cs">
+      <DependentUpon>201601310312298_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601312104233_2.cs" />
+    <Compile Include="Migrations\201601312104233_2.Designer.cs">
+      <DependentUpon>201601312104233_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602010022236_3.cs" />
+    <Compile Include="Migrations\201602010022236_3.Designer.cs">
+      <DependentUpon>201602010022236_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602030205434_4.cs" />
+    <Compile Include="Migrations\201602030205434_4.Designer.cs">
+      <DependentUpon>201602030205434_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602040016534_5.cs" />
+    <Compile Include="Migrations\201602040016534_5.Designer.cs">
+      <DependentUpon>201602040016534_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602110342057_6.cs" />
+    <Compile Include="Migrations\201602110342057_6.Designer.cs">
+      <DependentUpon>201602110342057_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602110522262_7.cs" />
+    <Compile Include="Migrations\201602110522262_7.Designer.cs">
+      <DependentUpon>201602110522262_7.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -280,40 +322,60 @@
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\UserSpace.cs" />
+    <Compile Include="Models\ViewModels\AdminViewModel.cs" />
     <Compile Include="Models\ViewModels\RequestViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
+    <Compile Include="Models\ViewModels\VisitUserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Repositories\ExploreRequestsRepository.cs" />
+    <Compile Include="Repositories\AdminViewRepository.cs" />
+    <Compile Include="Repositories\ExploreViewRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IExploreRequestsRepository.cs" />
-    <Compile Include="Repositories\IProfileRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAdminViewRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IExploreViewRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProfileViewRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IVisitUserRepository.cs" />
+    <Compile Include="Repositories\VisitUserRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\MapUtility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-MyWebsite-20160107062507.mdf" />
+    <Content Include="App_Data\aspnet-MyWebsite-20160107062507_log.ldf">
+      <DependentUpon>aspnet-MyWebsite-20160107062507.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="GitIgnore\.gitignore" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="audiojs\audio.min.js" />
     <Content Include="audiojs\audiojs.swf" />
     <Content Include="audiojs\player-graphics.gif" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="ngApp\Dialogs\editGearDialog.html" />
     <Content Include="ngApp\Dialogs\editProfileDialog.html" />
+    <Content Include="ngApp\Dialogs\editReqDialog.html" />
+    <Content Include="ngApp\Dialogs\editSpaceDialog.html" />
     <Content Include="ngApp\Dialogs\loginDialog.html" />
     <Content Include="ngApp\Dialogs\newGearDialog.html" />
     <Content Include="ngApp\Dialogs\newReqDialog.html" />
     <Content Include="ngApp\Dialogs\newSpaceDialog.html" />
     <Content Include="ngApp\Dialogs\signUpDialog.html" />
     <Content Include="ngApp\Views\about.html" />
+    <Content Include="ngApp\Views\adminPage.html" />
     <Content Include="ngApp\Views\explore.html" />
+    <Content Include="ngApp\Views\gearDetails.html" />
     <Content Include="ngApp\Views\home.html" />
     <Content Include="ngApp\Views\profile.html" />
     <Content Include="ngApp\Views\requestDetails.html" />
+    <Content Include="ngApp\Views\spaceDetails.html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\angular-animate.js" />
@@ -347,8 +409,6 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular_filepicker.min.js" />
     <Content Include="Scripts\bootstrap-modalmanager.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -371,6 +431,19 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include=".bin\node.cmd" />
+    <Content Include=".bin\git.cmd" />
+    <Content Include=".bin\bower.cmd" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
@@ -383,10 +456,6 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include=".bin\node.cmd" />
-    <Content Include=".bin\git.cmd" />
-    <Content Include=".bin\bower.cmd" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -1131,9 +1200,10 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1157,52 +1227,73 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="GitIgnore\Secret.config" />
     <Content Include="Scripts\version.json" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="ngApp\Details\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ngApp\Controllers\aboutController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\accountController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\adminController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\gearDetailsController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editGearController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editProfileModalController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\exploreController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editRequestController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editSpaceController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\gearDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\homeController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\profileController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\reqDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\spaceDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\requestDetailsController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\spaceDetailsController.ts" />
     <TypeScriptCompile Include="ngApp\ngApp.ts" />
     <TypeScriptCompile Include="ngApp\Services\accountService.ts" />
+    <TypeScriptCompile Include="ngApp\Services\adminService.ts" />
     <TypeScriptCompile Include="ngApp\Services\exploreServices.ts" />
     <TypeScriptCompile Include="ngApp\Services\profileService.ts" />
     <TypeScriptCompile Include="ngApp\Services\userServices.ts" />
-    <TypeScriptCompile Include="ngApp\Services\soundServices.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\es6-promise\es6-promise.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601281847581_initial.resx">
-      <DependentUpon>201601281847581_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601310312298_initial.resx">
+      <DependentUpon>201601310312298_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601312104233_2.resx">
+      <DependentUpon>201601312104233_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602010022236_3.resx">
+      <DependentUpon>201602010022236_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602030205434_4.resx">
+      <DependentUpon>201602030205434_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602040016534_5.resx">
+      <DependentUpon>201602040016534_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602110342057_6.resx">
+      <DependentUpon>201602110342057_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602110522262_7.resx">
+      <DependentUpon>201602110522262_7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -4,87 +4,43 @@
 
         public userProfileInfo;
 
-        constructor(private $uibModal: ng.ui.bootstrap.IModalService, private $resource: ng.resource.IResourceService, private $location: ng.ILocationService, private profileService: MyApp.Services.ProfileService, private userService: MyApp.Services.UserService) {
+        constructor(private profileService: MyApp.Services.ProfileService, private userService: MyApp.Services.UserService, private $routeParams: angular.route.IRouteParamsService, private $route: ng.route.IRouteService) {          
+            this.checkRouteParam();
+        }
 
-            this.userProfileInfo = profileService.getUserInfo();
+        public checkRouteParam() {
+            if (this.$routeParams["displayName"] == "myprofile") {
+                this.userProfileInfo = this.getLoggedInUser();
+            }
+            else {
+                this.userProfileInfo = this.profileService.getUserInfoProfile(this.$routeParams["displayName"]);
+            }
+        }
+
+        public getLoggedInUser() {
+            return this.profileService.getUserInfo();
+        }
+
+        public editRequest(id: number) {
+            return this.userService.getUserRequest(id);           
+        }
+
+        public editGear(id: number) {
+            return this.userService.getUserGear(id);
+        }
+
+        public editSpace(id: number) {
+            return this.userService.getUserSpace(id);
         }
 
         public deleteGear(id: number) {
-            return this.userService.deleteUserGear(id);
+            return this.userService.deleteUserGear(id).then(() =>
+                this.$route.reload());
         }
 
         public deleteRequest(id: number) {
-            return this.userService.deleteRequest(id);
-        }
-
-        public addNewRequest() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
-                controller: MyApp.Controllers.ReqDialogController,
-                controllerAs: "modal",
-                size: "sm",              
-            });
-        }
-
-        public addNewGear() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newGearDialog.html",
-                controller: MyApp.Controllers.GearDialogController,
-                controllerAs: "modal",
-                size: "sm"
-            });
-        }
-
-        public addUserSpace() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
-                controller: MyApp.Controllers.SpaceDialogController,
-                controllerAs: "modal",
-                size: "sm"
-            });
-        }
-
-        public editRequest() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newReqDialog.html",
-                controller: MyApp.Controllers.ReqDialogController,
-                controllerAs: "modal",
-                size: "sm"
-            });
-        }
-
-        public editGear() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newGearDialog.html",
-                controller: MyApp.Controllers.GearDialogController,
-                controllerAs: "modal",
-                size: "sm",
-            });
-        }
-
-        public editSpace() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
-                controller: MyApp.Controllers.SpaceDialogController,
-                controllerAs: "modal",
-                size: "sm"
-            });
-        }
-
-        public editProfile() {
-
-            this.$uibModal.open({
-                templateUrl: "/ngApp/Dialogs/editProfileDialog.html",
-                controller: MyApp.Controllers.EditProfileModalController,
-                controllerAs: "modal",
-                size: "sm"
-            });
+            return this.userService.deleteRequest(id).then(() =>
+                this.$route.reload());
         }
     }
 }

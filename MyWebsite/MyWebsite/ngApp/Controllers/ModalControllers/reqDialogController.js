@@ -3,24 +3,21 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ReqDialogController = (function () {
-            function ReqDialogController(userService, $uibModalInstance, filepickerService, $scope) {
+            function ReqDialogController(userService, filepickerService, $location, $scope) {
                 this.userService = userService;
-                this.$uibModalInstance = $uibModalInstance;
                 this.filepickerService = filepickerService;
+                this.$location = $location;
                 this.$scope = $scope;
-                this.request = {};
-                this.file = {};
             }
             ReqDialogController.prototype.addRequest = function () {
                 var _this = this;
                 this.userService.addUserRequest(this.request).then(function () {
-                    _this.$uibModalInstance.close();
+                    _this.$location.path("/profile/myprofile");
+                    window.location.reload();
                 });
             };
-            ReqDialogController.prototype.editRequest = function () {
-            };
             ReqDialogController.prototype.pickFile = function () {
-                this.filepickerService.pick({ mimetype: 'audio/*' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
+                this.filepickerService.pick({ mimetype: 'audio/*' }, this.fileUploaded.bind(this));
             };
             ReqDialogController.prototype.fileUploaded = function (file) {
                 // save file url to database            
@@ -30,11 +27,10 @@ var MyApp;
                 this.$scope.$apply(); // force page to update            
             };
             ReqDialogController.prototype.cancel = function () {
-                this.$uibModalInstance.close();
+                this.$location.path("/profile/myprofile");
             };
             return ReqDialogController;
         })();
         Controllers.ReqDialogController = ReqDialogController;
-        angular.module("MyApp").controller("reqDialogController", ReqDialogController);
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));

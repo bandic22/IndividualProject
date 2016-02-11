@@ -1,0 +1,40 @@
+﻿<section id="reqModal">
+    <div class="page-header">
+        <h3 class="text-center">Edit your request!</h3>
+    </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label>Title</label><input ng-model="vm.request.title" class="form-control" type="text" placeholder="Enter a title" />
+            </div>
+        </div>
+        <!--<div class="row">
+            <div class="col-md-6" id="modalDropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Category
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" ng-repeat="category in modal.categories">
+                        <li><a href="#" ng-model="modal.request.category">{{category.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>-->
+        <div class="row">
+            <div class="col-md-12">
+                <label>Description</label><textarea ng-model="vm.request.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary form" id="profileUploadBtn" ng-click="vm.pickFile()">Choose sound</button>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <button class="btn btn-primary" ng-click="vm.cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="vm.addRequest()">Submit</button>
+        </div>
+    </div>
+</section>
+

@@ -21,6 +21,15 @@ namespace MyWebsite.Models
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
-        
+
+    }
+
+    public class RequestDto
+    {
+        public string Title { get; set; }
+        public DateTime DateCreated { get; set; }
+        public int NoOfReplies { get; set; }
+        public ApplicationUserDto User { get; set; }
+        public int Id { get; set; }
     }
 }

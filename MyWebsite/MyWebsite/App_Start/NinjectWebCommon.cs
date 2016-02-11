@@ -11,6 +11,7 @@ namespace MyWebsite.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Repositories;
+    using Repositories.Interfaces;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -61,9 +62,11 @@ namespace MyWebsite.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IProfileRepository>().To<ProfileRepository>();
+            kernel.Bind<IProfileViewRepository>().To<ProfileViewRepository>();
             kernel.Bind<IGenericRepository>().To<GenericRepository>();
-            kernel.Bind<IExploreRequestsRepository>().To<ExploreRequestsRepository>();
+            kernel.Bind<IExploreViewRepository>().To<ExploreViewRepository>();
+            kernel.Bind<IAdminViewRepository>().To<AdminViewRepository>();
+            kernel.Bind<IVisitUserRepository>().To<VisitUserRepository>();
         }        
     }
 }

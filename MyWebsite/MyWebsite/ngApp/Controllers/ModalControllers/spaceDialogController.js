@@ -3,24 +3,22 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var SpaceDialogController = (function () {
-            function SpaceDialogController($uibModal, $uibModalInstance, filepickerService, $scope, userService) {
-                this.$uibModal = $uibModal;
-                this.$uibModalInstance = $uibModalInstance;
+            function SpaceDialogController($location, filepickerService, $scope, userService) {
+                this.$location = $location;
                 this.filepickerService = filepickerService;
                 this.$scope = $scope;
                 this.userService = userService;
-                this.userSpace = {};
             }
             SpaceDialogController.prototype.addNewSpace = function () {
                 var _this = this;
-                return this.userService.addUserSpace(this.userSpace).then(function () {
-                    _this.$uibModalInstance.close();
+                this.userService.editUserSpace(this.userSpace).then(function () {
+                    _this.$location.path("/profile/myprofile");
                 });
             };
             SpaceDialogController.prototype.editSpace = function () {
             };
             SpaceDialogController.prototype.pickFile = function () {
-                this.filepickerService.pick({ mimetype: 'image/*' }, this.fileUploaded.bind(this), this.$uibModalInstance.close());
+                this.filepickerService.pick({ mimetype: 'image/*' }, this.fileUploaded.bind(this), this.$location.path("/profile"));
             };
             SpaceDialogController.prototype.fileUploaded = function (file) {
                 // save file url to database
@@ -28,7 +26,7 @@ var MyApp;
                 this.$scope.$apply(); // force page to update
             };
             SpaceDialogController.prototype.cancel = function () {
-                this.$uibModalInstance.close();
+                this.$location.path("/profile/myprofile");
             };
             return SpaceDialogController;
         })();

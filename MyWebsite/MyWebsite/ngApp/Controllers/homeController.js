@@ -3,15 +3,19 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var HomeController = (function () {
-            function HomeController($uibModal) {
+            function HomeController($scope, $uibModal, accountService, profileService) {
+                this.$scope = $scope;
                 this.$uibModal = $uibModal;
+                this.accountService = accountService;
+                this.profileService = profileService;
+                this.isLoggedIn = accountService.isLoggedIn();
             }
             HomeController.prototype.signUp = function () {
                 this.$uibModal.open({
                     templateUrl: "/ngApp/Dialogs/signUpDialog.html",
                     controller: MyApp.Controllers.RegisterController,
                     controllerAs: "register",
-                    size: "sm"
+                    size: "md"
                 });
             };
             HomeController.prototype.login = function () {
@@ -19,12 +23,12 @@ var MyApp;
                     templateUrl: "/ngApp/Dialogs/loginDialog.html",
                     controller: MyApp.Controllers.LoginController,
                     controllerAs: "login",
-                    size: "sm"
+                    size: "md"
                 });
             };
             return HomeController;
         })();
         Controllers.HomeController = HomeController;
-        angular.module("MyApp").controller("homeController", HomeController);
+        angular.module("MyApp").controller("HomeController", HomeController); //why could I declare multiple controllers on the index page only when "HomeController" had a captial H
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));

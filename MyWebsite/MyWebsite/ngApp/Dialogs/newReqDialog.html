@@ -1,11 +1,11 @@
-﻿<section id="reqModal">
-    <div class="modal-header">
-        <h3 class="modal-title">Make a new request!</h3>
+﻿<form ng-submit="vm.addRequest()" id="reqModal">
+    <div class="page-header">
+        <h3 class="text-center">Make a new request!</h3>
     </div>
-    <div class="modal-body">
+    <div>
         <div class="row form-group">
             <div class="col-md-6">
-                <label>Title</label><input ng-model="modal.request.title" class="form-control" type="text" placeholder="Enter a title" />
+                <label>Title</label><input ng-model="vm.request.title" class="form-control" type="text" placeholder="Enter a title" required />
             </div>
         </div>
         <!--<div class="row">
@@ -23,17 +23,19 @@
         </div>-->
         <div class="row">
             <div class="col-md-12">
-                <label>Description</label><textarea ng-model="modal.request.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
+                <label>Description</label><textarea ng-model="vm.request.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" required />
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-primary form" id="profileUploadBtn" ng-click="modal.pickFile()">Choose sound</button>
+                <button class="btn btn-primary form" id="profileUploadBtn" ng-click="vm.pickFile()">Choose sound</button>
             </div>
         </div>
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-        <button class="btn btn-primary" ng-click="modal.addRequest()">Submit</button>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <button class="btn btn-primary" ng-click="vm.cancel()">Cancel</button>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
     </div>
-</section>
+</form>

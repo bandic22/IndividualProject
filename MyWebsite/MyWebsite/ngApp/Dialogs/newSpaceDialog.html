@@ -1,26 +1,26 @@
-﻿<form ng-submit="modal.addNewSpace()">
-    <div class="modal-header">
-        <h3 class="modal-title">Submit details about your space!</h3>
-    </div>
-    <div class="modal-body">
+﻿<form ng-submit="vm.addNewSpace()">
+    <div class="page-header">
+        <h3 class="text-center">Submit details about your space!</h3>
+    </div>    
         <div class="row form-group">
             <div class="col-md-6" id="reqModalInputs">
-                <label>Title</label><input ng-model="modal.userSpace.title" class="form-control" type="text" placeholder="Enter a title" />
+                <label>Title</label><input ng-model="vm.userSpace.title" class="form-control" type="text" placeholder="Enter a title" />
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <label>Description</label><textarea ng-model="modal.userSpace.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
+                <label>Description</label><textarea ng-model="vm.userSpace.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-primary form" id="profileUploadBtn" ng-click="modal.pickFile()">Upload photos/Dimensions</button>
+                <button class="btn btn-primary form" id="profileUploadBtn" ng-click="vm.pickFile()">Upload photos/Dimensions</button>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-        <button class="btn btn-primary" type="submit">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
-    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <button class="btn btn-primary" ng-click="vm.cancel()">Cancel</button>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </div>    
 </form>

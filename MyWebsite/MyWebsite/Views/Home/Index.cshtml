@@ -17,18 +17,22 @@
         </div>
 
         <!--Top nav tabs-->
-        <div ng-controller="AccountController as account">
+        <div>
             <div class="row">
                 <div class="col-md-12 img-responsive">
                     <ul class="nav nav-tabs" id="mainNav">
                         <li role="presentation"><a href="/home">Home</a></li>
-                        <li role="presentation"><a ng-show="account.isLoggedIn()" href="/profile">Profile</a></li>
+                        <li role="presentation" ng-controller="HomeController as home"><a ng-show="home.isLoggedIn" href="/profile/myprofile">Profile</a></li>
                         <li role="presentation"><a href="/explore">Explore</a></li>
                         <li role="presentation"><a href="/about">About</a></li>
+                        <li role="presentation" ng-controller="AccountController as account"><a ng-show="account.getClaim('Admin')" href="/adminPage">Admin Page</a></li>
+                        <li role="presentation" ng-controller="AccountController as account" id="mainNavFloat"><a class="btn" ng-show="account.isLoggedIn()" ng-click="account.logout()">Logout</a></li>
+                        <li role="presentation" ng-controller="HomeController as home" ng-show="!home.isLoggedIn" id="mainNavFloat"><a class="btn" ng-click="home.login()">Login</a></li>
+                        <li role="presentation" ng-controller="HomeController as home" ng-show="!home.isLoggedIn" id="mainNavFloat"><a class="btn" ng-click="home.signUp()">Sign Up</a></li>
                     </ul>
                 </div>
             </div>
-        </div>        
+        </div>       
 
         <div ng-view>
             
@@ -57,35 +61,41 @@
     </script>*@
 
     <!--Bootstrap stuff-->
-    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <!--Angular stuff-->
     <script src="~/Scripts/angular.min.js"></script>    
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/angular-resource.min.js"></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
     <script src="/Scripts/angular_filepicker.min.js"></script>
     <!--Files created by me-->
     <script src="~/ngApp/ngApp.js"></script>
-    <script src="~/audiojs/audio.min.js"></script>
-    
+    <script src="~/audiojs/audio.min.js"></script>    
     <script src="~/ngApp/Services/exploreServices.js"></script>
-    <script src="~/ngApp/Services/soundServices.js"></script>
     <script src="~/ngApp/Services/userServices.js"></script>
     <script src="~/ngApp/Services/accountService.js"></script>
     <script src="~/ngApp/Services/profileService.js"></script>
+    <script src="~/ngApp/Services/adminService.js"></script>
     <script src="~/ngApp/Controllers/aboutController.js"></script>
     <script src="~/ngApp/Controllers/exploreController.js"></script>
     <script src="~/ngApp/Controllers/homeController.js"></script>
     <script src="~/ngApp/Controllers/profileController.js"></script>
     <script src="~/ngApp/Controllers/accountController.js"></script>
     <script src="~/ngApp/Controllers/requestDetailsController.js"></script>
+    <script src="~/ngApp/Controllers/adminController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/editProfileModalController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/editRequestController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/editSpaceController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/editGearController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/gearDialogController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/loginDialogController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/reqDialogController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/signUpModalController.js"></script>
     <script src="~/ngApp/Controllers/ModalControllers/spaceDialogController.js"></script>
+    <script src="~/ngApp/Controllers/spaceDetailsController.js"></script>
+    <script src="~/ngApp/Controllers/gearDetailsController.js"></script>
 </body>
 </html>

@@ -3,10 +3,11 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var AccountController = (function () {
-            function AccountController(accountService, $location) {
+            function AccountController(accountService, $location, profileService) {
                 var _this = this;
                 this.accountService = accountService;
                 this.$location = $location;
+                this.profileService = profileService;
                 this.getExternalLogins().then(function (results) {
                     _this.externalLogins = results;
                 });
@@ -19,6 +20,8 @@ var MyApp;
             };
             AccountController.prototype.logout = function () {
                 this.accountService.logout();
+                window.location.reload();
+                this.$location.path("/");
             };
             AccountController.prototype.getExternalLogins = function () {
                 return this.accountService.getExternalLogins();
@@ -28,18 +31,20 @@ var MyApp;
         Controllers.AccountController = AccountController;
         angular.module('MyApp').controller('AccountController', AccountController);
         var LoginController = (function () {
-            function LoginController($uibModalInstance, accountService, $location) {
+            function LoginController($uibModalInstance, accountService, $location, $scope) {
                 this.$uibModalInstance = $uibModalInstance;
                 this.accountService = accountService;
                 this.$location = $location;
+                this.$scope = $scope;
             }
             LoginController.prototype.login = function () {
-                var _this = this;
-                this.accountService.login(this.loginUser).then(function () {
-                    _this.$uibModalInstance.close();
-                    _this.$location.path("/profile");
+                var self = this;
+                this.accountService.login(self.loginUser).then(function () {
+                    self.$uibModalInstance.close();
+                    self.$location.path("/profile/myprofile");
+                    window.location.reload();
                 }).catch(function (results) {
-                    _this.validationMessages = results;
+                    self.validationMessages = results;
                 });
             };
             LoginController.prototype.cancel = function () {

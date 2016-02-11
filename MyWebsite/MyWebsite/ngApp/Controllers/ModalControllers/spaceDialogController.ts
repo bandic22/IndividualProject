@@ -5,14 +5,13 @@
         public userSpace;
         public file;
 
-        constructor(private $uibModal: angular.ui.bootstrap.IModalService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private filepickerService, private $scope: ng.IScope, private userService: MyApp.Services.UserService) {
-            this.userSpace = {};
+        constructor(private $location: ng.ILocationService, private filepickerService, private $scope: ng.IScope, private userService: MyApp.Services.UserService) {
 
         }
 
         public addNewSpace() {
-            return this.userService.addUserSpace(this.userSpace).then(() => {
-                this.$uibModalInstance.close();
+            this.userService.editUserSpace(this.userSpace).then(() => {
+                this.$location.path("/profile/myprofile");
             });
         }
 
@@ -26,7 +25,7 @@
             this.filepickerService.pick(
                 { mimetype: 'image/*' },
                 this.fileUploaded.bind(this),
-                this.$uibModalInstance.close())
+                this.$location.path("/profile"));
         }
 
         public fileUploaded(file) {
@@ -36,7 +35,7 @@
         }
 
         public cancel() {
-            this.$uibModalInstance.close();
+            this.$location.path("/profile/myprofile");
         }
     }
 }

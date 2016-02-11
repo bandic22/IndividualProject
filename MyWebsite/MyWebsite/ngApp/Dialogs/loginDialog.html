@@ -1,4 +1,4 @@
-﻿<form ng-submit="login.login()">
+﻿<form ng-submit="login.login()" name="loginForm">
     <!--<ul>
         <li ng-repeat="message in login.validationMessages">
             {{message}}
@@ -10,15 +10,20 @@
     <div class="modal-body">
         <div class="row form-group">
             <div class="col-md-6">
-                <label>Email</label><input ng-model="login.loginUser.userName" class="form-control" type="text" placeholder="Email" />
+                <label>Email</label><input ng-model="login.loginUser.userName" class="form-control" type="text" placeholder="Email" name="email" required /><span ng-show="loginForm.email.$touched && loginForm.email.$error.required" class="error">Please enter an email</span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label>Password</label><input ng-model="login.loginUser.password" class="form-control" type="password" placeholder="Password" />
+                <label>Password</label><input ng-model="login.loginUser.password" class="form-control" name="password" type="password" placeholder="Password" required/><span ng-show="loginForm.password.$touched && loginForm.password.$error.required" class="error">Please enter a password</span>
             </div>
         </div>
     </div>
+    <ul>
+        <li ng-repeat="message in login.validationMessages">
+            {{message}}
+        </li>
+    </ul>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="login.cancel()">Cancel</button>
         <button class="btn btn-primary" type="submit">Login</button>

@@ -27,18 +27,22 @@ namespace MyWebsite.Migrations
                 user = new ApplicationUser
                 {
                     UserName = "bandic22@gmail.com",
+                    DisplayName = "Bandic22(Admin)",
                     Email = "bandic22@gmail.com",
                     FirstName = "Duran",
                     LastName = "Gradwell",
+                    IsActive = true,
+                    MemberSince = new DateTime(2016, 01, 01),
+                    Status = "In good standing"
                 };
 
                 userManager.Create(user, "Hello!123");
-                //userManager.AddClaim(user.Id, new Claim("Admin", "true"));
+                userManager.AddClaim(user.Id, new Claim("Admin", "true"));
             }
 
             var requests = new Request[]
         {
-                new Request { Title = "Help me", Description = "My mix sucks", Id = 1, NoOfReplies = 0 }
+                new Request { Title = "Please give me some feedback on my mix", Description = "This is a song from an EP I recorded for a local band. To my standards it sounds good but I know it's not there yet. I don't have any specific requests, just give me all the constructive criticism you can. Thanks!", Id = 1, NoOfReplies = 0, FileUrl = "https://www.filestackapi.com/api/file/IYw27dpbTxqLKOw7arwo", DateCreated = DateTime.Now, UserId = "41ef0386-336a-476f-b8cd-7e540507f99f" }
         };
 
             context.Requests.AddOrUpdate(r => r.Title, requests);

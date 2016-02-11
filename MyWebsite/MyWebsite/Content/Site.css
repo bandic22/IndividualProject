@@ -33,6 +33,11 @@
 
 #mainNav a {
     color: black;
+    font-size: 15px;
+}
+
+#mainNavFloat {
+    float: right;
 }
 
 #homeCarousel {
@@ -68,28 +73,14 @@
 
 .btnHome {
     margin-top: 10px;
-}
-
-#profileTable {
-    margin-top: 10px;
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-    border: 1px solid black;
-    border-radius: 5px;
 }
-
 
 #profileTable td {
     padding-left: 10px;
     padding-top: 7px;
     height: 35px;
-    border-top: none !important; 
-    border: 1px solid black;
-    border-radius: 5px;
-}
-
-#profilePostList {
-    margin-top: 25px;
-    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    /*border-top: none !important;*/ 
     border: 1px solid black;
     border-radius: 5px;
 }
@@ -100,15 +91,11 @@
     border-radius: 5px;
 }
 
-#homeHeading {
+.myPageHeader {
     margin-top: 25px;
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
     border: 1px solid black;
     border-radius: 5px;
-}
-
-#profileReqBtn {
-    margin-bottom: 15px;
 }
 
 #modalDropdown {
@@ -119,20 +106,79 @@
     margin-top: 20px;
 } 
 
-#gearTable{
+.myTable{
     margin-top: 10px;
+    margin-bottom: 15px;
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
     border: 1px solid black;
     border-radius: 5px;
+    padding-top: 5px;
 }
 
-#spaceTable{
-    margin-top: 10px;
-    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-    border: 1px solid black;
-    border-radius: 5px;
+.myTable a{
+    margin-bottom: 20px;
+}
+
+.myTable button{
+    margin-bottom: 20px;
+}
+
+.myTable table {
+    margin-top: 15px;
 }
 
 #audioPlayer{
     margin-top: 20px;
+    position: relative;
+    right: 85px;
+    padding-bottom: 20px;
+}
+
+#reqCommentTable {
+
+    padding-top: 20px;
+    margin-top: 20px;
+    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#reqCommentTable td{
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+#exploreTable {
+    margin-top: 25px;
+}
+
+#exploreRequest {
+    margin-top: 15px;
+    padding-top: 5px;
+    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#replyTextArea {
+    margin-top: 30px;
+    margin-left: -10px;
+}
+
+#exploreLoginRequirement{
+    background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+    margin-left: 85px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 6px 6px 6px 6px;
+}
+
+#spaceImage {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+.myTableBtn {
+    float: right;
 }

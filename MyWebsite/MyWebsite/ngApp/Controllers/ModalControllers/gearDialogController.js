@@ -3,21 +3,20 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var GearDialogController = (function () {
-            function GearDialogController($uibModal, $uibModalInstance, userService) {
-                this.$uibModal = $uibModal;
-                this.$uibModalInstance = $uibModalInstance;
+            function GearDialogController($location, userService) {
+                this.$location = $location;
                 this.userService = userService;
             }
             GearDialogController.prototype.addGear = function () {
                 var _this = this;
                 return this.userService.addUserGear(this.gearItem).then(function () {
-                    _this.$uibModalInstance.close();
+                    _this.$location.path("/profile/myprofile");
                 });
             };
             GearDialogController.prototype.editGear = function () {
             };
             GearDialogController.prototype.cancel = function () {
-                this.$uibModalInstance.close();
+                this.$location.path("/profile/myprofile");
             };
             return GearDialogController;
         })();

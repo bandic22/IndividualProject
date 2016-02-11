@@ -3,10 +3,14 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ExploreController = (function () {
-            function ExploreController(exploreService, $resource, $location) {
+            function ExploreController(exploreService) {
                 this.exploreService = exploreService;
-                this.$resource = $resource;
-                this.$location = $location;
+                this.sortType = 'title';
+                this.sortReverse = false;
+                this.currentPage = 1;
+                this.maxSize = 5;
+                this.bigTotalItems = 200;
+                this.bigCurrentPage = 1;
                 this.requests = exploreService.getRequests();
             }
             return ExploreController;

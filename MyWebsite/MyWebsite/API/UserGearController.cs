@@ -10,6 +10,8 @@ using System.Web.Http;
 
 namespace MyWebsite.API
 {
+
+    // Controller for userGear CRUD
     public class UserGearController : ApiController
     {
         private IGenericRepository _repo;
@@ -19,19 +21,16 @@ namespace MyWebsite.API
             _repo = repo;
         }
 
-        // fetches all requests from DB
         public IHttpActionResult Get()
         {
             return Ok(_repo.Query<GearItem>().ToList());
         }
 
-        // fetches one request from DB by the ID
         public IHttpActionResult Get(int id)
         {
             return Ok(_repo.Find<GearItem>(id));
         }
 
-        // checks the model state, if valid and if request id == 0, it's new, so create new DB entry and return it
         public IHttpActionResult Post(GearItem gearItem)
         {
             if (ModelState.IsValid)
@@ -41,6 +40,14 @@ namespace MyWebsite.API
                     var userId = this.User.Identity.GetUserId();
                     gearItem.UserId = userId;
                     _repo.Add<GearItem>(gearItem);
+                    _repo.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    var original = _repo.Find<GearItem>(gearItem.Id);
+                    original.Title = gearItem.Title;
+                    original.Description = gearItem.Description;
                     _repo.SaveChanges();
                     return Ok();
                 }

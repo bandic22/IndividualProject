@@ -1,13 +1,14 @@
 ﻿namespace MyApp.Services {
 
+// Handles 
     export class ExploreService {
 
         private requestResource;
-        private replyResource;
+        private detailsRequestResource;
 
         constructor($resource: angular.resource.IResourceService) {
             this.requestResource = $resource('/api/requests/:id');
-            this.replyResource = $resource('/api/requestExplore/:id');
+            this.detailsRequestResource = $resource('/api/requestView/:id');
         }
 
         public getRequests() {
@@ -15,19 +16,24 @@
         }
 
         public getRequest(id: number) {
-            return this.requestResource.get({id: id});
+            return this.requestResource.get({ id: id }).$promise;
         }
 
         public getReplies(id: number) {
-            return this.replyResource.get({ id: id });
+            return this.detailsRequestResource.get({ id: id });
+        }
 
+        public deleteReply(id: number) {
+            return this.detailsRequestResource.remove({ id: id });    
         }
 
         public addReply(reply) {       
-            return this.replyResource.save(reply);
+            return this.detailsRequestResource.save(reply);
         }
 
-
+        public hideReply(reply) {
+            return this.detailsRequestResource.save(reply);
+        }
     }
     angular.module("MyApp").service('exploreService', ExploreService);
 }

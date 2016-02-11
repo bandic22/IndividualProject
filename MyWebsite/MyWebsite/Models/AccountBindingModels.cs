@@ -39,6 +39,8 @@ namespace MyWebsite.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        [Required]
+        public string DisplayName { get; set; }
 
         [Required]
         [Display(Name = "Email")]

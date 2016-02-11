@@ -3,13 +3,12 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var EditProfileModalController = (function () {
-            function EditProfileModalController(userService, $uibModal, $uibModalInstance) {
+            function EditProfileModalController(userService, $location) {
                 this.userService = userService;
-                this.$uibModal = $uibModal;
-                this.$uibModalInstance = $uibModalInstance;
+                this.$location = $location;
             }
             EditProfileModalController.prototype.cancel = function () {
-                this.$uibModalInstance.close();
+                this.$location.path("/profile");
             };
             return EditProfileModalController;
         })();

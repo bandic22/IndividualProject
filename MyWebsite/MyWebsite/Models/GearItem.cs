@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,9 @@ namespace MyWebsite.Models
     public class GearItem
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "GearItem title is required")]
         public string Title { get; set; }
+        [Required(ErrorMessage = "GearItem title is required")]
         public string Description { get; set; }
         public string Category { get; set; }
         

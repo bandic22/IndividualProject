@@ -4,12 +4,12 @@
 
         public user;
 
-        constructor(private userService: MyApp.Services.UserService, private $uibModal: angular.ui.bootstrap.IModalService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance) {
+        constructor(private userService: MyApp.Services.UserService, private $location: ng.ILocationService) {
 
         }
 
         public cancel() {
-            this.$uibModalInstance.close();
+            this.$location.path("/profile");
         }
     }
 }

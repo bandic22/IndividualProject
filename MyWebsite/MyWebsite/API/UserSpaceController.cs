@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace MyWebsite.API
 {
+    // Controller for userSpace CRUD
     public class UserSpaceController : ApiController
     {
         private IGenericRepository _repo;
@@ -19,19 +20,16 @@ namespace MyWebsite.API
             _repo = repo;
         }
 
-        // fetches all requests from DB
         public IHttpActionResult Get()
         {
             return Ok(_repo.Query<UserSpace>().ToList());
         }
 
-        // fetches one request from DB by the ID
         public IHttpActionResult Get(int id)
         {
             return Ok(_repo.Find<UserSpace>(id));
         }
 
-        // checks the model state, if valid and if request id == 0, it's new, so create new DB entry and return it
         public IHttpActionResult Post(UserSpace userSpace)
         {
             if (ModelState.IsValid)
@@ -41,6 +39,15 @@ namespace MyWebsite.API
                     var userId = this.User.Identity.GetUserId();
                     userSpace.UserId = userId;
                     _repo.Add<UserSpace>(userSpace);
+                    _repo.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    var original = _repo.Find<UserSpace>(userSpace.Id);
+                    original.Title = userSpace.Title;
+                    original.Description = userSpace.Description;
+                    original.FileUrl = userSpace.FileUrl;
                     _repo.SaveChanges();
                     return Ok();
                 }

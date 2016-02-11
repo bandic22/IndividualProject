@@ -8,11 +8,11 @@ using MyWebsite.Models;
 
 namespace MyWebsite.Repositories
 {
-    public class ProfileRepository : IProfileRepository
+    public class ProfileViewRepository : IProfileViewRepository
     {
         private IGenericRepository _repo;
 
-        public ProfileRepository(IGenericRepository repo)
+        public ProfileViewRepository(IGenericRepository repo)
         {
             _repo = repo;
         }
@@ -29,12 +29,19 @@ namespace MyWebsite.Repositories
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                UserName = user.UserName,
+                DisplayName = user.DisplayName,
                 UserSpace = userSpace,
                 UserGear = userGear,
                 Requests = userRequests,
+                IsAuthorized = true
             };
             return userViewModel;
+        }
+
+        public string UserId(string displayName)
+        {
+            var user = _repo.Query<ApplicationUser>().Where(a => a.DisplayName == displayName).FirstOrDefault();
+            return user.Id;
         }
     }
 }

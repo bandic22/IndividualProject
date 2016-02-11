@@ -3,7 +3,6 @@
     export class AccountController {
         public externalLogins;
 
-
         public getClaim(type) {
             return this.accountService.getClaim(type);
         }
@@ -14,13 +13,15 @@
 
         public logout() {
             this.accountService.logout();
+            window.location.reload();
+            this.$location.path("/");           
         }
 
         public getExternalLogins() {
             return this.accountService.getExternalLogins();
         }
 
-        constructor(private accountService: MyApp.Services.AccountService, private $location: ng.ILocationService) {
+        constructor(private accountService: MyApp.Services.AccountService, private $location: ng.ILocationService, private profileService: MyApp.Services.ProfileService) {
             this.getExternalLogins().then((results) => {
                 this.externalLogins = results;
             });
@@ -35,11 +36,13 @@
         public validationMessages;
 
         public login() {
-            this.accountService.login(this.loginUser).then(() => {
-                this.$uibModalInstance.close();
-                this.$location.path("/profile");
+            var self = this;
+            this.accountService.login(self.loginUser).then(() => {
+                self.$uibModalInstance.close();
+                self.$location.path("/profile/myprofile");
+                window.location.reload();
             }).catch((results) => {
-                this.validationMessages = results;
+                self.validationMessages = results;
             });
         }
 
@@ -47,16 +50,16 @@
             this.$uibModalInstance.close();
         }
 
-        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private accountService: MyApp.Services.AccountService, private $location: angular.ILocationService) { }
+        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private accountService: MyApp.Services.AccountService, private $location: angular.ILocationService, private $scope: ng.IScope) { }
     }
-    
+
 
     export class RegisterController {
         public registerUser;
         public validationMessages;
 
         public register() {
-            
+
             this.accountService.register(this.registerUser).then(() => {
                 this.$uibModalInstance.close();
             }).catch((results) => {
@@ -65,7 +68,7 @@
         }
 
         public cancel() {
-            
+
             this.$uibModalInstance.close();
         }
 
@@ -131,5 +134,4 @@
                 });
         }
     }
-
 }

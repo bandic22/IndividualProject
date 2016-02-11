@@ -1,22 +1,22 @@
-﻿<form ng-submit="modal.addGear()">
-    <div class="modal-header">
-        <h3 class="modal-title">Submit a new piece of gear!</h3>
+﻿<form ng-submit="vm.addGear()">
+    <div class="page-header">
+        <h3 class="text-center">Submit a new piece of gear!</h3>
     </div>
-    <div class="modal-body">
         <div class="row form-group">
             <div class="col-md-6" id="reqModalInputs">
-                <label>Title</label><input ng-model="modal.gearItem.title" class="form-control" type="text" placeholder="Enter a title" />
+                <label>Title</label><input ng-model="vm.gearItem.title" class="form-control" type="text" placeholder="Enter a title" />
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <label>Description</label><textarea ng-model="modal.gearItem.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
+                <label>Description</label><textarea ng-model="vm.gearItem.description" class="form-control" rows="8" cols="50" placeholder="Enter a description" />
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="modal.cancel()">Cancel</button>
-        <button class="btn btn-primary" type="submit">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
+    <div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <button class="btn btn-primary" ng-click="vm.cancel()">Cancel</button>
+            <button class="btn btn-primary" type="submit">Submit</button> <!--can you refer to vm. and modal. in the same html page?-->
+        </div>
     </div>
 </form>
 

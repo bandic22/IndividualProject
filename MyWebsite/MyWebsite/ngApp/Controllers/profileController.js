@@ -3,74 +3,43 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ProfileController = (function () {
-            function ProfileController($uibModal, $resource, $location, profileService, userService) {
-                this.$uibModal = $uibModal;
-                this.$resource = $resource;
-                this.$location = $location;
+            function ProfileController(profileService, userService, $routeParams, $route) {
                 this.profileService = profileService;
                 this.userService = userService;
-                this.userProfileInfo = profileService.getUserInfo();
+                this.$routeParams = $routeParams;
+                this.$route = $route;
+                this.checkRouteParam();
             }
+            ProfileController.prototype.checkRouteParam = function () {
+                if (this.$routeParams["displayName"] == "myprofile") {
+                    this.userProfileInfo = this.getLoggedInUser();
+                }
+                else {
+                    this.userProfileInfo = this.profileService.getUserInfoProfile(this.$routeParams["displayName"]);
+                }
+            };
+            ProfileController.prototype.getLoggedInUser = function () {
+                return this.profileService.getUserInfo();
+            };
+            ProfileController.prototype.editRequest = function (id) {
+                return this.userService.getUserRequest(id);
+            };
+            ProfileController.prototype.editGear = function (id) {
+                return this.userService.getUserGear(id);
+            };
+            ProfileController.prototype.editSpace = function (id) {
+                return this.userService.getUserSpace(id);
+            };
             ProfileController.prototype.deleteGear = function (id) {
-                return this.userService.deleteUserGear(id);
+                var _this = this;
+                return this.userService.deleteUserGear(id).then(function () {
+                    return _this.$route.reload();
+                });
             };
             ProfileController.prototype.deleteRequest = function (id) {
-                return this.userService.deleteRequest(id);
-            };
-            ProfileController.prototype.addNewRequest = function () {
-                this.$uibModal.open({
-                    templateUrl: "/ngApp/Dialogs/newReqDialog.html",
-                    controller: MyApp.Controllers.ReqDialogController,
-                    controllerAs: "modal",
-                    size: "sm",
-                });
-            };
-            ProfileController.prototype.addNewGear = function () {
-                this.$uibModal.open({
-                    templateUrl: "/ngApp/Dialogs/newGearDialog.html",
-                    controller: MyApp.Controllers.GearDialogController,
-                    controllerAs: "modal",
-                    size: "sm"
-                });
-            };
-            ProfileController.prototype.addUserSpace = function () {
-                this.$uibModal.open({
-                    templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
-                    controller: MyApp.Controllers.SpaceDialogController,
-                    controllerAs: "modal",
-                    size: "sm"
-                });
-            };
-            ProfileController.prototype.editRequest = function () {
-                this.$uibModal.open({
-                    templateUrl: "/ngApp/Dialogs/newReqDialog.html",
-                    controller: MyApp.Controllers.ReqDialogController,
-                    controllerAs: "modal",
-                    size: "sm"
-                });
-            };
-            ProfileController.prototype.editGear = function () {
-                this.$uibModal.open({
-                    templateUrl: "/ngApp/Dialogs/newGearDialog.html",
-                    controller: MyApp.Controllers.GearDialogController,
-                    controllerAs: "modal",
-                    size: "sm",
-                });
-            };
-            ProfileController.prototype.editSpace = function () {
-                this.$uibModal.open({
-                    templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
-                    controller: MyApp.Controllers.SpaceDialogController,
-                    controllerAs: "modal",
-                    size: "sm"
-                });
-            };
-            ProfileController.prototype.editProfile = function () {
-                this.$uibModal.open({
-                    templateUrl: "/ngApp/Dialogs/editProfileDialog.html",
-                    controller: MyApp.Controllers.EditProfileModalController,
-                    controllerAs: "modal",
-                    size: "sm"
+                var _this = this;
+                return this.userService.deleteRequest(id).then(function () {
+                    return _this.$route.reload();
                 });
             };
             return ProfileController;
