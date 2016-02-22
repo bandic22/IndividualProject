@@ -29,7 +29,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3 myTable" id="gearTable">
+    <div class="col-md-8 col-md-offset-2 myTable" id="gearTable">
         <h2 class="text-center">My Gear</h2>
         <table class="table table-condensed table-responsive">
             <tr ng-repeat="gear in vm.userProfileInfo.userGear">
@@ -42,15 +42,17 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3 myTable" id="spaceTable">
+    <div class="col-md-8 col-md-offset-2 myTable" id="spaceTable">
         <h2 class="text-center">My Space</h2>
-        <table class="table table-condensed table-responsive">
-            <tr>
-                <td><a href="/spaceDetails/{{vm.userProfileInfo.userSpace.id}}">{{vm.userProfileInfo.userSpace.title}}</a><a class="btn btn-primary myTableBtn" ng-hide="!vm.userProfileInfo.isAuthorized || !vm.userProfileInfo.userSpace" href="/editSpace/{{vm.userProfileInfo.userSpace.id}}">Edit space info</a></td>
-            </tr>
-        </table>        
-        <a class="btn btn-primary" ng-hide="!vm.userProfileInfo.isAuthorized || vm.userProfileInfo.userSpace" href="/addSpace">Add your space</a>         
-        <img id="spaceImage" ng-hide="!vm.userProfileInfo.userSpace.fileUrl" ng-src="{{vm.userProfileInfo.userSpace.fileUrl}}" /> 
+        <a class="btn btn-primary" ng-hide="!vm.userProfileInfo.isAuthorized || vm.userProfileInfo.userSpace" href="/addSpace">Add your space</a>
+        <p>{{vm.userProfileInfo.userSpace.description}}</p>
+        <div ng-repeat="image in vm.userProfileInfo.userImages">
+            <img class="spaceImage" style="cursor: pointer" ng-click="vm.viewImage(image)" ng-hide="!vm.userProfileInfo.userImages" ng-src="{{image.fileUrl}}" />
+        </div>
+        <div class="imgBtns">
+            <button class="btn btn-primary form" id="profileUploadBtn" ng-click="vm.pickFile()" ng-hide="!vm.userProfileInfo.isAuthorized || vm.imageReady">Add a photo</button>
+            <a class="btn btn-primary myTableBtn" ng-hide="!vm.userProfileInfo.isAuthorized || !vm.userProfileInfo.userSpace" href="/editSpace/{{vm.userProfileInfo.userSpace.id}}">Edit space info</a>
+        </div>      
     </div>
 </div>
 
@@ -68,13 +70,39 @@
             <tbody>
                 <tr ng-repeat="request in vm.userProfileInfo.requests">
                     <td><a href="/details/{{request.id}}">{{request.title}}</a></td>
-                    <td>{{request.dateCreated}}</td>
+                    <td>{{request.dateCreated | date: 'short'}}</td>
                     <td>{{request.noOfReplies}}</td>
                     <td><a class="btn btn-primary" ng-hide="!vm.userProfileInfo.isAuthorized" href="/editRequest/{{request.id}}">Edit</a><button class="btn btn-danger" ng-click="vm.deleteRequest(request.id)" ng-hide="!vm.userProfileInfo.isAuthorized">Delete</button></td>
                 </tr>
             </tbody>
         </table>
-        <a class="btn btn-primary" href="/addRequest" ng-hide="!vm.userProfileInfo.isAuthorized">Add new request</a>        
+        <a class="btn btn-primary" href="/addRequest" ng-hide="!vm.userProfileInfo.isAuthorized">Add new request</a>
+        <a class="btn btn-primary" ng-hide="!vm.userProfileInfo.isAuthorized || vm.showReplies" ng-click="vm.showReplies = true">Show my replies</a>
+        <a class="btn btn-primary" ng-hide="!vm.userProfileInfo.isAuthorized || !vm.showReplies" ng-click="vm.showReplies = false">Hide my replies</a>
+    </div>
+</div>
+
+<div class="row" ng-show="vm.showReplies">
+    <div class="col-md-10 col-md-offset-1 myTable">
+        <h2 class="text-center">My replies</h2>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Request Title</th>
+                    <th>Request Author</th>
+                    <th>Date Created</th>
+                    <th>Likes/Dislikes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="reply in vm.userProfileInfo.userReplies">
+                    <td><a href="/details/{{reply.request.id}}">{{reply.request.title}}</a></td>
+                    <td>{{reply.request.user.displayName}}</td>
+                    <td>{{reply.dateCreated | date: 'short'}}</td>
+                    <td>{{vm.likes}}/{{vm.dislikes}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

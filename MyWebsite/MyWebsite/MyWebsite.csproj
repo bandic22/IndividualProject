@@ -240,6 +240,8 @@
   <ItemGroup>
     <Compile Include="API\AdminViewController.cs" />
     <Compile Include="API\ProfileViewController.cs" />
+    <Compile Include="API\ReplyRatingsController.cs" />
+    <Compile Include="API\UserImageController.cs" />
     <Compile Include="API\UserRequestsController.cs" />
     <Compile Include="API\RequestViewController.cs" />
     <Compile Include="API\UserGearController.cs" />
@@ -286,39 +288,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601310312298_initial.cs" />
-    <Compile Include="Migrations\201601310312298_initial.Designer.cs">
-      <DependentUpon>201601310312298_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201602210125562_initial.cs" />
+    <Compile Include="Migrations\201602210125562_initial.Designer.cs">
+      <DependentUpon>201602210125562_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601312104233_2.cs" />
-    <Compile Include="Migrations\201601312104233_2.Designer.cs">
-      <DependentUpon>201601312104233_2.cs</DependentUpon>
+    <Compile Include="Migrations\201602210140358_2.cs" />
+    <Compile Include="Migrations\201602210140358_2.Designer.cs">
+      <DependentUpon>201602210140358_2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602010022236_3.cs" />
-    <Compile Include="Migrations\201602010022236_3.Designer.cs">
-      <DependentUpon>201602010022236_3.cs</DependentUpon>
+    <Compile Include="Migrations\201602210239450_3.cs" />
+    <Compile Include="Migrations\201602210239450_3.Designer.cs">
+      <DependentUpon>201602210239450_3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602030205434_4.cs" />
-    <Compile Include="Migrations\201602030205434_4.Designer.cs">
-      <DependentUpon>201602030205434_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602040016534_5.cs" />
-    <Compile Include="Migrations\201602040016534_5.Designer.cs">
-      <DependentUpon>201602040016534_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602110342057_6.cs" />
-    <Compile Include="Migrations\201602110342057_6.Designer.cs">
-      <DependentUpon>201602110342057_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602110522262_7.cs" />
-    <Compile Include="Migrations\201602110522262_7.Designer.cs">
-      <DependentUpon>201602110522262_7.cs</DependentUpon>
+    <Compile Include="Migrations\201602211903369_4.cs" />
+    <Compile Include="Migrations\201602211903369_4.Designer.cs">
+      <DependentUpon>201602211903369_4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\GearItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\UserSpace.cs" />
@@ -342,10 +334,6 @@
     <Compile Include="Utilities\MapUtility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-MyWebsite-20160107062507.mdf" />
-    <Content Include="App_Data\aspnet-MyWebsite-20160107062507_log.ldf">
-      <DependentUpon>aspnet-MyWebsite-20160107062507.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -359,10 +347,12 @@
     <Content Include="audiojs\player-graphics.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="ngApp\Dialogs\deleteModal.html" />
     <Content Include="ngApp\Dialogs\editGearDialog.html" />
     <Content Include="ngApp\Dialogs\editProfileDialog.html" />
     <Content Include="ngApp\Dialogs\editReqDialog.html" />
     <Content Include="ngApp\Dialogs\editSpaceDialog.html" />
+    <Content Include="ngApp\Dialogs\imageModal.html" />
     <Content Include="ngApp\Dialogs\loginDialog.html" />
     <Content Include="ngApp\Dialogs\newGearDialog.html" />
     <Content Include="ngApp\Dialogs\newReqDialog.html" />
@@ -1230,7 +1220,9 @@
     <Content Include="GitIgnore\Secret.config" />
     <Content Include="Scripts\version.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
@@ -1240,6 +1232,7 @@
     <TypeScriptCompile Include="ngApp\Controllers\accountController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\adminController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\gearDetailsController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\deleteModalController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editGearController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editProfileModalController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\exploreController.ts" />
@@ -1247,6 +1240,8 @@
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\editSpaceController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\gearDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\homeController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\imageModalController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\promptModalController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\profileController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\reqDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\spaceDialogController.ts" />
@@ -1274,26 +1269,17 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601310312298_initial.resx">
-      <DependentUpon>201601310312298_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602210125562_initial.resx">
+      <DependentUpon>201602210125562_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601312104233_2.resx">
-      <DependentUpon>201601312104233_2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602210140358_2.resx">
+      <DependentUpon>201602210140358_2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602010022236_3.resx">
-      <DependentUpon>201602010022236_3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602210239450_3.resx">
+      <DependentUpon>201602210239450_3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602030205434_4.resx">
-      <DependentUpon>201602030205434_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602040016534_5.resx">
-      <DependentUpon>201602040016534_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602110342057_6.resx">
-      <DependentUpon>201602110342057_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602110522262_7.resx">
-      <DependentUpon>201602110522262_7.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602211903369_4.resx">
+      <DependentUpon>201602211903369_4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

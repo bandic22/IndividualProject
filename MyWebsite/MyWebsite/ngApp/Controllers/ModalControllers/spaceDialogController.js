@@ -15,16 +15,6 @@ var MyApp;
                     _this.$location.path("/profile/myprofile");
                 });
             };
-            SpaceDialogController.prototype.editSpace = function () {
-            };
-            SpaceDialogController.prototype.pickFile = function () {
-                this.filepickerService.pick({ mimetype: 'image/*' }, this.fileUploaded.bind(this), this.$location.path("/profile"));
-            };
-            SpaceDialogController.prototype.fileUploaded = function (file) {
-                // save file url to database
-                this.userSpace.fileUrl = this.file.url; // or this.file.url
-                this.$scope.$apply(); // force page to update
-            };
             SpaceDialogController.prototype.cancel = function () {
                 this.$location.path("/profile/myprofile");
             };
@@ -33,3 +23,4 @@ var MyApp;
         Controllers.SpaceDialogController = SpaceDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=spaceDialogController.js.map

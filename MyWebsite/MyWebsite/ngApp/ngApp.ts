@@ -2,7 +2,6 @@
 namespace MyApp {
     angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap", "ngResource", "ngSanitize"]).config((filepickerProvider, $routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider, $sceProvider) => {
         filepickerProvider.setKey("AupjI1ulQZebn5FDtAfgkz");
-        //$sceProvider.enabled(false);
         $routeProvider
             .when("/", {
                 templateUrl: "/ngApp/Views/home.html",

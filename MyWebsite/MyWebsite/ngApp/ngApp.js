@@ -3,7 +3,6 @@ var MyApp;
 (function (MyApp) {
     angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap", "ngResource", "ngSanitize"]).config(function (filepickerProvider, $routeProvider, $locationProvider, $sceProvider) {
         filepickerProvider.setKey("AupjI1ulQZebn5FDtAfgkz");
-        //$sceProvider.enabled(false);
         $routeProvider
             .when("/", {
             templateUrl: "/ngApp/Views/home.html",
@@ -100,3 +99,4 @@ var MyApp;
         $httpProvider.interceptors.push('authInterceptor');
     });
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=ngApp.js.map

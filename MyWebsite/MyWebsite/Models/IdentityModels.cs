@@ -43,6 +43,8 @@ namespace MyWebsite.Models
         public IDbSet<GearItem> GearItems { get; set; }
         public IDbSet<UserSpace> UserSpaces { get; set; }
         public IDbSet<Reply> Replies { get; set; }
+        public IDbSet<Image> Images { get; set; }
+        public IDbSet<Rating> Ratings { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

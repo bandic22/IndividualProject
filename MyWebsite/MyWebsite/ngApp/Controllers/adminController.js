@@ -19,3 +19,4 @@ var MyApp;
         Controllers.AdminController = AdminController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=adminController.js.map

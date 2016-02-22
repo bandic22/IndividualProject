@@ -47,7 +47,6 @@ namespace MyWebsite.API
                     var original = _repo.Find<UserSpace>(userSpace.Id);
                     original.Title = userSpace.Title;
                     original.Description = userSpace.Description;
-                    original.FileUrl = userSpace.FileUrl;
                     _repo.SaveChanges();
                     return Ok();
                 }

@@ -8,8 +8,11 @@ namespace MyWebsite.Models.ViewModels
     public class UserViewModel
     {
         public List<Request> Requests { get; set; }
+        public List<Rating> Ratings { get; set; }
         public UserSpace UserSpace { get; set; }
         public List<GearItem> UserGear { get; set; }
+        public List<Image> UserImages { get; set; }
+        public List<Reply> UserReplies { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string DisplayName { get; set; }

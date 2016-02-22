@@ -12,3 +12,4 @@ var MyApp;
         Controllers.GearDetailsController = GearDetailsController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=gearDetailsController.js.map

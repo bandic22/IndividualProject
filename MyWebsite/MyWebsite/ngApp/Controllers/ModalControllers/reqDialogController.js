@@ -34,3 +34,4 @@ var MyApp;
         Controllers.ReqDialogController = ReqDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=reqDialogController.js.map

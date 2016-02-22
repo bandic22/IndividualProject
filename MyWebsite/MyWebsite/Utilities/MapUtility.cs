@@ -15,6 +15,11 @@ namespace MyWebsite.Utilities
             {
                 cfg.CreateMap<ApplicationUser, ApplicationUserDto>();
                 cfg.CreateMap<Request, RequestDto>();
+                cfg.CreateMap<UserSpace, UserSpaceDto>();
+                cfg.CreateMap<GearItem, GearItemDto>();
+                cfg.CreateMap<Reply, ReplyDto>();
+                cfg.CreateMap<Image, ImageDto>();
+                cfg.CreateMap<Rating, RatingDto>();
             });
 
             var mapper = config.CreateMapper();

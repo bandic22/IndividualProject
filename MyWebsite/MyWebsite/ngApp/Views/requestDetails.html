@@ -1,8 +1,8 @@
 ﻿<form ng-submit="vm.userReply()">
     <div class="row">
         <div class="col-md-10 col-md-offset-1" id="exploreRequest">
-            <h3 class="text-center">{{vm.request.title}}</h3>
-            <h4>Posted by <a href="/profile/{{vm.replyView.request.user.displayName}}">{{vm.replyView.request.user.displayName}}</a> on the {{vm.replyView.request.dateCreated | date: 'short' }}</h4>
+            <h3 class="text-center marginBot">{{vm.request.title}}</h3>
+            <h4 class="marginBot">Posted by <a class="marginBot" href="/profile/{{vm.replyView.request.user.displayName}}">{{vm.replyView.request.user.displayName}}</a> on the {{vm.replyView.request.dateCreated | date: 'short' }}</h4>
             <p>{{vm.request.description}}</p>
             <div class="row">
                 <div class="col-md-4 col-md-offset-1" id="audioPlayer">
@@ -11,7 +11,9 @@
                             var as = audiojs.createAll();
                         });
                     </script>
-                    <audio data-ng-src="{{vm.request.fileUrl}}" ng-show="vm.request.fileUrl" preload="none"></audio>
+                    <div ng-show="vm.request.fileUrl">
+                        <audio data-ng-src="{{vm.request.fileUrl}}" ng-show="vm.request.fileUrl" preload="none"></audio>
+                    </div>
                 </div>
             </div>
         </div>
@@ -19,11 +21,26 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1" id="reqCommentTable">
             <table class="table table-condensed table-responsive">
-                <tr ng-repeat="reply in vm.replyView.replies">
-                    <td><a href="/profile/{{reply.user.displayName}}">{{reply.user.displayName}}</a></td>
-                    <td>{{reply.message}}</td>
-                    <td ng-controller="AccountController as account"><a ng-show="account.getClaim('Admin')" class="btn btn-danger" ng-click="vm.deleteReply(reply.id)">Delete</a><a ng-show="account.getClaim('Admin')" class="btn btn-danger" ng-click="vm.hideReply(reply)">Hide</a></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Message</th>
+                        <th>Date of Reply</th>                     
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                        <th ng-controller="AccountController as account" ng-show="account.getClaim('Admin')">Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="reply in vm.replyView.replies">
+                        <td><a href="/profile/{{reply.user.displayName}}">{{reply.user.displayName}}</a></td>
+                        <td>{{reply.message}}</td>
+                        <td>{{reply.dateCreated | date: 'short'}}</td>
+                        <td><a class="glyphicon glyphicon-thumbs-up" style="cursor: pointer" ng-show="!reply.canNotRate || vm.isLoggedIn()" ng-click="vm.addReplyRating(reply.id, 1)"></a>{{reply.noOfLikes}}</td>
+                        <td><a class="glyphicon glyphicon-thumbs-down" style="cursor: pointer" ng-show="!reply.canNotRate || vm.isLoggedIn()" ng-click="vm.addReplyRating(reply.id, 0)"></a>{{reply.noOfDislikes}}</td>
+                        <td ng-controller="AccountController as account" ng-show="account.getClaim('Admin')"><a ng-show="account.getClaim('Admin')" class="btn btn-danger" ng-click="vm.deleteReply(reply.id)">Delete</a><a ng-show="account.getClaim('Admin')" class="btn btn-danger" ng-click="vm.hideReply(reply)">Hide</a></td>
+                    </tr>
+                </tbody>           
             </table>           
         </div>
     </div>

@@ -29,6 +29,9 @@ namespace MyWebsite.Migrations
                         FirstName = c.String(),
                         LastName = c.String(),
                         DisplayName = c.String(),
+                        MemberSince = c.DateTime(nullable: false),
+                        Status = c.String(),
+                        IsActive = c.Boolean(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -83,11 +86,44 @@ namespace MyWebsite.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.Images",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FileUrl = c.String(),
+                        Caption = c.String(),
+                        UserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Ratings",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        IsApproval = c.Boolean(),
+                        ReplyId = c.Int(nullable: false),
+                        UserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Replies", t => t.ReplyId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.ReplyId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
                 "dbo.Replies",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Message = c.String(nullable: false),
+                        IsHidden = c.Boolean(nullable: false),
+                        DateCreated = c.DateTime(),
+                        NoOfLikes = c.Int(nullable: false),
+                        NoOfDislikes = c.Int(nullable: false),
+                        CanRate = c.Boolean(nullable: false),
                         UserId = c.String(maxLength: 128),
                         RequestId = c.Int(nullable: false),
                     })
@@ -130,7 +166,6 @@ namespace MyWebsite.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Description = c.String(nullable: false),
                         Title = c.String(nullable: false),
-                        FileUrl = c.String(),
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -143,9 +178,12 @@ namespace MyWebsite.Migrations
         {
             DropForeignKey("dbo.UserSpaces", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Ratings", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Replies", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Replies", "RequestId", "dbo.Requests");
             DropForeignKey("dbo.Requests", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Ratings", "ReplyId", "dbo.Replies");
+            DropForeignKey("dbo.Images", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.GearItems", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -155,6 +193,9 @@ namespace MyWebsite.Migrations
             DropIndex("dbo.Requests", new[] { "UserId" });
             DropIndex("dbo.Replies", new[] { "RequestId" });
             DropIndex("dbo.Replies", new[] { "UserId" });
+            DropIndex("dbo.Ratings", new[] { "UserId" });
+            DropIndex("dbo.Ratings", new[] { "ReplyId" });
+            DropIndex("dbo.Images", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -165,6 +206,8 @@ namespace MyWebsite.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Requests");
             DropTable("dbo.Replies");
+            DropTable("dbo.Ratings");
+            DropTable("dbo.Images");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

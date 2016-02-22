@@ -15,3 +15,4 @@ var MyApp;
         angular.module("MyApp").service("adminService", AdminService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=adminService.js.map

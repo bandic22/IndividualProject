@@ -35,3 +35,4 @@ var MyApp;
         Controllers.EditGearController = EditGearController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=editGearController.js.map

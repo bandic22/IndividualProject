@@ -23,3 +23,4 @@ var MyApp;
         Controllers.GearDialogController = GearDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=gearDialogController.js.map

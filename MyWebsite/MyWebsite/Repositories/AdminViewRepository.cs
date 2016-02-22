@@ -24,6 +24,7 @@ namespace MyWebsite.Repositories
             var replies = _repo.Query<Reply>();
             var requests = _repo.Query<Request>();
             var userGear = _repo.Query<GearItem>();
+            var ratings = _repo.Query<Rating>();
 
             var adminViewModel = new AdminViewModel()
             {
@@ -32,6 +33,7 @@ namespace MyWebsite.Repositories
                 UserGear = userGear.ToList(),
                 Users = users.ToList(),
                 UserSpaces = userSpaces.ToList(),
+                Ratings = ratings.ToList(),
             };
             return adminViewModel;
         }

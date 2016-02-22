@@ -7,10 +7,14 @@ namespace MyWebsite.Migrations
     {
         public override void Up()
         {
+            AddColumn("dbo.Replies", "CanNotRate", c => c.Boolean(nullable: false));
+            DropColumn("dbo.Replies", "CanRate");
         }
         
         public override void Down()
         {
+            AddColumn("dbo.Replies", "CanRate", c => c.Boolean(nullable: false));
+            DropColumn("dbo.Replies", "CanNotRate");
         }
     }
 }

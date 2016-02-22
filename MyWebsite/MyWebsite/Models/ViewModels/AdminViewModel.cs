@@ -12,5 +12,6 @@ namespace MyWebsite.Models.ViewModels
         public List<ApplicationUser> Users { get; set; }
         public List<UserSpace> UserSpaces { get; set; }
         public List<GearItem> UserGear { get; set; }
+        public List<Rating> Ratings { get; set; }
     }
 }

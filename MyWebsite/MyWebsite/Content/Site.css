@@ -42,8 +42,11 @@
 
 #homeCarousel {
     max-width: 100%;
-    height: auto !important;
-    margin-left: -14px;
+}
+
+.carouselImg {
+    max-width: 1280px;
+    max-height: 300px;
 }
 
 #homeCarousel span {
@@ -89,6 +92,7 @@
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
     border: 1px solid black;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 .myPageHeader {
@@ -101,10 +105,6 @@
 #modalDropdown {
     margin-bottom: 10px;
 }
-
-#profileUploadBtn {
-    margin-top: 20px;
-} 
 
 .myTable{
     margin-top: 10px;
@@ -135,12 +135,19 @@
 }
 
 #reqCommentTable {
-
     padding-top: 20px;
     margin-top: 20px;
     background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
     border: 1px solid black;
     border-radius: 5px;
+}
+
+#reqCommentTable thead tr th {
+    border-bottom: 1px solid black;
+}
+
+.marginBot {
+    margin-bottom: 20px;
 }
 
 #reqCommentTable td{
@@ -173,12 +180,26 @@
     padding: 6px 6px 6px 6px;
 }
 
-#spaceImage {
-    width: 250px;
-    height: 250px;
+.spaceImage {
+    width: 230px;
+    height: 230px;
     margin-bottom: 20px;
+    display: block;
+    float: left;
+    margin-right: 15px;
+}
+
+.imgBtns {
+    float: left;
 }
 
 .myTableBtn {
     float: right;
+}
+
+.modalImg {
+    max-width: 800px;
+    max-height: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }

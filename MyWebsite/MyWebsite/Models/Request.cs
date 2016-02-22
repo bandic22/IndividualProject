@@ -27,9 +27,11 @@ namespace MyWebsite.Models
     public class RequestDto
     {
         public string Title { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
         public int NoOfReplies { get; set; }
+        public string Description { get; set; }
         public ApplicationUserDto User { get; set; }
+        public string FileUrl { get; set; }
         public int Id { get; set; }
     }
 }

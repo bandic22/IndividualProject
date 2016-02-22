@@ -1,0 +1,12 @@
+﻿<div class="modal-header">
+    <h4 ng-hide="modal.isAuthorized">{{modal.image.caption}}</h4>
+    <input type="text" class="form-control" ng-hide="!modal.isAuthorized" ng-model="modal.image.caption" placeholder="Add a caption to your image..." />
+</div>
+<div class="modal-body">
+    <img src="{{modal.image.fileUrl}}" class="modalImg img-responsive" />
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-hide="!modal.isAuthorized" ng-click="modal.addCaption()">Save</button>
+    <button class="btn btn-danger" ng-hide="!modal.isAuthorized" ng-click="modal.deleteImage()">Delete</button>
+    <button class="btn btn-primary" ng-click="modal.closeModal()">Close</button>
+</div>

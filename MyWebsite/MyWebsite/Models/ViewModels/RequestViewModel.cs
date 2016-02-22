@@ -7,7 +7,7 @@ namespace MyWebsite.Models.ViewModels
 {
     public class RequestViewModel
     {
-        public Request Request { get; set; }
-        public List<Reply> Replies { get; set; }
+        public RequestDto Request { get; set; }
+        public List<ReplyDto> Replies { get; set; }
     }
 }

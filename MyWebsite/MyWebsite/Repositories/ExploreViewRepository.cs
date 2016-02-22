@@ -1,5 +1,6 @@
 ﻿using MyWebsite.Models;
 using MyWebsite.Models.ViewModels;
+using MyWebsite.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,16 @@ namespace MyWebsite.Repositories
         public RequestViewModel GetRequestInfo(int requestId)
         {
             var request = _repo.Query<Request>().Where(r => r.Id == requestId).Include(u => u.User).FirstOrDefault();
-            var replies = _repo.Query<Reply>().Where(re => re.RequestId == requestId).Include(u => u.User).ToList();
+            var requestDto = MapUtility.Map<Request, RequestDto>(request);
+            var replies = _repo.Query<Reply>().Where(re => re.RequestId == requestId).Include(u => u.User).Include(r => r.Ratings).ToList();
+            var repliesDto = MapUtility.Map<List<Reply>, List<ReplyDto>>(replies);
+            //var ratings = _repo.Query<Rating>().Where(r => r.ReplyId == ).Include(u => u.User).ToList();
+            //var ratingsDto = MapUtility.Map<List<Rating>, List<RatingDto>>(ratings);
 
             var requestViewModel = new RequestViewModel
             {
-                Replies = replies,
-                Request = request,
+                Replies = repliesDto,
+                Request = requestDto,
             };
 
             return requestViewModel;
@@ -41,15 +46,8 @@ namespace MyWebsite.Repositories
         {
             if(reply.Id != 0)
             {
-                var original = reply;
-                original.UserId = reply.UserId;
-                original.User = reply.User;
-                original.RequestId = reply.RequestId;
-                original.Request = reply.Request;
-                original.Message = reply.Message;
+                var original = _repo.Find<Reply>(reply.Id);
                 original.IsHidden = true;
-                original.Id = reply.Id;
-                _repo.Add<Reply>(original);
                 _repo.SaveChanges();
             }
             else

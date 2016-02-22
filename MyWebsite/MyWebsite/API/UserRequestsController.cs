@@ -60,8 +60,10 @@ namespace MyWebsite.Controllers
                     return Ok();
                 }
             }
-            return BadRequest();
-
+            else
+            {
+                return BadRequest();
+            }
         }
 
         public IHttpActionResult Delete(int id)

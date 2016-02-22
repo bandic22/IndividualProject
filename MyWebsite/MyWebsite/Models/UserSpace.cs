@@ -14,10 +14,17 @@ namespace MyWebsite.Models
         public string Description { get; set; }
         [Required(ErrorMessage = "UserSpace title is required")]
         public string Title { get; set; }
-        public string FileUrl { get; set; }
        
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
+    }
+
+    public class UserSpaceDto
+    {
+        public string Description { get; set; }
+        public string Title { get; set; }
+        public int Id { get; set; }
+        public ApplicationUserDto User { get; set; }
     }
 }

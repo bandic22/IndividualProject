@@ -11,12 +11,12 @@
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
-                    <th><a style="cursor: pointer" ng-click="sortType = 'dateCreated'; sortReverse = !sortReverse">Date Created<span class="glyphicon glyphicon-arrow-down"></span></a></th>
-                    <th><a style="cursor: pointer" ng-click="sortType = 'noOfReplies'; sortReverse = !sortReverse">Replies<span class="glyphicon glyphicon-arrow-down"></span></a></th>
+                    <th><a style="cursor: pointer" ng-click="sortType = 'dateCreated'; sortReverse = !sortReverse">Date Created<span ng-show="sortType == 'dateCreated' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span><span ng-show="sortType == 'dateCreated' && sortReverse" class="glyphicon glyphicon-chevron-up"></span></a></th>
+                    <th><a style="cursor: pointer" ng-click="sortType = 'noOfReplies'; sortReverse = !sortReverse">Replies<span ng-show="sortType == 'noOfReplies' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span><span ng-show="sortType == 'noOfReplies' && sortReverse" class="glyphicon glyphicon-chevron-up"></span></a></th>
                 </tr>
             </thead>
             <tbody>
-                <tr id="exploreList" ng-repeat="request in vm.requests | filter:{title: searchText} | orderBy:sortType:sortReverse">
+                <tr id="exploreList" ng-repeat="request in vm.requests.slice(((vm.currentPage-1)*vm.itemsPerPage), ((vm.currentPage)*vm.itemsPerPage)) | filter:{title: searchText} | orderBy:sortType:sortReverse">
                     <td><a href="/details/{{request.id}}">{{request.title}}</a></td>
                     <td><a href="/profile/{{request.user.displayName}}">{{request.user.displayName}}</a></td><!--if you pass in a displayName into here, it'll redirect to the profile page, passing in the displayName to the routeparams of the new controller-->
                     <td>{{request.dateCreated | date: 'short'}}</td>
@@ -24,7 +24,7 @@
                 </tr>
             </tbody>
         </table>
-        <uib-pagination ng-model="vm.bigCurrentPage" max-size="vm.maxSize" class="pagination-sm" boundary-link-numbers="true" items-per-page="10" total-items="vm.bigTotalItems"></uib-pagination>
+        <uib-pagination total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" items-per-page="{{vm.itemsPerPage}}"></uib-pagination>
     </div>
 </div>
 

@@ -20,4 +20,13 @@ namespace MyWebsite.Models
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
     }
+
+    public class GearItemDto
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Category { get; set; }
+        public ApplicationUserDto User { get; set; }
+    }
 }

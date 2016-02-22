@@ -8,7 +8,14 @@ var MyApp;
                 this.requestResource = $resource("/api/requests/:id"); //api/nameOfServerSideController - Controller/:id
                 this.userGearResource = $resource("/api/userGear/:id");
                 this.userSpaceResource = $resource("/api/userSpace/:id");
-                this.userInfoResource = $resource("/api/profileView/:id");
+                this.userInfoResource = $resource("/api/profileView/:id", null, {
+                    findCurrentUser: {
+                        method: 'GET',
+                        url: '/api/profileView/findCurrentUser',
+                        isArray: false
+                    }
+                });
+                this.imageResource = $resource("/api/images/:id");
             }
             // get user info from profile view model
             UserService.prototype.getUserInfo = function () {
@@ -24,7 +31,14 @@ var MyApp;
                 return this.userSpaceResource.get({ id: id });
             };
             UserService.prototype.addUserRequest = function (request) {
-                return this.requestResource.save(request).$promise;
+                var data = this.requestResource.save(request).$promise;
+                return data;
+            };
+            UserService.prototype.addImage = function (image) {
+                return this.imageResource.save(image).$promise;
+            };
+            UserService.prototype.deleteImage = function (id) {
+                return this.imageResource.remove({ id: id }).$promise;
             };
             UserService.prototype.deleteRequest = function (id) {
                 return this.requestResource.remove({ id: id }).$promise;
@@ -44,9 +58,13 @@ var MyApp;
             UserService.prototype.editUserRequest = function (request) {
                 return this.requestResource.save(request).$promise;
             };
+            UserService.prototype.findCurrentUser = function () {
+                return this.userInfoResource.findCurrentUser();
+            };
             return UserService;
         })();
         Services.UserService = UserService;
         angular.module("MyApp").service("userService", UserService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=userServices.js.map

@@ -7,13 +7,21 @@
         private userGearResource;
         private userSpaceResource;
         private userInfoResource;
+        private imageResource;
         
         constructor($resource: angular.resource.IResourceService) {
 
             this.requestResource = $resource("/api/requests/:id"); //api/nameOfServerSideController - Controller/:id
             this.userGearResource = $resource("/api/userGear/:id");
             this.userSpaceResource = $resource("/api/userSpace/:id");
-            this.userInfoResource = $resource("/api/profileView/:id");
+            this.userInfoResource = $resource("/api/profileView/:id", null, {
+                findCurrentUser: {
+                    method: 'GET',
+                    url: '/api/profileView/findCurrentUser',
+                    isArray: false
+                }
+            });
+            this.imageResource = $resource("/api/images/:id");
         }
         
         // get user info from profile view model
@@ -33,8 +41,17 @@
             return this.userSpaceResource.get({id: id});
         }
 
-        public addUserRequest(request) {
-            return this.requestResource.save(request).$promise;
+        public addUserRequest(request) {       
+            let data = this.requestResource.save(request).$promise;   
+            return data;      
+        }
+
+        public addImage(image) {
+            return this.imageResource.save(image).$promise;
+        }
+
+        public deleteImage(id: number) {
+            return this.imageResource.remove({ id: id }).$promise;
         }
 
         public deleteRequest(id: number) {
@@ -59,6 +76,10 @@
 
         public editUserRequest(request) {
             return this.requestResource.save(request).$promise;
+        }
+
+        public findCurrentUser() {
+            return this.userInfoResource.findCurrentUser();
         }
     }
     angular.module("MyApp").service("userService", UserService);

@@ -22,7 +22,6 @@
             )
         }
 
-
         public fileUploaded(file) {
             // save file url to database            
             this.file = file;

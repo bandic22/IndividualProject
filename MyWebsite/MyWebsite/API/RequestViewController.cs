@@ -35,12 +35,15 @@ namespace MyWebsite.API
                 {
                     var userId = this.User.Identity.GetUserId();
                     reply.UserId = userId;
+                    reply.DateCreated = DateTime.Now;
                     reply.IsHidden = false;
-                    _repo.addReply(reply);                 
+                    _repo.addReply(reply);
+                    return Ok();               
                 }
                 else
                 {
                     _repo.addReply(reply);
+                    return Ok();
                 }
             }
             return BadRequest();

@@ -12,3 +12,4 @@ var MyApp;
         Controllers.SpaceDetailsController = SpaceDetailsController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=spaceDetailsController.js.map

@@ -3,9 +3,31 @@
     export class ProfileController {
 
         public userProfileInfo;
+        public file;
+        public image;
+        public imageReady = false;
+        public showReplies = false;
+        public likes: number;
+        public dislikes: number;
 
-        constructor(private profileService: MyApp.Services.ProfileService, private userService: MyApp.Services.UserService, private $routeParams: angular.route.IRouteParamsService, private $route: ng.route.IRouteService) {          
+        constructor(private profileService: MyApp.Services.ProfileService, private userService: MyApp.Services.UserService, private $routeParams: angular.route.IRouteParamsService, private $route: ng.route.IRouteService, private filepickerService, private $location: ng.ILocationService, private $uibModal: ng.ui.bootstrap.IModalService) {
             this.checkRouteParam();
+            this.checkRatings();
+            this.image = {
+                fileUrl: '',
+                caption: '',
+            };
+        }
+
+        public checkRatings() {
+            for (let rating in this.userProfileInfo.ratings) {
+                if (rating.isApproved) {
+                    this.likes++;
+                }
+                else if(!rating.isApproved) {
+                    this.dislikes++;
+                }
+            }
         }
 
         public checkRouteParam() {
@@ -17,30 +39,100 @@
             }
         }
 
+        public pickFile() {
+            this.filepickerService.pick(
+                { mimetype: 'image/*' },
+                this.fileUploaded.bind(this)
+            )
+        }
+
+        public fileUploaded(file) {
+            this.file = file;
+            this.image.fileUrl = this.file.url;
+            this.imageReady = true;
+            this.addImage();
+        }
+
+        public addImage() {
+            this.userService.addImage(this.image).then(() => {
+                this.imageReady = false;
+                this.$route.reload();
+            });
+        }
+
+        public viewImage(image) {
+            debugger;
+            this.$uibModal.open({
+                templateUrl: "/ngApp/dialogs/imageModal.html",
+                controller: MyApp.Controllers.ImageModalController,
+                controllerAs: 'modal',
+                size: 'lg',
+                resolve: {
+                    isAuthorized: this.userProfileInfo.isAuthorized,
+                    image: () => image,
+                }
+            });
+        }
+
         public getLoggedInUser() {
             return this.profileService.getUserInfo();
         }
 
         public editRequest(id: number) {
-            return this.userService.getUserRequest(id);           
+            return this.userService.getUserRequest(id).then(() => {
+                this.$location.path('/profile/myprofile')
+            });
         }
 
         public editGear(id: number) {
-            return this.userService.getUserGear(id);
+            return this.userService.getUserGear(id).then(() => {
+                this.$location.path('/profile/myprofile')
+            });
         }
 
         public editSpace(id: number) {
-            return this.userService.getUserSpace(id);
+            return this.userService.getUserSpace(id).then(() => {
+                this.$location.path('/profile/myprofile')
+            });
         }
 
         public deleteGear(id: number) {
-            return this.userService.deleteUserGear(id).then(() =>
-                this.$route.reload());
+            this.$uibModal.open({
+                templateUrl: "/ngApp/dialogs/deleteModal.html",
+                controller: MyApp.Controllers.DeleteController,
+                controllerAs: 'modal',
+                size: 'sm',
+                resolve: {
+                    item: () => id,
+                    type: () => "gear"
+                }
+            });
         }
 
         public deleteRequest(id: number) {
-            return this.userService.deleteRequest(id).then(() =>
-                this.$route.reload());
+            this.$uibModal.open({
+                templateUrl: "/ngApp/dialogs/deleteModal.html",
+                controller: MyApp.Controllers.DeleteController,
+                controllerAs: 'modal',
+                size: 'sm',
+                resolve: {
+                    item: () => id,
+                    type: () => "request"
+                }
+            });
+        }
+
+        public deleteImage(id: number) {
+            this.$uibModal.open({
+                templateUrl: "/ngApp/dialogs/deleteModal.html",
+                controller: MyApp.Controllers.DeleteController,
+                controllerAs: 'modal',
+                size: 'sm',
+                resolve: {
+                    item: () => id,
+                    type: () => "image"
+                }
+            });
         }
     }
 }
