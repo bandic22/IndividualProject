@@ -101,10 +101,6 @@ C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsi
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\bin\System.Web.Http.Owin.xml
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.csprojResolveAssemblyReference.cache
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.Migrations.initial.resources
-C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.Migrations._2.resources
-C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.Migrations._3.resources
-C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.Migrations._4.resources
-C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.Migrations._5.resources
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.csproj.GenerateResource.Cache
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.dll
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Release\MyWebsite.pdb

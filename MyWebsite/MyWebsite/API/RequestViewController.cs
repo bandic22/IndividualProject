@@ -27,6 +27,7 @@ namespace MyWebsite.API
             return _repo.GetRequestInfo(id);
         }
 
+        [Authorize]
         public IHttpActionResult Post(Reply reply)
         {
             if (ModelState.IsValid)
@@ -35,7 +36,7 @@ namespace MyWebsite.API
                 {
                     var userId = this.User.Identity.GetUserId();
                     reply.UserId = userId;
-                    reply.DateCreated = DateTime.Now;
+                    reply.DateCreated = DateTime.UtcNow;
                     reply.IsHidden = false;
                     _repo.addReply(reply);
                     return Ok();               

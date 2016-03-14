@@ -194,6 +194,3 @@ C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsi
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.csprojResolveAssemblyReference.cache
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.Migrations.initial.resources
 C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.csproj.GenerateResource.Cache
-C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.Migrations._2.resources
-C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.Migrations._3.resources
-C:\Users\bandi\Desktop\My Individual Project\IndividualProject\MyWebsite\MyWebsite\obj\Debug\MyWebsite.Migrations._4.resources

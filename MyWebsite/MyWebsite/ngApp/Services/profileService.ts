@@ -7,10 +7,8 @@
         public visitUserResource;
 
         constructor($resource: ng.resource.IResourceService) {
-
             this.userInfoResource = $resource("/api/profileView/:id");
             this.visitUserResource = $resource("/api/visitUser");
-
         }
 
         public getUserInfoProfile(displayName: string) {

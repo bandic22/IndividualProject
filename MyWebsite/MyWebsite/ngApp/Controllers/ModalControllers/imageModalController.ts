@@ -2,7 +2,7 @@
 
     export class ImageModalController {
 
-        constructor(private $uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, private userService: MyApp.Services.UserService, private image, private $route: ng.route.IRouteService, private isAuthorized) {
+        constructor(private $uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, private userService: MyApp.Services.UserService, private image, private $state: ng.ui.IStateService, private isAuthorized) {
 
         }
 
@@ -20,7 +20,6 @@
 
         public closeModal() {
             this.$uibModalInstance.close();
-            this.$route.reload();
         }
     }
 }

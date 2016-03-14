@@ -24,7 +24,7 @@
                 templateUrl: "/ngApp/Dialogs/loginDialog.html",
                 controller: MyApp.Controllers.LoginController,
                 controllerAs: "login",
-                size: "md"
+                size: "sm"
             })
         }
     }

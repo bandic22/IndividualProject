@@ -1,11 +1,12 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <h1 class="text-center">My Profile</h1>
+
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3 myTable" id="profileTable">
+    <div class="col-md-6 col-md-offset-3 myTable marginTop" id="profileTable">
+        <h2 class="text-center">My Details</h2>
         <table class="table table-condensed table-responsive">
             <tr ng-hide="!vm.userProfileInfo.isAuthorized">
                 <td>First Name</td>
@@ -29,7 +30,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2 myTable" id="gearTable">
+    <div class="col-md-10 col-md-offset-1 myTable" id="gearTable">
         <h2 class="text-center">My Gear</h2>
         <table class="table table-condensed table-responsive">
             <tr ng-repeat="gear in vm.userProfileInfo.userGear">
@@ -42,7 +43,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2 myTable" id="spaceTable">
+    <div class="col-md-10 col-md-offset-1 myTable" id="spaceTable">
         <h2 class="text-center">My Space</h2>
         <a class="btn btn-primary" ng-hide="!vm.userProfileInfo.isAuthorized || vm.userProfileInfo.userSpace" href="/addSpace">Add your space</a>
         <p>{{vm.userProfileInfo.userSpace.description}}</p>
@@ -63,16 +64,19 @@
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Date Created</th>
                     <th>Replies</th>
+                    <th>Manage</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="request in vm.userProfileInfo.requests">
                     <td><a href="/details/{{request.id}}">{{request.title}}</a></td>
+                    <td>{{request.category}}</td>
                     <td>{{request.dateCreated | date: 'short'}}</td>
                     <td>{{request.noOfReplies}}</td>
-                    <td><a class="btn btn-primary" ng-hide="!vm.userProfileInfo.isAuthorized" href="/editRequest/{{request.id}}">Edit</a><button class="btn btn-danger" ng-click="vm.deleteRequest(request.id)" ng-hide="!vm.userProfileInfo.isAuthorized">Delete</button></td>
+                    <td><button class="btn btn-danger myTableBtn" ng-click="vm.deleteRequest(request.id)" ng-hide="!vm.userProfileInfo.isAuthorized">Delete</button><a class="btn btn-primary myTableBtn" ng-hide="!vm.userProfileInfo.isAuthorized" href="/editRequest/{{request.id}}">Edit</a></td>
                 </tr>
             </tbody>
         </table>
@@ -99,7 +103,7 @@
                     <td><a href="/details/{{reply.request.id}}">{{reply.request.title}}</a></td>
                     <td>{{reply.request.user.displayName}}</td>
                     <td>{{reply.dateCreated | date: 'short'}}</td>
-                    <td>{{vm.likes}}/{{vm.dislikes}}</td>
+                    <td>{{reply.noOfLikes}}/{{reply.noOfDislikes}}</td>
                 </tr>
             </tbody>
         </table>

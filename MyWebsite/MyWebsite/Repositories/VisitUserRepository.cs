@@ -28,6 +28,10 @@ namespace MyWebsite.Repositories.Interfaces
             var user = _repo.Query<ApplicationUser>().Where(u => u.DisplayName == displayName).FirstOrDefault();
             var userImages = _repo.Query<Image>().Where(i => i.User.DisplayName == displayName).ToList();
             var userImagesDto = MapUtility.Map<List<Image>, List<ImageDto>>(userImages);
+            foreach (var request in requestsDto)
+            {
+                request.DateCreated = request.DateCreated.ToLocalTime();
+            }
 
             var visitUserViewModel = new VisitUserViewModel
             {

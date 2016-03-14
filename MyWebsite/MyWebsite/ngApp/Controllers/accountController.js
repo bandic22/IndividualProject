@@ -46,6 +46,7 @@ var MyApp;
                 }).catch(function (results) {
                     self.validationMessages = results;
                 });
+                debugger;
             };
             LoginController.prototype.cancel = function () {
                 this.$uibModalInstance.close();
@@ -53,6 +54,7 @@ var MyApp;
             return LoginController;
         })();
         Controllers.LoginController = LoginController;
+        angular.module("MyApp").controller("LoginController", LoginController);
         var RegisterController = (function () {
             function RegisterController($uibModalInstance, accountService) {
                 this.$uibModalInstance = $uibModalInstance;
@@ -132,4 +134,3 @@ var MyApp;
         Controllers.ConfirmEmailController = ConfirmEmailController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=accountController.js.map

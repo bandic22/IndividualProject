@@ -4,8 +4,8 @@
 
         public gearItem;
 
-        constructor(private userService: MyApp.Services.UserService, $routeParams: ng.route.IRouteParamsService) {
-            this.gearItem = this.userService.getUserGear($routeParams['id']);
+        constructor(private userService: MyApp.Services.UserService, $stateParams: ng.ui.IStateParamsService) {
+            this.gearItem = this.userService.getUserGear($stateParams['id']);
         }
     }
 }

@@ -3,17 +3,17 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var EditSpaceController = (function () {
-            function EditSpaceController(userService, filepickerService, $location, $scope, $routeParams) {
+            function EditSpaceController(userService, filepickerService, $location, $scope, $stateParams) {
                 this.userService = userService;
                 this.filepickerService = filepickerService;
                 this.$location = $location;
                 this.$scope = $scope;
-                this.userSpace = this.userService.getUserSpace($routeParams['id']);
+                this.userSpace = this.userService.getUserSpace($stateParams['id']);
             }
             EditSpaceController.prototype.editSpace = function () {
                 var _this = this;
                 this.userService.editUserSpace(this.userSpace).then(function () {
-                    _this.$scope.$apply();
+                    _this.$location.path("/profile/myprofile");
                 });
             };
             EditSpaceController.prototype.cancel = function () {
@@ -24,4 +24,3 @@ var MyApp;
         Controllers.EditSpaceController = EditSpaceController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=editSpaceController.js.map

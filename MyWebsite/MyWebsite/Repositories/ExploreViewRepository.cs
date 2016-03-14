@@ -24,15 +24,18 @@ namespace MyWebsite.Repositories
             var requestDto = MapUtility.Map<Request, RequestDto>(request);
             var replies = _repo.Query<Reply>().Where(re => re.RequestId == requestId).Include(u => u.User).Include(r => r.Ratings).ToList();
             var repliesDto = MapUtility.Map<List<Reply>, List<ReplyDto>>(replies);
-            //var ratings = _repo.Query<Rating>().Where(r => r.ReplyId == ).Include(u => u.User).ToList();
-            //var ratingsDto = MapUtility.Map<List<Rating>, List<RatingDto>>(ratings);
+
+            foreach (var reply in repliesDto)
+            {
+                reply.DateCreated = reply.DateCreated.ToLocalTime();
+            }
+            requestDto.DateCreated = request.DateCreated.ToLocalTime();
 
             var requestViewModel = new RequestViewModel
             {
                 Replies = repliesDto,
                 Request = requestDto,
             };
-
             return requestViewModel;
         }
 

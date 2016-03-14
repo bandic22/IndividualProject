@@ -1,0 +1,97 @@
+﻿<html ng-app="MyApp">
+<head>
+    <base href="/" />
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <!--Header image-->
+    <div class="container" id="mainBody">
+        <div class="row" id="pageHeader">
+            <div class="col-md-12 ">
+                <img id="mainLogoImg" src="http://i.imgur.com/PJzqsk0.png" /> <!--Voice graphic by <a href="http://www.freepik.com/">Freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>-->
+            </div>
+        </div>
+
+        <!--Top nav tabs-->
+        <div class="row">
+            <div class="col-md-12 img-responsive" ng-cloak>
+                <ul class="nav nav-tabs" id="mainNav">
+                    <li role="presentation"><a ui-sref="home">Home</a></li>
+                    <li role="presentation" ng-controller="HomeController as home" ng-show="home.isLoggedIn"><a ng-show="home.isLoggedIn" ui-sref="myProfile">Profile</a></li>
+                    <li role="presentation"><a ui-sref="explore">Explore</a></li>
+                    <li role="presentation"><a ui-sref="news">News</a></li>
+                    <li role="presentation"><a ui-sref="about">About</a></li>                    
+                    <li role="presentation" ng-controller="AccountController as account" ng-show="account.getClaim('Admin')"><a ng-show="account.getClaim('Admin')" ui-sref="adminPage">Admin Page</a></li>
+                    <li role="presentation" ng-controller="AccountController as account" id="mainNavFloat"><a class="btn" ng-show="account.isLoggedIn()" ng-click="account.logout()">Logout</a></li>
+                    <li role="presentation" ng-controller="HomeController as home" ng-show="!home.isLoggedIn" id="mainNavFloat"><a class="btn" ng-click="home.login()">Login</a></li>
+                    <li role="presentation" ng-controller="HomeController as home" ng-show="!home.isLoggedIn" id="mainNavFloat"><a class="btn" ng-click="home.signUp()">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div ui-view></div>
+
+        <!--Page footer-->
+        <div class="row">
+            <div class="col-md-12 img-responsive">
+                <div id="pageFooter">
+                    Copyright&#169; 2016 Mixed Up
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Soundcloud API-->
+    @*<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+          <script>
+        SC.initialize({
+            client_id: 'a1dd81241e6b3f7fa9bcc06893ffd926',
+          redirect_uri: 'http://example.com/callback'
+        });
+          </script>*@
+
+    <!--Bootstrap stuff-->
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <!--Angular stuff-->
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-resource.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/angular-ui-router.js"></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
+    <script src="/Scripts/angular_filepicker.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <!--Files created by me-->
+    <script src="~/ngApp/ngApp.js"></script>
+    <script src="~/audiojs/audio.min.js"></script>
+    <script src="~/ngApp/Services/exploreServices.js"></script>
+    <script src="~/ngApp/Services/userServices.js"></script>
+    <script src="~/ngApp/Services/accountService.js"></script>
+    <script src="~/ngApp/Services/profileService.js"></script>
+    <script src="~/ngApp/Services/adminService.js"></script>
+    <script src="~/ngApp/Controllers/aboutController.js"></script>
+    <script src="~/ngApp/Controllers/exploreController.js"></script>
+    <script src="~/ngApp/Controllers/homeController.js"></script>
+    <script src="~/ngApp/Controllers/profileController.js"></script>
+    <script src="~/ngApp/Controllers/accountController.js"></script>
+    <script src="~/ngApp/Controllers/requestDetailsController.js"></script>
+    <script src="~/ngApp/Controllers/adminController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/editProfileModalController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/editRequestController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/editSpaceController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/editGearController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/gearDialogController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/reqDialogController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/spaceDialogController.js"></script>
+    <script src="~/ngApp/Controllers/spaceDetailsController.js"></script>
+    <script src="~/ngApp/Controllers/gearDetailsController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/deleteModalController.js"></script>
+    <script src="~/ngApp/Controllers/ModalControllers/imageModalController.js"></script>
+</body>
+</html>

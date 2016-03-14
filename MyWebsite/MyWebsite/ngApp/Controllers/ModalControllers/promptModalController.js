@@ -28,4 +28,3 @@ var MyApp;
         Controllers.PromptController = PromptController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=promptModalController.js.map

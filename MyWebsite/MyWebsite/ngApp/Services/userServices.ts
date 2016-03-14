@@ -41,9 +41,8 @@
             return this.userSpaceResource.get({id: id});
         }
 
-        public addUserRequest(request) {       
-            let data = this.requestResource.save(request).$promise;   
-            return data;      
+        public addUserRequest(request) {   
+            return this.requestResource.save(request).$promise;   
         }
 
         public addImage(image) {

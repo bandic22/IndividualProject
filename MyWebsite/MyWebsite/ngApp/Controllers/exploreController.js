@@ -3,15 +3,16 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ExploreController = (function () {
-            function ExploreController(exploreService) {
+            function ExploreController(exploreService, categoryService) {
                 var _this = this;
                 this.exploreService = exploreService;
+                this.categoryService = categoryService;
                 this.sortType = 'noOfReplies';
                 this.sortReverse = false;
                 this.currentPage = 1;
                 this.maxSize = 5;
                 this.itemsPerPage = 5;
-                var requests = this.exploreService.getRequests().then(function (result) {
+                this.requests = this.exploreService.getRequests().then(function (result) {
                     _this.totalItems = result.length;
                     _this.requests = result;
                 });
@@ -21,4 +22,3 @@ var MyApp;
         Controllers.ExploreController = ExploreController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=exploreController.js.map

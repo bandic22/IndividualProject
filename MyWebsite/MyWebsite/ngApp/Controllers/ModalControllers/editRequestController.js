@@ -3,13 +3,15 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var EditRequestController = (function () {
-            function EditRequestController(userService, $routeParams, filepickerService, $location, $scope) {
+            function EditRequestController(userService, $stateParams, filepickerService, $location, $scope, categoryService) {
                 this.userService = userService;
-                this.$routeParams = $routeParams;
+                this.$stateParams = $stateParams;
                 this.filepickerService = filepickerService;
                 this.$location = $location;
                 this.$scope = $scope;
-                this.request = this.userService.getUserRequest($routeParams['id']);
+                this.categoryService = categoryService;
+                this.request = this.userService.getUserRequest($stateParams['id']);
+                this.categories = this.categoryService.getRequestCategories();
             }
             EditRequestController.prototype.addRequest = function () {
                 var _this = this;
@@ -35,4 +37,3 @@ var MyApp;
         Controllers.EditRequestController = EditRequestController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=editRequestController.js.map

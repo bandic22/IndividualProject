@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace MyWebsite.API
 {
+    [Authorize]
     //brings in the UserViewModel for the profile view
     public class ProfileViewController : ApiController
     {

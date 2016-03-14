@@ -7,7 +7,7 @@ var MyApp;
                 this.adminResource = $resource("/api/adminView/");
             }
             AdminService.prototype.getAdminResource = function () {
-                return this.adminResource.get();
+                return this.adminResource.get().$promise;
             };
             return AdminService;
         })();
@@ -15,4 +15,3 @@ var MyApp;
         angular.module("MyApp").service("adminService", AdminService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=adminService.js.map

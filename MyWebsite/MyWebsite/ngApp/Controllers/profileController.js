@@ -3,10 +3,10 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ProfileController = (function () {
-            function ProfileController(profileService, userService, $routeParams, $route, filepickerService, $location, $uibModal) {
+            function ProfileController(profileService, userService, $stateParams, $route, filepickerService, $location, $uibModal) {
                 this.profileService = profileService;
                 this.userService = userService;
-                this.$routeParams = $routeParams;
+                this.$stateParams = $stateParams;
                 this.$route = $route;
                 this.filepickerService = filepickerService;
                 this.$location = $location;
@@ -14,28 +14,17 @@ var MyApp;
                 this.imageReady = false;
                 this.showReplies = false;
                 this.checkRouteParam();
-                this.checkRatings();
                 this.image = {
                     fileUrl: '',
                     caption: '',
                 };
             }
-            ProfileController.prototype.checkRatings = function () {
-                for (var rating in this.userProfileInfo.ratings) {
-                    if (rating.isApproved) {
-                        this.likes++;
-                    }
-                    else if (!rating.isApproved) {
-                        this.dislikes++;
-                    }
-                }
-            };
             ProfileController.prototype.checkRouteParam = function () {
-                if (this.$routeParams["displayName"] == "myprofile") {
+                if (this.$stateParams["displayName"] == "myprofile") {
                     this.userProfileInfo = this.getLoggedInUser();
                 }
                 else {
-                    this.userProfileInfo = this.profileService.getUserInfoProfile(this.$routeParams["displayName"]);
+                    this.userProfileInfo = this.profileService.getUserInfoProfile(this.$stateParams["displayName"]);
                 }
             };
             ProfileController.prototype.pickFile = function () {
@@ -129,4 +118,3 @@ var MyApp;
         Controllers.ProfileController = ProfileController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=profileController.js.map

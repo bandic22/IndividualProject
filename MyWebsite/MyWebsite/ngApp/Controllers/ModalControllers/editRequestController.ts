@@ -4,11 +4,12 @@
 
         public request;
         public file;
+        public categories;
 
-        constructor(private userService: MyApp.Services.UserService, private $routeParams: ng.route.IRouteParamsService, private filepickerService, private $location: ng.ILocationService, private $scope: ng.IScope) {
-            this.request = this.userService.getUserRequest($routeParams['id']);
+        constructor(private userService: MyApp.Services.UserService, private $stateParams: ng.ui.IStateParamsService, private filepickerService, private $location: ng.ILocationService, private $scope: ng.IScope, private categoryService: MyApp.Services.CategoryService) {
+            this.request = this.userService.getUserRequest($stateParams['id']);
+            this.categories = this.categoryService.getRequestCategories();
         }
-
 
         public addRequest() {
             this.userService.addUserRequest(this.request).then(() => {
@@ -22,7 +23,6 @@
                 this.fileUploaded.bind(this)
             )
         }
-
 
         public fileUploaded(file) {
             // save file url to database            

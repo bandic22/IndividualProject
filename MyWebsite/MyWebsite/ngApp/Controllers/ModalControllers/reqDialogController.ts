@@ -4,13 +4,14 @@
 
         public request;
         public file;
+        public categories;
 
-        constructor(private userService: MyApp.Services.UserService, private filepickerService, private $location: ng.ILocationService, private $scope: ng.IScope) {
-            
+        constructor(private userService: MyApp.Services.UserService, private filepickerService, private $location: ng.ILocationService, private $scope: ng.IScope, private categoryService: MyApp.Services.CategoryService) {
+            this.categories = this.categoryService.getRequestCategories();
         }
 
         public addRequest() {
-            this.userService.addUserRequest(this.request).then(() => {
+            return this.userService.addUserRequest(this.request).then(() => {
                 this.$location.path("/profile/myprofile");
                 window.location.reload();
             });
@@ -23,14 +24,11 @@
             )
         }
 
-
         public fileUploaded(file) {
             // save file url to database            
             this.file = file;
             this.request.fileUrl = this.file.url;
-            console.log(this.request);
-
-            this.$scope.$apply(); // force page to update            
+             // force page to update            
         }
 
         public cancel() {

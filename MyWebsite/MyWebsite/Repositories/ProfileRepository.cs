@@ -22,10 +22,17 @@ namespace MyWebsite.Repositories
             var user = _repo.Query<ApplicationUser>().Where(a => a.Id == userId).FirstOrDefault();
             var userGear = _repo.Query<GearItem>().Where(g => g.UserId == userId).ToList();
             var userRequests = _repo.Query<Request>().Where(r => r.UserId == userId).ToList();
-            var replies = _repo.Query<Reply>().Where(re => re.UserId == userId).Include(r => r.Request).ToList();
+            var replies = _repo.Query<Reply>().Where(re => re.UserId == userId).Include(r => r.Ratings).ToList();
             var userSpace = _repo.Query<UserSpace>().Where(s => s.UserId == userId).FirstOrDefault();
             var userImages = _repo.Query<Image>().Where(i => i.UserId == userId).ToList();
-            var ratings = _repo.Query<Rating>().Where(r => r.UserId == userId).ToList();
+            foreach (var reply in replies)
+            {
+                reply.DateCreated = reply.DateCreated.ToLocalTime();
+            }
+            foreach (var request in userRequests)
+            {
+                request.DateCreated = request.DateCreated.ToLocalTime();
+            }
 
             var userViewModel = new UserViewModel()
             {
@@ -38,7 +45,6 @@ namespace MyWebsite.Repositories
                 UserGear = userGear,
                 Requests = userRequests,
                 UserReplies = replies,
-                Ratings = ratings,
                 IsAuthorized = true
             };
             return userViewModel;

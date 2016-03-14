@@ -36,4 +36,3 @@ var MyApp;
         angular.module("MyApp").service('exploreService', ExploreService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=exploreServices.js.map

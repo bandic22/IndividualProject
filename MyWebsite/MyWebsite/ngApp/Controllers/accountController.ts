@@ -43,7 +43,8 @@
                 window.location.reload();
             }).catch((results) => {
                 self.validationMessages = results;
-            });
+                });
+            debugger;
         }
 
         public cancel() {
@@ -52,6 +53,8 @@
 
         constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private accountService: MyApp.Services.AccountService, private $location: angular.ILocationService, private $scope: ng.IScope) { }
     }
+
+    angular.module("MyApp").controller("LoginController", LoginController);
 
 
     export class RegisterController {
@@ -68,7 +71,6 @@
         }
 
         public cancel() {
-
             this.$uibModalInstance.close();
         }
 
@@ -92,7 +94,6 @@
             });
         }
     }
-
 
     export class ExternalRegisterController {
         private externalAccessToken;

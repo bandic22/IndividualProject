@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using MyWebsite.Models;
+using MyWebsite;
 
 namespace MyWebsite.Providers
 {
@@ -44,7 +45,7 @@ namespace MyWebsite.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user);
+            AuthenticationProperties properties = CreateProperties(user);  // modified by Stephen
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -75,7 +76,7 @@ namespace MyWebsite.Providers
         {
             if (context.ClientId == _publicClientId)
             {
-                Uri expectedRootUri = new Uri(context.Request.Uri, "/");
+                Uri expectedRootUri = new Uri(context.Request.Uri, "/externalLogin"); // modified by Stephen
 
                 if (expectedRootUri.AbsoluteUri == context.RedirectUri)
                 {
@@ -88,11 +89,35 @@ namespace MyWebsite.Providers
 
         public static AuthenticationProperties CreateProperties(ApplicationUser user)
         {
+            if (user.FirstName == null)
+            {
+                user.FirstName = "";
+            }
+            if (user.LastName == null)
+            {
+                user.LastName = "";
+            }
+            if (user.PhoneNumber == null)
+            {
+                user.PhoneNumber = "";
+            }
+            if (user.IsActive == false)
+            {
+                user.IsActive = true;
+            }
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", user.UserName }
+
+                { "userName", user.UserName },
+                { "firstName", user.FirstName },
+                { "lastName", user.LastName },
+                { "email", user.Email },
+                { "phoneNumber", user.PhoneNumber }
             };
 
+
+
+            // add claims (modified by Stephen)
             foreach (var claim in user.Claims)
             {
                 data.Add("claim_" + claim.ClaimType, claim.ClaimValue);

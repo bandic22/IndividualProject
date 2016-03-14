@@ -5,8 +5,8 @@
         public gearItem;
         public file;
 
-        constructor(private userService: MyApp.Services.UserService, private filepickerService, private $location: ng.ILocationService, private $scope: ng.IScope, private $routeParams: ng.route.IRouteParamsService) {
-            this.gearItem = this.userService.getUserGear($routeParams['id']);
+        constructor(private userService: MyApp.Services.UserService, private filepickerService, private $location: ng.ILocationService, private $scope: ng.IScope, private $stateParams: ng.ui.IStateParamsService) {
+            this.gearItem = this.userService.getUserGear($stateParams['id']);
         }
 
         public editGear() {

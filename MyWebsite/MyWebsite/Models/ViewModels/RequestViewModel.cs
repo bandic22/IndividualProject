@@ -10,4 +10,9 @@ namespace MyWebsite.Models.ViewModels
         public RequestDto Request { get; set; }
         public List<ReplyDto> Replies { get; set; }
     }
+
+    public class RequestsFilterViewModel
+    {
+        public List<RequestDto> Requests { get; set; }
+    }
 }

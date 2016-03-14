@@ -8,8 +8,8 @@
             this.adminResource = $resource("/api/adminView/");
         }
 
-        public getAdminResource() {
-            return this.adminResource.get();
+         public getAdminResource() {
+            return this.adminResource.get().$promise;
         }
     }
     angular.module("MyApp").service("adminService", AdminService);

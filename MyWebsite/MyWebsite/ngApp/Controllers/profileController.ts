@@ -7,35 +7,21 @@
         public image;
         public imageReady = false;
         public showReplies = false;
-        public likes: number;
-        public dislikes: number;
 
-        constructor(private profileService: MyApp.Services.ProfileService, private userService: MyApp.Services.UserService, private $routeParams: angular.route.IRouteParamsService, private $route: ng.route.IRouteService, private filepickerService, private $location: ng.ILocationService, private $uibModal: ng.ui.bootstrap.IModalService) {
+        constructor(private profileService: MyApp.Services.ProfileService, private userService: MyApp.Services.UserService, private $stateParams: angular.ui.IStateParamsService, private $route: ng.route.IRouteService, private filepickerService, private $location: ng.ILocationService, private $uibModal: ng.ui.bootstrap.IModalService) {
             this.checkRouteParam();
-            this.checkRatings();
             this.image = {
                 fileUrl: '',
                 caption: '',
             };
         }
 
-        public checkRatings() {
-            for (let rating in this.userProfileInfo.ratings) {
-                if (rating.isApproved) {
-                    this.likes++;
-                }
-                else if(!rating.isApproved) {
-                    this.dislikes++;
-                }
-            }
-        }
-
         public checkRouteParam() {
-            if (this.$routeParams["displayName"] == "myprofile") {
+            if (this.$stateParams["displayName"] == "myprofile") {
                 this.userProfileInfo = this.getLoggedInUser();
             }
             else {
-                this.userProfileInfo = this.profileService.getUserInfoProfile(this.$routeParams["displayName"]);
+                this.userProfileInfo = this.profileService.getUserInfoProfile(this.$stateParams["displayName"]);
             }
         }
 

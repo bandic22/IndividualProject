@@ -1,0 +1,68 @@
+﻿<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="page-header myPageHeader text-center">
+            <h1>News</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-controller="AccountController as account" ng-show="account.getClaim('Admin')">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="newsBlock">
+            <h3 class="text-center">New Post</h3>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group">
+                        <label>Title<input type="text" class="form-control" /></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group">
+                        <label>Description<textarea class="form-control" cols="60" rows="7" /></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group">
+                        <button class="btn btn-primary marginBot" ng-click="vm.addImage()">Upload Image</button>
+                        <button class="btn btn-primary marginBot" ng-click="vm.addAudio()">Upload Audio</button>
+                        <button type="submit" class="btn btn-primary marginBot" ng-click="vm.addNews()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row" ng-repeat="news in vm.newsResource">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>{{news.title}}</h3>
+        <p>{{news.description}}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-success" id="homePanel">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center" style="color: black">Posted by: Bandic22 (Admin) | 03/08/2016</h3>
+            </div>
+            <div class="panel-body">
+                <p>Mixed Up welcomes all the newest signups! We welcome feedback and ideas, and want to create the best sharing and learning platform for anyone involved in audio production. As the site is still a work in progress, please report any bugs to <a href="mixedup.contact@gmail.com">mixedup.contact@gmail.com</a> Below is a list of some of the features still to be added:</p>
+                <ul>
+                    <li class="newsList">Tools for calculating acoustic properties of your recording space (RT60, Frequency Response etc...) based off of given room dimensions and surface materials</li>
+                    <li class="newsList">Advanced filtering, categorization and match-making</li>
+                    <li class="newsList">Inbox and friend support</li>
+                    <li class="newsList">Posting challenges</li>
+                    <li class="newsList">In-browser mixing of other user's sounds</li>
+                    <li class="newsList">User Interface design overhaul</li>
+                    <li class="newsList">SoundCloud API integration</li>
+                    <li class="newsList">Social Network integration</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

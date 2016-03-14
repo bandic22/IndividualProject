@@ -19,6 +19,7 @@ namespace MyWebsite.API
             _repo = repo;
         }
 
+        [Authorize]
         public IHttpActionResult Post(Image image)
         {
             if (ModelState.IsValid)
@@ -56,6 +57,7 @@ namespace MyWebsite.API
             return Ok(_repo.Query<Image>().ToList());
         }
 
+        [Authorize]
         public IHttpActionResult Delete(int id)
         {
             _repo.Delete<Image>(id);

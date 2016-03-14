@@ -18,7 +18,7 @@ namespace MyWebsite.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string DisplayName { get; set; }
-        public DateTime MemberSince { get; set; }
+        public DateTime? MemberSince { get; set; }
         public string Status { get; set; }
         public bool IsActive { get; set; }
 
@@ -45,6 +45,8 @@ namespace MyWebsite.Models
         public IDbSet<Reply> Replies { get; set; }
         public IDbSet<Image> Images { get; set; }
         public IDbSet<Rating> Ratings { get; set; }
+        public IDbSet<Category> Categories { get; set; }
+        public IDbSet<SubCategory> SubCategories { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

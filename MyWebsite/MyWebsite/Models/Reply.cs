@@ -9,11 +9,16 @@ namespace MyWebsite.Models
 {
     public class Reply
     {
+        public Reply()
+        {
+            CanNotRate = true;
+        }
+
         public int Id { get; set; }
         [Required(ErrorMessage = "Message is required")]
         public string Message { get; set; }
         public bool IsHidden { get; set; }
-        public DateTime? DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
         public List<Rating> Ratings { get; set; }
         public int NoOfLikes { get; set; }
         public int NoOfDislikes { get; set; }
@@ -34,7 +39,7 @@ namespace MyWebsite.Models
         public int Id { get; set; }
         public string Message { get; set; }
         public bool IsHidden { get; set; }
-        public DateTime? DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
         public ApplicationUserDto User { get; set; }
         public List<RatingDto> Ratings { get; set; }
         public int NoOfLikes { get; set; }

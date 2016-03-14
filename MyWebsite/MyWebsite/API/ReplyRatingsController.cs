@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace MyWebsite.API
 {
+    [Authorize]
     public class ReplyRatingsController : ApiController
     {
         IGenericRepository _repo;

@@ -3,11 +3,11 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ImageModalController = (function () {
-            function ImageModalController($uibModalInstance, userService, image, $route, isAuthorized) {
+            function ImageModalController($uibModalInstance, userService, image, $state, isAuthorized) {
                 this.$uibModalInstance = $uibModalInstance;
                 this.userService = userService;
                 this.image = image;
-                this.$route = $route;
+                this.$state = $state;
                 this.isAuthorized = isAuthorized;
             }
             ImageModalController.prototype.addCaption = function () {
@@ -24,11 +24,9 @@ var MyApp;
             };
             ImageModalController.prototype.closeModal = function () {
                 this.$uibModalInstance.close();
-                this.$route.reload();
             };
             return ImageModalController;
         })();
         Controllers.ImageModalController = ImageModalController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=imageModalController.js.map

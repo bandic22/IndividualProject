@@ -323,12 +323,13 @@ namespace MyWebsite.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+          
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, DisplayName = model.DisplayName, Status = "In good standing", MemberSince = DateTime.Now, IsActive = true };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, DisplayName = model.DisplayName, Status = "In good standing", MemberSince = DateTime.Now, IsActive = true, };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -338,12 +339,12 @@ namespace MyWebsite.Controllers
             }
 
             //Uncomment to send an email confirmation
-            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            code = System.Web.HttpUtility.UrlEncode(code);
+            //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            //code = System.Web.HttpUtility.UrlEncode(code);
 
-            var callbackUrl = String.Format("/confirmEmail?userId={0}&code={1}", user.Id, code);
-            var absoluteCallbackUrl = Request.GetUrlHelper().Content(callbackUrl);
-            await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Welcome to Mixed Up!\n\nPlease confirm your account by clicking <a href=\"" + absoluteCallbackUrl + "\">here</a>");
+            //var callbackUrl = String.Format("/confirmEmail?userId={0}&code={1}", user.Id, code);
+            //var absoluteCallbackUrl = Request.GetUrlHelper().Content(callbackUrl);
+            //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Welcome to Mixed Up! Please confirm your account by clicking <a href=\"" + absoluteCallbackUrl + "\">here</a>");
 
             return Ok();
         }

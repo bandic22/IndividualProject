@@ -2,7 +2,7 @@
 
     export class DeleteController {
 
-        constructor(private $uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, private item, private type, private userService: MyApp.Services.UserService, private $route: ng.route.IRouteService, private exploreService: MyApp.Services.ExploreService) {
+        constructor(private $uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, private item, private type, private userService: MyApp.Services.UserService, private $state: ng.ui.IStateService, private exploreService: MyApp.Services.ExploreService) {
 
         }
 
@@ -10,26 +10,30 @@
             switch (this.type) {
                 case "request":
                     return this.userService.deleteRequest(this.item).then(() =>
-                        this.closeModal())
+                        this.closeModalReload())
                     break;
                 case "gear":
                     return this.userService.deleteUserGear(this.item).then(() =>
-                        this.closeModal())
+                        this.closeModalReload())
                     break;
                 case "image":
                     return this.userService.deleteImage(this.item).then(() =>
-                        this.closeModal())                      
+                        this.closeModalReload())                      
                     break;
                 case "reply":
                     return this.exploreService.deleteReply(this.item).then(() =>
-                        this.closeModal())
+                        this.closeModalReload())
                     break;
             }
         }
 
+        public closeModalReload() {
+            this.$uibModalInstance.close();
+            this.$state.reload();
+        }
+
         public closeModal() {
             this.$uibModalInstance.close();
-            this.$route.reload();
         }
     }
 }

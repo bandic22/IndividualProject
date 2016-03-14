@@ -30,6 +30,7 @@ namespace MyWebsite.API
             return Ok(_repo.Find<UserSpace>(id));
         }
 
+        [Authorize]
         public IHttpActionResult Post(UserSpace userSpace)
         {
             if (ModelState.IsValid)
@@ -54,6 +55,7 @@ namespace MyWebsite.API
             return BadRequest();
         }
 
+        [Authorize]
         public IHttpActionResult Delete(int id)
         {
             _repo.Delete<UserSpace>(id);

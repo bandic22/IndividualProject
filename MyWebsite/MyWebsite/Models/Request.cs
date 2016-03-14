@@ -15,21 +15,30 @@ namespace MyWebsite.Models
         [Required(ErrorMessage = "Request description is required")]
         public string Description { get; set; }
         public int NoOfReplies { get; set; }
-        public DateTime? DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
         public string FileUrl { get; set; }
+
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
+
+        public List<GearItem> GearItems { get; set; }
+        public List<Reply> Replies { get; set; }
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
-
     }
 
     public class RequestDto
     {
         public string Title { get; set; }
-        public DateTime? DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
         public int NoOfReplies { get; set; }
         public string Description { get; set; }
+        public Category Category { get; set; }
+        public List<GearItemDto> GearItems { get; set; }
+        public List<ReplyDto> Replies { get; set; }
         public ApplicationUserDto User { get; set; }
         public string FileUrl { get; set; }
         public int Id { get; set; }

@@ -3,13 +3,13 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var EditGearController = (function () {
-            function EditGearController(userService, filepickerService, $location, $scope, $routeParams) {
+            function EditGearController(userService, filepickerService, $location, $scope, $stateParams) {
                 this.userService = userService;
                 this.filepickerService = filepickerService;
                 this.$location = $location;
                 this.$scope = $scope;
-                this.$routeParams = $routeParams;
-                this.gearItem = this.userService.getUserGear($routeParams['id']);
+                this.$stateParams = $stateParams;
+                this.gearItem = this.userService.getUserGear($stateParams['id']);
             }
             EditGearController.prototype.editGear = function () {
                 var _this = this;
@@ -35,4 +35,3 @@ var MyApp;
         Controllers.EditGearController = EditGearController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=editGearController.js.map

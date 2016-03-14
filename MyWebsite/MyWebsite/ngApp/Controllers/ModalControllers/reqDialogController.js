@@ -3,15 +3,17 @@ var MyApp;
     var Controllers;
     (function (Controllers) {
         var ReqDialogController = (function () {
-            function ReqDialogController(userService, filepickerService, $location, $scope) {
+            function ReqDialogController(userService, filepickerService, $location, $scope, categoryService) {
                 this.userService = userService;
                 this.filepickerService = filepickerService;
                 this.$location = $location;
                 this.$scope = $scope;
+                this.categoryService = categoryService;
+                this.categories = this.categoryService.getRequestCategories();
             }
             ReqDialogController.prototype.addRequest = function () {
                 var _this = this;
-                this.userService.addUserRequest(this.request).then(function () {
+                return this.userService.addUserRequest(this.request).then(function () {
                     _this.$location.path("/profile/myprofile");
                     window.location.reload();
                 });
@@ -23,8 +25,7 @@ var MyApp;
                 // save file url to database            
                 this.file = file;
                 this.request.fileUrl = this.file.url;
-                console.log(this.request);
-                this.$scope.$apply(); // force page to update            
+                // force page to update            
             };
             ReqDialogController.prototype.cancel = function () {
                 this.$location.path("/profile/myprofile");
@@ -34,4 +35,3 @@ var MyApp;
         Controllers.ReqDialogController = ReqDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=reqDialogController.js.map

@@ -31,6 +31,7 @@ namespace MyWebsite.API
             return Ok(_repo.Find<GearItem>(id));
         }
 
+        [Authorize]
         public IHttpActionResult Post(GearItem gearItem)
         {
             if (ModelState.IsValid)
@@ -55,6 +56,7 @@ namespace MyWebsite.API
             return BadRequest();
         }
 
+        [Authorize]
         public IHttpActionResult Delete(int id)
         {
             _repo.Delete<GearItem>(id);

@@ -1,79 +1,105 @@
 ﻿// Creates the module and sets up page routing and HTML5 mode
 namespace MyApp {
-    angular.module("MyApp", ["ngRoute", "angular-filepicker", "ui.bootstrap", "ngResource", "ngSanitize"]).config((filepickerProvider, $routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider, $sceProvider) => {
+    angular.module("MyApp", ["ngRoute", "ngResource", "ui.bootstrap", "ui.router", "angular-filepicker", "ngSanitize"]).config(($locationProvider: ng.ILocationProvider, $routeProvider: ng.route.IRouteProvider, $stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider, $sceProvider, filepickerProvider) => {
         filepickerProvider.setKey("AupjI1ulQZebn5FDtAfgkz");
-        $routeProvider
-            .when("/", {
+        $stateProvider
+            .state("home", {
+                url: "/",
                 templateUrl: "/ngApp/Views/home.html",
                 controller: MyApp.Controllers.HomeController,
                 controllerAs: "vm"
             })
-            .when("/profile/:displayName?", {
+            .state("profile", {
+                url: "/profile/:displayName?",
                 templateUrl: "/ngApp/Views/profile.html",
                 controller: MyApp.Controllers.ProfileController,
                 controllerAs: "vm"
             })
-            .when("/explore", {
+            .state("myProfile", {
+                url: "/profile/myprofile",
+                templateUrl: "/ngApp/Views/profile.html",
+                controller: MyApp.Controllers.ProfileController,
+                controllerAs: "vm"
+            })
+            .state("explore", {
+                url: "/explore",
                 templateUrl: "/ngApp/Views/explore.html",
                 controller: MyApp.Controllers.ExploreController,
                 controllerAs: 'vm'
             })
-            .when("/about", {
+            .state("about", {
+                url: "/about",
                 templateUrl: "/ngApp/Views/about.html",
                 controller: MyApp.Controllers.AboutController,
                 controllerAs: "vm"
             })
-            .when("/spaceDetails/:id", {
+            .state("spaceDetails", {
+                url: "/spaceDetails/:id",
                 templateUrl: "/ngApp/Views/spaceDetails.html",
                 controller: MyApp.Controllers.SpaceDetailsController,
                 controllerAs: "vm"
             }) 
-            .when("/gearDetails/:id", {
+            .state("gearDetails", {
+                url: "/gearDetails/:id",
                 templateUrl: "/ngApp/Views/gearDetails.html",
                 controller: MyApp.Controllers.GearDetailsController,
                 controllerAs: "vm"
             }) 
-            .when("/details/:id", {
+            .state("requestDetails", {
+                url: "/details/:id",
                 templateUrl: "/ngApp/Views/requestDetails.html",
                 controller: MyApp.Controllers.RequestDetailsController,
                 controllerAs: "vm"
             }) 
-            .when("/addRequest", {
+            .state("addRequest", {
+                url: "/addRequest",
                 templateUrl: "/ngApp/Dialogs/newReqDialog.html",
                 controller: MyApp.Controllers.ReqDialogController,
                 controllerAs: "vm",
             })
-            .when("/addGear", {
+            .state("addGear", {
+                url: "/addGear",
                 templateUrl: "/ngApp/Dialogs/newGearDialog.html",
                 controller: MyApp.Controllers.GearDialogController,
                 controllerAs: "vm",
             })
-            .when("/addSpace", {
+            .state("addSpace", {
+                url: "/addSpace",
                 templateUrl: "/ngApp/Dialogs/newSpaceDialog.html",
                 controller: MyApp.Controllers.SpaceDialogController,
                 controllerAs: "vm"
             })
-            .when("/editRequest/:id", {
+            .state("editRequest", {
+                url: "/editRequest/:id",
                 templateUrl: "/ngApp/Dialogs/editReqDialog.html",
                 controller: MyApp.Controllers.EditRequestController,
                 controllerAs: "vm",
             })
-            .when("/editSpace/:id", {
+            .state("editSpace", {
+                url: "/editSpace/:id",
                 templateUrl: "/ngApp/Dialogs/editSpaceDialog.html",
                 controller: MyApp.Controllers.EditSpaceController,
                 controllerAs: "vm",
             })
-            .when("/editGear/:id", {
+            .state("editGear", {
+                url: "/editGear/:id",
                 templateUrl: "/ngApp/Dialogs/editGearDialog.html",
                 controller: MyApp.Controllers.EditGearController,
                 controllerAs: "vm",
             })
-            .when("/adminPage", {
+            .state("adminPage", {
+                url: "/adminPage",
                 templateUrl: "/ngApp/Views/adminPage.html",
                 controller: MyApp.Controllers.AdminController,
                 controllerAs: "admin",
             })
-            .otherwise("/");
+            .state("news", {
+                url: "/news",
+                templateUrl: "/ngApp/Views/news.html",
+                controller: MyApp.Controllers.NewsController,
+                controllerAs: "vm"
+            })
+        $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
     });
 
@@ -99,7 +125,6 @@ namespace MyApp {
             }
         })
     );
-
 
     angular.module('MyApp').config(function ($httpProvider) {
         $httpProvider.interceptors.push('authInterceptor');

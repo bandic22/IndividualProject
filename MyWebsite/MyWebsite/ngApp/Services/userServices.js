@@ -31,8 +31,7 @@ var MyApp;
                 return this.userSpaceResource.get({ id: id });
             };
             UserService.prototype.addUserRequest = function (request) {
-                var data = this.requestResource.save(request).$promise;
-                return data;
+                return this.requestResource.save(request).$promise;
             };
             UserService.prototype.addImage = function (image) {
                 return this.imageResource.save(image).$promise;
@@ -67,4 +66,3 @@ var MyApp;
         angular.module("MyApp").service("userService", UserService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
-//# sourceMappingURL=userServices.js.map

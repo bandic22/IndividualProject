@@ -239,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\AdminViewController.cs" />
+    <Compile Include="API\CategoryController.cs" />
     <Compile Include="API\ProfileViewController.cs" />
     <Compile Include="API\ReplyRatingsController.cs" />
     <Compile Include="API\UserImageController.cs" />
@@ -288,31 +289,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602210125562_initial.cs" />
-    <Compile Include="Migrations\201602210125562_initial.Designer.cs">
-      <DependentUpon>201602210125562_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602210140358_2.cs" />
-    <Compile Include="Migrations\201602210140358_2.Designer.cs">
-      <DependentUpon>201602210140358_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602210239450_3.cs" />
-    <Compile Include="Migrations\201602210239450_3.Designer.cs">
-      <DependentUpon>201602210239450_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602211903369_4.cs" />
-    <Compile Include="Migrations\201602211903369_4.Designer.cs">
-      <DependentUpon>201602211903369_4.cs</DependentUpon>
+    <Compile Include="Migrations\201603141625400_initial.cs" />
+    <Compile Include="Migrations\201603141625400_initial.Designer.cs">
+      <DependentUpon>201603141625400_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\GearItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\News.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\ViewModels\RequestFilterViewModel.cs" />
+    <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\UserSpace.cs" />
     <Compile Include="Models\ViewModels\AdminViewModel.cs" />
     <Compile Include="Models\ViewModels\RequestViewModel.cs" />
@@ -321,8 +314,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\AdminViewRepository.cs" />
+    <Compile Include="Repositories\CategoryViewRepository.cs" />
     <Compile Include="Repositories\ExploreViewRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICategoryViewRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAdminViewRepository.cs" />
     <Compile Include="Repositories\Interfaces\IExploreViewRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProfileViewRepository.cs" />
@@ -363,8 +358,10 @@
     <Content Include="ngApp\Views\explore.html" />
     <Content Include="ngApp\Views\gearDetails.html" />
     <Content Include="ngApp\Views\home.html" />
+    <Content Include="ngApp\Views\news.html" />
     <Content Include="ngApp\Views\profile.html" />
     <Content Include="ngApp\Views\requestDetails.html" />
+    <Content Include="ngApp\Views\resources.html" />
     <Content Include="ngApp\Views\spaceDetails.html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -391,6 +388,8 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-ui-router.js" />
+    <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
@@ -1190,6 +1189,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <None Include="Properties\PublishProfiles\mixedup.pubxml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -1200,6 +1200,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
@@ -1242,6 +1246,7 @@
     <TypeScriptCompile Include="ngApp\Controllers\homeController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\imageModalController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\promptModalController.ts" />
+    <TypeScriptCompile Include="ngApp\Controllers\newsController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\profileController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\reqDialogController.ts" />
     <TypeScriptCompile Include="ngApp\Controllers\ModalControllers\spaceDialogController.ts" />
@@ -1250,10 +1255,12 @@
     <TypeScriptCompile Include="ngApp\ngApp.ts" />
     <TypeScriptCompile Include="ngApp\Services\accountService.ts" />
     <TypeScriptCompile Include="ngApp\Services\adminService.ts" />
+    <TypeScriptCompile Include="ngApp\Services\categoryService.ts" />
     <TypeScriptCompile Include="ngApp\Services\exploreServices.ts" />
     <TypeScriptCompile Include="ngApp\Services\profileService.ts" />
     <TypeScriptCompile Include="ngApp\Services\userServices.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular-ui-router\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
@@ -1264,22 +1271,18 @@
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\es6-promise\es6-promise.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment\moment-node.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602210125562_initial.resx">
-      <DependentUpon>201602210125562_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602210140358_2.resx">
-      <DependentUpon>201602210140358_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602210239450_3.resx">
-      <DependentUpon>201602210239450_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602211903369_4.resx">
-      <DependentUpon>201602211903369_4.cs</DependentUpon>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603141625400_initial.resx">
+      <DependentUpon>201603141625400_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
