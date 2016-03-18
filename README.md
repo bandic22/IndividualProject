@@ -11,3 +11,29 @@ Features:
 - 3 levels of user access (not logged in, logged in and admin)
 - Admin privileges for moderating comments and viewing user data
 - Extra efforts to protect sensitive user info from reaching the client side, using automapper 
+
+Technologies:
+
+Front-End: 
+
+- Typescript/Javascript
+- Angular JS
+- JQuery
+- HTML5
+-CSS3
+- Bootstrap
+- Angular UI
+- 
+Back-End: 
+
+- C#
+- ASP .Net Web API
+- Microsoft SQL Server
+- Linq
+- Entity Framework
+
+APIs and Libraries: 
+
+- AudioJS
+- Automapper
+- Filestack API
