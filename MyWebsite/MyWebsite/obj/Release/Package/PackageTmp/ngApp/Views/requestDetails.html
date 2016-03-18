@@ -2,7 +2,7 @@
     <div class="row marginTop marginBot">
         <div class="col-md-10 col-md-offset-1" id="exploreRequest">
             <h3 class="text-center marginBot">{{vm.request.title}}</h3>
-            <h4 class="marginBot">Posted by <a class="marginBot" href="/profile/{{vm.replyView.request.user.displayName}}">{{vm.replyView.request.user.displayName}}</a> on the {{vm.request.dateCreated | date: 'short' }}</h4>
+            <h4 class="marginBot">Posted by <a class="marginBot" href="/profile/{{vm.replyView.request.user.displayName}}">{{vm.replyView.request.user.displayName}}</a> on the {{vm.request.dateCreated | date: 'short' }}</h4><ul ng-repeat="category in vm.request.categories" class="inlineCategories"><li>{{category.name}}</li></ul>
             <p>{{vm.request.description}}</p>
             <div class="row">
                 <div class="col-md-4 col-md-offset-1" id="audioPlayer">

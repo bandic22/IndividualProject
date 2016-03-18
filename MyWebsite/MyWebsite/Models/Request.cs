@@ -34,7 +34,7 @@ namespace MyWebsite.Models
         public DateTime DateCreated { get; set; }
         public int NoOfReplies { get; set; }
         public string Description { get; set; }
-        public List<Category> Categories { get; set; }
+        public List<CategoryDto> Categories { get; set; }
         public List<GearItemDto> GearItems { get; set; }
         public List<ReplyDto> Replies { get; set; }
         public ApplicationUserDto User { get; set; }

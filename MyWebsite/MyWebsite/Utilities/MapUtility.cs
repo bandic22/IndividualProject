@@ -20,6 +20,7 @@ namespace MyWebsite.Utilities
                 cfg.CreateMap<Reply, ReplyDto>();
                 cfg.CreateMap<Image, ImageDto>();
                 cfg.CreateMap<Rating, RatingDto>();
+                cfg.CreateMap<Category, CategoryDto>();
             });
 
             var mapper = config.CreateMapper();

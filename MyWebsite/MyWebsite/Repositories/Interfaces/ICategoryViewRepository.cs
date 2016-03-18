@@ -6,7 +6,7 @@ namespace MyWebsite.Repositories
     public interface ICategoryViewRepository
     {
         List<Category> GetGearCategories();
-        List<Category> GetRequestCategories();
+        List<CategoryDto> GetRequestCategories();
         List<Request> SearchByCategories(RequestFilterViewModel vm);
     }
 }

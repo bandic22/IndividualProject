@@ -84,6 +84,12 @@
     background-color: RGB(173, 219, 113);
 }
 
+.inlineCategories {
+    margin-top: -7px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
 #profileTable td {
     padding-left: 10px;
     padding-top: 7px;

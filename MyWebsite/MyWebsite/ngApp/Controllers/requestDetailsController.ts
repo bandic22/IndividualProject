@@ -16,7 +16,8 @@
                 this.replyView = result;
                 this.checkUserRatings();
                 this.checkReplyIsRemoved();
-            });           
+            });     
+            debugger;      
             promise.then(this.allowAudioUrl);                   
             this.rating = {
                 isApproval: null,

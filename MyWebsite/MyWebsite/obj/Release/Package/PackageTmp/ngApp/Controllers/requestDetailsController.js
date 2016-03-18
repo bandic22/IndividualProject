@@ -23,6 +23,7 @@ var MyApp;
                     _this.checkUserRatings();
                     _this.checkReplyIsRemoved();
                 });
+                debugger;
                 promise.then(this.allowAudioUrl);
                 this.rating = {
                     isApproval: null,

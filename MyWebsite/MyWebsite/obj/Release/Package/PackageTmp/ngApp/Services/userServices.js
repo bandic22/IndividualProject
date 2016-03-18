@@ -14,7 +14,7 @@ var MyApp;
                         url: '/api/profileView/findCurrentUser',
                         isArray: false
                     },
-                    ReplyUpdateRequest: {
+                    replyUpdateRequest: {
                         method: 'POST',
                         url: '/api/requests/replyUpdateRequest',
                         isArray: false

@@ -17,10 +17,11 @@ namespace MyWebsite.Repositories
             this._repo = repo;
         }
 
-        public List<Category> GetRequestCategories()
+        public List<CategoryDto> GetRequestCategories()
         {
-            var data = _repo.Query<Category>().Where(c => c.Type == "Request").ToList();
-            return data;
+            var categories = _repo.Query<Category>().Where(c => c.Type == "Request").ToList();
+            var categoriesDto = MapUtility.Map<List<Category>, List<CategoryDto>>(categories);
+            return categoriesDto;
         }
 
         public List<Category> GetGearCategories()
@@ -32,6 +33,7 @@ namespace MyWebsite.Repositories
         {
             var requests = new List<Request>();
             var allRequests = _repo.Query<Request>().Include(r => r.Categories).ToList();
+            MapUtility.Map<List<Request>, List<RequestDto>>(allRequests);
 
             foreach (var id in vm.CategoryIds)
             {
