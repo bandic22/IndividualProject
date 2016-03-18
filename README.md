@@ -23,7 +23,7 @@ Front-End:
 -CSS3
 - Bootstrap
 - Angular UI
-- 
+
 Back-End: 
 
 - C#
