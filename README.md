@@ -1,4 +1,4 @@
-# IndividualProject
+# Mixed Up
 Community forum website as a sharing platform for the members of the enormous home recording industry to share sounds, make detailed profiles about their studios and engage in discussions.
 
 Features:
