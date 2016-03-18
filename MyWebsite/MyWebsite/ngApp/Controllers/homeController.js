@@ -32,3 +32,4 @@ var MyApp;
         angular.module("MyApp").controller("HomeController", HomeController); //why could I declare multiple controllers on the index page only when "HomeController" had a captial H
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=homeController.js.map

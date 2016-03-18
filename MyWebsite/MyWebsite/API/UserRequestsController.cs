@@ -25,7 +25,7 @@ namespace MyWebsite.Controllers
 
         public IHttpActionResult Get()
         {
-            var requests = _repo.Query<Request>().Include(r => r.User).ToList(); //skips the view model, now uses the automapper
+            var requests = _repo.Query<Request>().Include(r => r.User).Include(r => r.Categories).ToList(); //skips the view model, now uses the automapper
             var requestsDto = MapUtility.Map<List<Request>, List<RequestDto>>(requests);
             foreach (var request in requestsDto)
             {
@@ -36,33 +36,64 @@ namespace MyWebsite.Controllers
 
         public IHttpActionResult Get(int id)
         {
-            var data = _repo.Find<Request>(id);
-            data.DateCreated = data.DateCreated.ToLocalTime();
-            return Ok(data);
+            var request = _repo.Query<Request>().Where(r => r.Id == id).Include(r => r.Categories).FirstOrDefault();
+            request.DateCreated = request.DateCreated.ToLocalTime();
+            return Ok(request);
         }
 
-        public IHttpActionResult Post(Request request)
+        public IHttpActionResult Post(AddRequestViewModel requestVm)
         {
             if (ModelState.IsValid)
             {
-                if (request.Id == 0)
+                if (requestVm.Request.Id == 0)
                 {
                     var userId = this.User.Identity.GetUserId();
+                    var requestCategories = new List<Category>();
+                    var catRequests = new List<CatRequest>();
+                    var request = requestVm.Request;
+
+                    foreach (var category in requestVm.CatRequests)
+                    {
+                        var foundCat = _repo.Find<Category>(category.CategoryId);
+                        var catRequest = new CatRequest {
+                            CategoryId = category.CategoryId,
+                            RequestId = request.Id
+                        };
+                        _repo.Add<CatRequest>(catRequest);
+                        requestCategories.Add(foundCat);
+                    }
 
                     request.UserId = userId;
                     request.DateCreated = DateTime.UtcNow;
+                    request.Categories = requestCategories;
                     _repo.Add<Request>(request);
                     _repo.SaveChanges();
                     return Ok();
                 }
                 else
                 {
-                    var original = _repo.Find<Request>(request.Id);
-                    original.Title = request.Title;
-                    original.Description = request.Description;
-                    original.FileUrl = request.FileUrl;
-                    original.NoOfReplies = request.NoOfReplies;
-                    original.Category = request.Category;
+                    var requestCategories = new List<Category>();
+                    var catRequests = new List<CatRequest>();
+                    var request = requestVm.Request;
+
+                    foreach (var category in requestVm.CatRequests)
+                    {
+                        var foundCat = _repo.Find<Category>(category.CategoryId);
+                        var catRequest = new CatRequest
+                        {
+                            CategoryId = category.CategoryId,
+                            RequestId = request.Id
+                        };
+                        _repo.Add<CatRequest>(catRequest);
+                        requestCategories.Add(foundCat);
+                    }
+
+                    var original = _repo.Query<Request>().Where(r => r.Id == requestVm.Request.Id).Include(r => r.Categories).FirstOrDefault();
+                    original.Title = requestVm.Request.Title;
+                    original.Description = requestVm.Request.Description;
+                    original.FileUrl = requestVm.Request.FileUrl;
+                    original.NoOfReplies = requestVm.Request.NoOfReplies;
+                    original.Categories = requestCategories;
                     _repo.SaveChanges();
                     return Ok();
                 }

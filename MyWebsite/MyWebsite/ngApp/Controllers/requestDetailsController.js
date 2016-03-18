@@ -83,7 +83,7 @@ var MyApp;
                 var _this = this;
                 this.request.noOfReplies++;
                 this.request.fileUrl = this.replyView.request.fileUrl;
-                this.userService.addUserRequest(this.request);
+                this.userService.replyUpdateRequest(this.request);
                 this.reply.requestId = this.request.id;
                 return this.exploreService.addReply(this.reply).then(function () {
                     _this.$state.reload();
@@ -108,3 +108,4 @@ var MyApp;
         Controllers.RequestDetailsController = RequestDetailsController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=requestDetailsController.js.map

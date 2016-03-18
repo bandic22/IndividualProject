@@ -11,3 +11,4 @@ var MyApp;
         Controllers.NewsController = NewsController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=newsController.js.map

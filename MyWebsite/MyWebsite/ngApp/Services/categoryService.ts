@@ -5,30 +5,31 @@
         public categoryResource;
 
         constructor($resource: ng.resource.IResourceService) {
-            this.categoryResource = $resource("/api/categories/:id", null, {
+            this.categoryResource = $resource("/api/category/:id", null, {
                 getRequestCategories: {
                     method: "GET",
-                    url: "/api/categories/getRequestCategories",
+                    url: "/api/category/getRequestCategories",
                     isArray: true
                 },
                 getGearCategories: {
                     method: "GET",
-                    url: "/api/categories/getGearCategories",
+                    url: "/api/category/getGearCategories",
                     isArray: true
                 },
                 getFilteredRequests: {
-                    method: "GET",
-                    url: "/api/categories/getFilteredRequests",
+                    method: "POST",
+                    url: "/api/category/getFilteredRequests",
                     isArray: true
                 }
             });
         }
 
-        public filterRequests(requestCategoryId: number, gearCategoryId: number, gearSubCategoryId) {
-            let vm: any = {};
-            vm.categoryId = requestCategoryId;
-            vm.subCategoryId = gearCategoryId;
-            vm.gearSubCategoryId = gearSubCategoryId;
+        public filterRequests(categoriesToFilterBy) {
+
+            let vm: any = {
+                CategoryIds: categoriesToFilterBy
+            };
+
             return this.categoryResource.getFilteredRequests(vm).$promise;
         }
 
@@ -37,7 +38,7 @@
         }
 
         public getGearCategories() {
-            return this.categoryResource.getGearCategories().$promise;
+            return this.categoryResource.getGearCategories();
         }
     }
 }

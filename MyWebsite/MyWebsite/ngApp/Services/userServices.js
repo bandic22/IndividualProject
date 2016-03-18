@@ -13,6 +13,11 @@ var MyApp;
                         method: 'GET',
                         url: '/api/profileView/findCurrentUser',
                         isArray: false
+                    },
+                    ReplyUpdateRequest: {
+                        method: 'POST',
+                        url: '/api/requests/replyUpdateRequest',
+                        isArray: false
                     }
                 });
                 this.imageResource = $resource("/api/images/:id");
@@ -22,7 +27,7 @@ var MyApp;
                 return this.userInfoResource.get();
             };
             UserService.prototype.getUserRequest = function (id) {
-                return this.requestResource.get({ id: id });
+                return this.requestResource.get({ id: id }).$promise;
             };
             UserService.prototype.getUserGear = function (id) {
                 return this.userGearResource.get({ id: id });
@@ -30,8 +35,11 @@ var MyApp;
             UserService.prototype.getUserSpace = function (id) {
                 return this.userSpaceResource.get({ id: id });
             };
-            UserService.prototype.addUserRequest = function (request) {
-                return this.requestResource.save(request).$promise;
+            UserService.prototype.addUserRequest = function (requestVm) {
+                return this.requestResource.save(requestVm).$promise;
+            };
+            UserService.prototype.replyUpdateRequest = function (request) {
+                return this.userInfoResource.replyUpdateRequest(request);
             };
             UserService.prototype.addImage = function (image) {
                 return this.imageResource.save(image).$promise;
@@ -66,3 +74,4 @@ var MyApp;
         angular.module("MyApp").service("userService", UserService);
     })(Services = MyApp.Services || (MyApp.Services = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=userServices.js.map

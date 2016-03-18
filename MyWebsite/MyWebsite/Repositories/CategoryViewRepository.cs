@@ -19,7 +19,8 @@ namespace MyWebsite.Repositories
 
         public List<Category> GetRequestCategories()
         {
-            return _repo.Query<Category>().Where(c => c.Type == "Request").ToList();
+            var data = _repo.Query<Category>().Where(c => c.Type == "Request").ToList();
+            return data;
         }
 
         public List<Category> GetGearCategories()
@@ -27,96 +28,137 @@ namespace MyWebsite.Repositories
             return _repo.Query<Category>().Where(c => c.Type == "Gear").ToList();
         }
 
-        public RequestsFilterViewModel GetFilteredRequestView(RequestFilterViewModel vm)
+        public List<Request> SearchByCategories(RequestFilterViewModel vm)
         {
-            var reqCatRequests = _repo.Query<Request>().Where(r => r.Category.Id == vm.ReqCategoryId).Include(r => r.Replies).ToList();           
-            var gearCatRequests = _repo.Query<Request>().Where(r => r.Category.Id == vm.GearCategoryId).Include(r => r.Replies).ToList();
-            var gearSubCatRequests = _repo.Query<Request>().Where(r => r.CategoryId == vm.GearSubCategoryId).Include(r => r.Replies).Select(r => r.Category).Include(r => r.SubCategories).ToList();
-            var subCategories = _repo.Query<SubCategory>().Where(s => s.Id == vm.GearSubCategoryId).ToList();
-            ////////////////// Figure this out ///////////////////
+            var requests = new List<Request>();
+            var allRequests = _repo.Query<Request>().Include(r => r.Categories).ToList();
 
-            var requestsFiltered = new List<Request>();
-
-            if (vm.ReqCategoryId != 0)
+            foreach (var id in vm.CategoryIds)
             {
-                if (vm.GearCategoryId != 0)
+                var x = _repo.Query<CatRequest>().Where(c => c.CategoryId == id).Select(r => r.Request).Include(r => r.User).ToList();
+                foreach (var req in x)
                 {
-                    if (vm.GearSubCategoryId != 0)
+                    if (requests.Contains(req) == false)
                     {
-                        requestsFiltered = reqCatRequests.Intersect(reqCatRequests).Intersect(gearCatRequests).Intersect(gearSubCatRequests).ToList();
+                        requests.Add(req);
                     }
-                    else
-                    {
-                        requestsFiltered = reqCatRequests.Intersect(reqCatRequests).Intersect(gearCatRequests).ToList();
-                    }
-                }
-                else if (vm.GearSubCategoryId != 0)
-                {
-                    requestsFiltered = reqCatRequests.Intersect(reqCatRequests).Intersect(gearSubCatRequests).ToList();
-                }
-                else
-                {
-                    requestsFiltered = reqCatRequests;
                 }
             }
-            else if (vm.GearCategoryId != 0)
-            {
-                if (vm.ReqCategoryId != 0)
-                {
-                    if (vm.GearSubCategoryId != 0)
-                    {
-                        requestsFiltered = reqCatRequests.Intersect(reqCatRequests).Intersect(gearCatRequests).Intersect(gearSubCatRequests).ToList();
-                    }
-                    else
-                    {
-                        requestsFiltered = reqCatRequests.Intersect(reqCatRequests).Intersect(gearCatRequests).ToList();
-                    }
-                }
-                else if (vm.GearSubCategoryId != 0)
-                {
-                    requestsFiltered = reqCatRequests.Intersect(gearCatRequests).Intersect(gearSubCatRequests).ToList();
-                }
-                else
-                {
-                    requestsFiltered = gearCatRequests;
-                }
-            }
-            else if (vm.GearSubCategoryId != 0)
-            {
-                if (vm.GearCategoryId != 0)
-                {
-                    if (vm.ReqCategoryId != 0)
-                    {
-                        requestsFiltered = reqCatRequests.Intersect(reqCatRequests).Intersect(gearCatRequests).Intersect(gearSubCatRequests).ToList();
-                    }
-                    else
-                    {
-                        requestsFiltered = reqCatRequests.Intersect(gearSubCatRequests).Intersect(gearCatRequests).ToList();
-                    }
-                }
-                else if (vm.ReqCategoryId != 0)
-                {
-                    requestsFiltered = reqCatRequests.Intersect(reqCatRequests).Intersect(gearSubCatRequests).ToList();
-                }
-                else
-                {
-                    requestsFiltered = gearSubCatRequests;
-                }
-            }
-
-            var requestsFilteredDto = MapUtility.Map<List<Request>, List<RequestDto>>(requestsFiltered);
-
-            var requestViewModel = new RequestsFilterViewModel
-            {
-                Requests = requestsFilteredDto,
-            };
-
-            return requestViewModel;
-        }
-
-        public RequestsFilterViewModel GetFilteredRequests (RequestFilterViewModel vm)
-        {
-
+            return requests;
         }
     }
 }
+
+
+
+
+            //for (var i = 0; i < vm.CategoryIds.Count; i++)
+            //{
+            //    var results = _repo.Query<Category>().Where(c => c.Id == vm.CategoryIds[i]).Include(c => c.Requests).ToList();
+
+            //    for (var j = 0; j < results.Count; j++)
+            //    {
+            //        if (requests.Contains(results[j].Requests) == false)
+            //        {
+            //            requests.Add(results.Requests[j]);
+            //        }
+            //    }
+            //}
+            //return requests;
+        //}
+
+//        public RequestsFilterViewModel GetFilteredRequestView(RequestFilterViewModel vm)
+//        {
+//            var recordingRequests = _repo.Query<Request>().Where(r => r.CategoryId == vm.Recording).Include(r => r.Replies).ToList();
+//            var mixingRequests = _repo.Query<Request>().Where(r => r.CategoryId == vm.Mixing).Include(r => r.Replies).ToList();
+//            var masteringRequests = _repo.Query<Request>().Where(r => r.CategoryId == vm.Mastering).Include(r => r.Replies).ToList();
+//            var compositionRequests = _repo.Query<Request>().Where(r => r.CategoryId == vm.Composition).Include(r => r.Replies).ToList();
+//            var allRequests = _repo.Query<Request>().ToList();
+//            ////////////////// Figure this out ///////////////////
+
+//            var requestsFiltered = new List<Request>();
+
+
+
+
+
+
+
+//            if (vm.Recording != 0)
+//            {
+//                if (vm.Mixing != 0)
+//                {
+//                    if (vm.Mastering != 0)
+//                    {
+//                        requestsFiltered = recordingRequests.Intersect(recordingRequests).Intersect(mixingRequests).Intersect(masteringRequests).ToList();
+//                    }
+//                    else
+//                    {
+//                        requestsFiltered = recordingRequests.Intersect(recordingRequests).Intersect(mixingRequests).ToList();
+//                    }
+//                }
+//                else if (vm.Mastering != 0)
+//                {
+//                    requestsFiltered = recordingRequests.Intersect(recordingRequests).Intersect(masteringRequests).ToList();
+//                }
+//                else
+//                {
+//                    requestsFiltered = recordingRequests;
+//                }
+//            }
+//            else if (vm.Mixing != 0)
+//            {
+//                if (vm.Recording != 0)
+//                {
+//                    if (vm.Mastering != 0)
+//                    {
+//                        requestsFiltered = recordingRequests.Intersect(recordingRequests).Intersect(mixingRequests).Intersect(masteringRequests).ToList();
+//                    }
+//                    else
+//                    {
+//                        requestsFiltered = recordingRequests.Intersect(recordingRequests).Intersect(mixingRequests).ToList();
+//                    }
+//                }
+//                else if (vm.Mastering != 0)
+//                {
+//                    requestsFiltered = recordingRequests.Intersect(mixingRequests).Intersect(masteringRequests).ToList();
+//                }
+//                else
+//                {
+//                    requestsFiltered = mixingRequests;
+//                }
+//            }
+//            else if (vm.Mastering != 0)
+//            {
+//                if (vm.Mixing != 0)
+//                {
+//                    if (vm.Recording != 0)
+//                    {
+//                        requestsFiltered = recordingRequests.Intersect(recordingRequests).Intersect(mixingRequests).Intersect(masteringRequests).ToList();
+//                    }
+//                    else
+//                    {
+//                        requestsFiltered = recordingRequests.Intersect(masteringRequests).Intersect(mixingRequests).ToList();
+//                    }
+//                }
+//                else if (vm.Recording != 0)
+//                {
+//                    requestsFiltered = recordingRequests.Intersect(recordingRequests).Intersect(masteringRequests).ToList();
+//                }
+//                else
+//                {
+//                    requestsFiltered = masteringRequests;
+//                }
+//            }
+
+//            var requestsFilteredDto = MapUtility.Map<List<Request>, List<RequestDto>>(requestsFiltered);
+
+//            var requestViewModel = new RequestsFilterViewModel
+//            {
+//                Requests = requestsFilteredDto,
+//            };
+
+//            return requestViewModel;
+//        }
+//    }
+//}

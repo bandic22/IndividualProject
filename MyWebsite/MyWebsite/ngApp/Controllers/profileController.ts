@@ -17,6 +17,7 @@
         }
 
         public checkRouteParam() {
+            debugger;
             if (this.$stateParams["displayName"] == "myprofile") {
                 this.userProfileInfo = this.getLoggedInUser();
             }

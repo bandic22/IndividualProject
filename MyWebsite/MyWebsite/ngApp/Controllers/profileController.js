@@ -20,6 +20,7 @@ var MyApp;
                 };
             }
             ProfileController.prototype.checkRouteParam = function () {
+                debugger;
                 if (this.$stateParams["displayName"] == "myprofile") {
                     this.userProfileInfo = this.getLoggedInUser();
                 }
@@ -118,3 +119,4 @@ var MyApp;
         Controllers.ProfileController = ProfileController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=profileController.js.map

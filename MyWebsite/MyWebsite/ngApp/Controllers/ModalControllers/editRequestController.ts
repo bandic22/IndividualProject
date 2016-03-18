@@ -7,14 +7,69 @@
         public categories;
 
         constructor(private userService: MyApp.Services.UserService, private $stateParams: ng.ui.IStateParamsService, private filepickerService, private $location: ng.ILocationService, private $scope: ng.IScope, private categoryService: MyApp.Services.CategoryService) {
-            this.request = this.userService.getUserRequest($stateParams['id']);
-            this.categories = this.categoryService.getRequestCategories();
+            this.categoryService.getRequestCategories().then((result) => {
+                this.categories = result;
+                this.userService.getUserRequest($stateParams['id']).then((result) => {
+                    this.request = result;
+                    this.checkCategories();
+                });
+            });                  
         }
 
         public addRequest() {
-            this.userService.addUserRequest(this.request).then(() => {
+            let requestVm = {
+                request: this.request,
+                catRequests: []
+            };
+            if ($("#recording").is(':checked')) {
+                let recording = {
+                    requestId: this.request.id,
+                    categoryId: this.categories[0].id
+                }
+                requestVm.catRequests.push(recording);
+            }
+            if ($("#mixing").is(':checked')) {
+                let mixing = {
+                    requestId: this.request.id,
+                    categoryId: this.categories[1].id
+                }
+                requestVm.catRequests.push(mixing);
+            }
+            if ($("#mastering").is(':checked')) {
+                let mastering = {
+                    requestId: this.request.id,
+                    categoryId: this.categories[2].id
+                }
+                requestVm.catRequests.push(mastering);
+            }
+            if ($("#composition").is(':checked')) {
+                let composition = {
+                    requestId: this.request.id,
+                    categoryId: this.categories[3].id
+                }
+                requestVm.catRequests.push(composition);
+            }
+            this.userService.addUserRequest(requestVm).then(() => {
                 this.$location.path("/profile/myprofile");
             });
+        }
+
+        public checkCategories() {
+            debugger;
+            for (let category of this.request.categories) {
+                if (category.id == 1) {
+                    $("#recording").prop('checked', true);
+                }
+                if (category.id == 2) {
+                    $("#mixing").prop('checked', true);
+                }
+                if (category.id == 3) {
+                    $("#mastering").prop('checked', true);
+                }
+                if (category.id == 4) {
+                    $("#composition").prop('checked', true);
+                }
+            }
         }
 
         public pickFile() {

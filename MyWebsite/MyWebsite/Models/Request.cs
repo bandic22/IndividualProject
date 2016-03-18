@@ -18,9 +18,7 @@ namespace MyWebsite.Models
         public DateTime DateCreated { get; set; }
         public string FileUrl { get; set; }
 
-        public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        public List<Category> Categories { get; set; }
 
         public List<GearItem> GearItems { get; set; }
         public List<Reply> Replies { get; set; }
@@ -36,7 +34,7 @@ namespace MyWebsite.Models
         public DateTime DateCreated { get; set; }
         public int NoOfReplies { get; set; }
         public string Description { get; set; }
-        public Category Category { get; set; }
+        public List<Category> Categories { get; set; }
         public List<GearItemDto> GearItems { get; set; }
         public List<ReplyDto> Replies { get; set; }
         public ApplicationUserDto User { get; set; }

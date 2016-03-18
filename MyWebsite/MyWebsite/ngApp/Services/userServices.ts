@@ -19,6 +19,11 @@
                     method: 'GET',
                     url: '/api/profileView/findCurrentUser',
                     isArray: false
+                },
+                ReplyUpdateRequest: {
+                    method: 'POST',
+                    url: '/api/requests/replyUpdateRequest',
+                    isArray: false
                 }
             });
             this.imageResource = $resource("/api/images/:id");
@@ -30,7 +35,7 @@
         }
 
         public getUserRequest(id: number) {
-            return this.requestResource.get({ id: id });                     
+            return this.requestResource.get({ id: id }).$promise;                     
         }
 
         public getUserGear(id: number) {
@@ -41,8 +46,12 @@
             return this.userSpaceResource.get({id: id});
         }
 
-        public addUserRequest(request) {   
-            return this.requestResource.save(request).$promise;   
+        public addUserRequest(requestVm) {   
+            return this.requestResource.save(requestVm).$promise;   
+        }
+
+        public replyUpdateRequest(request) {
+            return this.userInfoResource.replyUpdateRequest(request);
         }
 
         public addImage(image) {

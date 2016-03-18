@@ -34,11 +34,11 @@ namespace MyWebsite.API
             return Ok(gearCategories);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/category/getFilteredRequests")]
         public IHttpActionResult GetFilteredRequests(RequestFilterViewModel vm)
         {
-            var filteredRequests = this._repo.GetFilteredRequestView(vm);
+            var filteredRequests = this._repo.SearchByCategories(vm);
             return Ok(filteredRequests);
         }
     }

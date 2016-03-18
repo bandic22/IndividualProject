@@ -48,3 +48,4 @@ var MyApp;
         Controllers.DeleteController = DeleteController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=deleteModalController.js.map

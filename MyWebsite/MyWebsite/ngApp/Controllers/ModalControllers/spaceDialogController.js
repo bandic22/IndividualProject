@@ -23,3 +23,4 @@ var MyApp;
         Controllers.SpaceDialogController = SpaceDialogController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=spaceDialogController.js.map

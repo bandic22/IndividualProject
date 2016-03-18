@@ -30,3 +30,4 @@ var MyApp;
         Controllers.ImageModalController = ImageModalController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=imageModalController.js.map

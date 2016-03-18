@@ -20,6 +20,7 @@ var MyApp;
                 };
             }
             ProfileController.prototype.checkRouteParam = function () {
+                debugger;
                 if (this.$stateParams["displayName"] == "myprofile") {
                     this.userProfileInfo = this.getLoggedInUser();
                 }

@@ -64,13 +64,16 @@
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Categories</th>
                     <th>Date Created</th>
                     <th>Replies</th>
+                    <th>Manage</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="request in vm.userProfileInfo.requests">
                     <td><a href="/details/{{request.id}}">{{request.title}}</a></td>
+                    <td></td>
                     <td>{{request.dateCreated | date: 'short'}}</td>
                     <td>{{request.noOfReplies}}</td>
                     <td><button class="btn btn-danger myTableBtn" ng-click="vm.deleteRequest(request.id)" ng-hide="!vm.userProfileInfo.isAuthorized">Delete</button><a class="btn btn-primary myTableBtn" ng-hide="!vm.userProfileInfo.isAuthorized" href="/editRequest/{{request.id}}">Edit</a></td>

@@ -24,3 +24,4 @@ var MyApp;
         Controllers.EditSpaceController = EditSpaceController;
     })(Controllers = MyApp.Controllers || (MyApp.Controllers = {}));
 })(MyApp || (MyApp = {}));
+//# sourceMappingURL=editSpaceController.js.map

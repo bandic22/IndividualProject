@@ -4,6 +4,7 @@ namespace MyWebsite.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -58,13 +59,6 @@ namespace MyWebsite.Migrations
             }
 
             userManager.Create(user2, "Joe!123");
-
-            var requests = new Request[]
-        {
-                new Request { Title = "Please give me some feedback on my mix", Description = "This is a song from an EP I recorded for a local band. To my standards it sounds good but I know it's not there yet. I don't have any specific requests, just give me all the constructive criticism you can. Thanks!", Id = 1, NoOfReplies = 4, FileUrl = "https://www.filestackapi.com/api/file/IYw27dpbTxqLKOw7arwo", CategoryId = 1, DateCreated = DateTime.Now, UserId = user.Id }
-        }; ///////////////////////////// Seed some categories ////////////////////////////////
-
-            context.Requests.AddOrUpdate(r => r.Title, requests);
 
             var replies = new Reply[]
             {
@@ -130,8 +124,10 @@ namespace MyWebsite.Migrations
 
             var requestCategories = new Category[]
             {
-                new Category { Id = 1, Type = "Request", Name = "Audio Production" },
-                new Category { Id = 2, Type = "Request", Name = "Composition" }
+                new Category { Id = 1, Type = "Request", Name = "Recording" },
+                new Category { Id = 2, Type = "Request", Name = "Mixing" },
+                new Category { Id = 3, Type = "Request", Name = "Mastering" },
+                new Category { Id = 4, Type = "Request", Name = "Composition" }
             };
             context.Categories.AddOrUpdate(c => c.Name, requestCategories);
 
@@ -145,13 +141,14 @@ namespace MyWebsite.Migrations
             };
             context.Categories.AddOrUpdate(c => c.Name, gearCategories);
 
-            var gearSubCategories = new SubCategory[]
-            {
-                new SubCategory { Id = 19, Name = "Condenser Microphone", Type = "Gear", CategoryId = 5 }
-            };
-            context.SubCategories.AddOrUpdate(s => s.Name, gearSubCategories);
-
             #endregion
+
+            var requests = new Request[]
+            {
+                new Request { Title = "Please give me some feedback on my mix", Description = "This is a song from an EP I recorded for a local band. To my standards it sounds good but I know it's not there yet. I don't have any specific requests, just give me all the constructive criticism you can. Thanks!", Id = 1, NoOfReplies = 4, FileUrl = "https://www.filestackapi.com/api/file/IYw27dpbTxqLKOw7arwo", Categories = new List<Category>(requestCategories), DateCreated = DateTime.Now, UserId = user.Id }
+            };
+
+            context.Requests.AddOrUpdate(r => r.Title, requests);
 
             var gearItems = new GearItem[]
             {

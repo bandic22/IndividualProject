@@ -46,7 +46,7 @@ namespace MyWebsite.Models
         public IDbSet<Image> Images { get; set; }
         public IDbSet<Rating> Ratings { get; set; }
         public IDbSet<Category> Categories { get; set; }
-        public IDbSet<SubCategory> SubCategories { get; set; }
+        public IDbSet<CatRequest> CatRequests { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

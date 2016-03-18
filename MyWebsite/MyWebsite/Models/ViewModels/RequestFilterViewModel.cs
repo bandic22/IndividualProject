@@ -7,8 +7,6 @@ namespace MyWebsite.Models
 {
     public class RequestFilterViewModel
     {
-        public int ReqCategoryId { get; set; }
-        public int GearCategoryId { get; set; }
-        public int GearSubCategoryId { get; set; }
+        public List<int> CategoryIds { get; set; }
     }
 }

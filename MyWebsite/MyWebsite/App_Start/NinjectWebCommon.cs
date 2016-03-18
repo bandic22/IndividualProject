@@ -67,6 +67,7 @@ namespace MyWebsite.App_Start
             kernel.Bind<IExploreViewRepository>().To<ExploreViewRepository>();
             kernel.Bind<IAdminViewRepository>().To<AdminViewRepository>();
             kernel.Bind<IVisitUserRepository>().To<VisitUserRepository>();
+            kernel.Bind<ICategoryViewRepository>().To<CategoryViewRepository>();
         }        
     }
 }

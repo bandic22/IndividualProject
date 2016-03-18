@@ -5,6 +5,14 @@
             <div class="col-md-4">
                 <input type="text" class="form-control" ng-model="searchText" placeholder="Search by title..." ng-model-options="{debounce:1000}" />
             </div>
+            <div class="col-md-8 form-group">
+                <label class="checkbox-inline"><input type="checkbox" value="1" ng-model="vm.categoriesToFilterBy[0]" id="recording" />Recording</label>
+                <label class="checkbox-inline"><input type="checkbox" value="2" ng-model="vm.categoriesToFilterBy[1]" id="mixing" />Mixing</label>
+                <label class="checkbox-inline"><input type="checkbox" value="3" ng-model="vm.categoriesToFilterBy[2]" id="mastering" />Mastering</label>
+                <label class="checkbox-inline"><input type="checkbox" value="4" ng-model="vm.categoriesToFilterBy[3]" id="composition"/>Composition</label>
+                <input type="button" value="Filter" class="btn btn-primary marginLeft" ng-click="vm.getFilteredRequests()" />
+                <input type="button" value="Show All" class="btn btn-primary marginLeft" ng-click="vm.getAllRequests()" />
+            </div>
         </div>
         <table class="table table-responsive table-hover">
             <thead id="exploreHeader">

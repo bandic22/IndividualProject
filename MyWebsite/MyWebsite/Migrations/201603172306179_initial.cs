@@ -18,6 +18,22 @@ namespace MyWebsite.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Requests",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false),
+                        Description = c.String(nullable: false),
+                        NoOfReplies = c.Int(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                        FileUrl = c.String(),
+                        UserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
                 "dbo.GearItems",
                 c => new
                     {
@@ -25,32 +41,16 @@ namespace MyWebsite.Migrations
                         Title = c.String(nullable: false),
                         Description = c.String(nullable: false),
                         CategoryId = c.Int(nullable: false),
-                        SubCategoryId = c.Int(),
                         UserId = c.String(maxLength: 128),
                         Request_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.SubCategories", t => t.SubCategoryId)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .ForeignKey("dbo.Requests", t => t.Request_Id)
                 .Index(t => t.CategoryId)
-                .Index(t => t.SubCategoryId)
                 .Index(t => t.UserId)
                 .Index(t => t.Request_Id);
-            
-            CreateTable(
-                "dbo.SubCategories",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Type = c.String(),
-                        CategoryId = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.CategoryId)
-                .Index(t => t.CategoryId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -117,34 +117,6 @@ namespace MyWebsite.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Images",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        FileUrl = c.String(),
-                        Caption = c.String(),
-                        UserId = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.Ratings",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        IsApproval = c.Boolean(),
-                        ReplyId = c.Int(nullable: false),
-                        UserId = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Replies", t => t.ReplyId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.ReplyId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
                 "dbo.Replies",
                 c => new
                     {
@@ -165,22 +137,45 @@ namespace MyWebsite.Migrations
                 .Index(t => t.RequestId);
             
             CreateTable(
-                "dbo.Requests",
+                "dbo.Ratings",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
-                        Description = c.String(nullable: false),
-                        NoOfReplies = c.Int(nullable: false),
-                        DateCreated = c.DateTime(nullable: false),
-                        FileUrl = c.String(),
-                        CategoryId = c.Int(nullable: false),
+                        IsApproval = c.Boolean(),
+                        ReplyId = c.Int(nullable: false),
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.Replies", t => t.ReplyId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.ReplyId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.CatRequests",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CategoryId = c.Int(nullable: false),
+                        RequestId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.Requests", t => t.RequestId, cascadeDelete: true)
                 .Index(t => t.CategoryId)
+                .Index(t => t.RequestId);
+            
+            CreateTable(
+                "dbo.Images",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FileUrl = c.String(),
+                        Caption = c.String(),
+                        UserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -206,58 +201,74 @@ namespace MyWebsite.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.RequestCategories",
+                c => new
+                    {
+                        Request_Id = c.Int(nullable: false),
+                        Category_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Request_Id, t.Category_Id })
+                .ForeignKey("dbo.Requests", t => t.Request_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Categories", t => t.Category_Id, cascadeDelete: true)
+                .Index(t => t.Request_Id)
+                .Index(t => t.Category_Id);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.UserSpaces", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Ratings", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Replies", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Requests", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Replies", "RequestId", "dbo.Requests");
-            DropForeignKey("dbo.GearItems", "Request_Id", "dbo.Requests");
-            DropForeignKey("dbo.Requests", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.Ratings", "ReplyId", "dbo.Replies");
             DropForeignKey("dbo.Images", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.CatRequests", "RequestId", "dbo.Requests");
+            DropForeignKey("dbo.CatRequests", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Requests", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Replies", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Replies", "RequestId", "dbo.Requests");
+            DropForeignKey("dbo.Ratings", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Ratings", "ReplyId", "dbo.Replies");
+            DropForeignKey("dbo.GearItems", "Request_Id", "dbo.Requests");
             DropForeignKey("dbo.GearItems", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.GearItems", "SubCategoryId", "dbo.SubCategories");
-            DropForeignKey("dbo.SubCategories", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.GearItems", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.RequestCategories", "Category_Id", "dbo.Categories");
+            DropForeignKey("dbo.RequestCategories", "Request_Id", "dbo.Requests");
+            DropIndex("dbo.RequestCategories", new[] { "Category_Id" });
+            DropIndex("dbo.RequestCategories", new[] { "Request_Id" });
             DropIndex("dbo.UserSpaces", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Requests", new[] { "UserId" });
-            DropIndex("dbo.Requests", new[] { "CategoryId" });
-            DropIndex("dbo.Replies", new[] { "RequestId" });
-            DropIndex("dbo.Replies", new[] { "UserId" });
+            DropIndex("dbo.Images", new[] { "UserId" });
+            DropIndex("dbo.CatRequests", new[] { "RequestId" });
+            DropIndex("dbo.CatRequests", new[] { "CategoryId" });
             DropIndex("dbo.Ratings", new[] { "UserId" });
             DropIndex("dbo.Ratings", new[] { "ReplyId" });
-            DropIndex("dbo.Images", new[] { "UserId" });
+            DropIndex("dbo.Replies", new[] { "RequestId" });
+            DropIndex("dbo.Replies", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.SubCategories", new[] { "CategoryId" });
             DropIndex("dbo.GearItems", new[] { "Request_Id" });
             DropIndex("dbo.GearItems", new[] { "UserId" });
-            DropIndex("dbo.GearItems", new[] { "SubCategoryId" });
             DropIndex("dbo.GearItems", new[] { "CategoryId" });
+            DropIndex("dbo.Requests", new[] { "UserId" });
+            DropTable("dbo.RequestCategories");
             DropTable("dbo.UserSpaces");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Requests");
-            DropTable("dbo.Replies");
-            DropTable("dbo.Ratings");
             DropTable("dbo.Images");
+            DropTable("dbo.CatRequests");
+            DropTable("dbo.Ratings");
+            DropTable("dbo.Replies");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.SubCategories");
             DropTable("dbo.GearItems");
+            DropTable("dbo.Requests");
             DropTable("dbo.Categories");
         }
     }

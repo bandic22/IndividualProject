@@ -176,6 +176,14 @@
     margin-top: 20px;
 }
 
+.marginLeft {
+    margin-left: 10px;
+}
+
+.marginRight {
+    margin-right: 10px;
+}
+
 #reqCommentTable td {
     border: 1px solid black;
     padding-left: 10px;

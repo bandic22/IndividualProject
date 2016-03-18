@@ -3,6 +3,7 @@
     export class RequestDetailsController {
 
         public request;
+        public categories;
         public reply;
         public replyView;
         public rating;
@@ -76,7 +77,7 @@
         public userReply() {
             this.request.noOfReplies++;
             this.request.fileUrl = this.replyView.request.fileUrl;
-            this.userService.addUserRequest(this.request);
+            this.userService.replyUpdateRequest(this.request);
             this.reply.requestId = this.request.id;
             return this.exploreService.addReply(this.reply).then(() => {
                 this.$state.reload()
@@ -93,7 +94,7 @@
                 this.rating.replyId = replyId;
             }
             this.exploreService.addRating(this.rating).then(() => {
-                this.$state.reload()
+                this.$state.reload();
             });
         }
 

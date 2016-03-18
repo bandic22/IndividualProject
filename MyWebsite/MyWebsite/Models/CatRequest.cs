@@ -6,14 +6,16 @@ using System.Web;
 
 namespace MyWebsite.Models
 {
-    public class SubCategory
+    public class CatRequest
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
 
-        public int ?CategoryId { get; set; }
+        public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
+
+        public int RequestId { get; set; }
+        [ForeignKey("RequestId")]
+        public Request Request { get; set; }
     }
 }
